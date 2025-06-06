@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Games</title>
   <style>
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #000;
+  background-color: #0d0d0d;
   color: #FFD700;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -21,15 +29,14 @@ header {
 }
 
 header h1 {
-  margin: 0;
-  font-size: 2em;
-  color: #FFD700;
+  font-size: 2.5em;
 }
 
 nav {
+  background-color: #1a1a1a;
   display: flex;
   justify-content: center;
-  background-color: #222;
+  flex-wrap: wrap;
   border-bottom: 1px solid #FFD700;
 }
 
@@ -37,18 +44,28 @@ nav a {
   color: #FFD700;
   text-decoration: none;
   padding: 14px 20px;
-  display: inline-block;
-  transition: 0.3s;
+  display: block;
+  transition: background-color 0.3s;
 }
 
 nav a:hover {
   background-color: #FFD700;
-  color: #000;
+  color: #111;
 }
 
 main {
-  padding: 40px;
+  flex: 1;
+  padding: 40px 20px;
   text-align: center;
+}
+
+footer {
+  background-color: #111;
+  color: #777;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+  border-top: 1px solid #FFD700;
 }
 </style>
 </head>
@@ -65,7 +82,10 @@ main {
     <a href="admin.html">Admins</a>
   </nav>
   <main>
-    Šeit būs aktuālās spēles un to analīze.
+    Spēļu saraksts, filtrēšana, datumi un komandu analīze.
   </main>
+  <footer>
+    © 2025 Likmju Kods. Radīts ar prātu. Visi kodi aizsargāti.
+  </footer>
 </body>
 </html>
