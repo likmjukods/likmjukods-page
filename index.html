@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Likmju Kods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #000;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo span {
+      color: #00f7cc;
+    }
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+    nav a.active {
+      background-color: #2a2a2a;
+    }
+    .cta {
+      background-color: #00f7cc;
+      color: #000;
+      font-weight: 700;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .hero {
+      background-color: #222;
+      padding: 3rem;
+      border-radius: 1rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .games-section, .results-section {
+      margin-top: 3rem;
+    }
+    .game, .result {
+      background-color: #2a2a2a;
+      padding: 1rem;
+      border-left: 5px solid #00f7cc;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+    .result.correct {
+      border-left-color: #00f7cc;
+    }
+    .result.wrong {
+      border-left-color: red;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+    }
+    span {
+      display: block;
+      margin-top: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>LIK</span>MJU KODS</div>
+    <nav>
+      <a href="#" class="active">Sākums</a>
+      <a href="#">Spēles</a>
+      <a href="#">Rezultāti</a>
+      <a class="cta" href="#">Veikt likmi</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Likmju Kods</h1>
+      <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+      <a class="cta" href="#">Veikt likmi</a>
+    </section>
+
+    <section class="games-section">
+      <h2>Šodienas spēles</h2>
+    </section>
+
+    <section class="results-section">
+      <h2>AI prognožu rezultāti</h2>
+    </section>
+  </main>
+
+  <script>
+    fetch('games.json')
+      .then(response => response.json())
+      .then(data => {
+        const gamesSection = document.querySelector('.games-section');
+        const resultsSection = document.querySelector('.results-section');
+
+        gamesSection.innerHTML = '<h2>Šodienas spēles</h2>';
+        resultsSection.innerHTML = '<h2>AI prognožu rezultāti</h2>';
+
+        data.games.forEach(game => {
+          const gameDiv = document.createElement('div');
+          gameDiv.className = 'game';
+          gameDiv.innerHTML = `
+            <h3>${game.title}</h3>
+            <span>${game.sport} – ${game.date}</span>
+            <span>Prognoze: ${game.prediction}</span>
+            <span>Koeficients: ${game.odd}</span>
+          `;
+          gamesSection.appendChild(gameDiv);
+
+          const resultDiv = document.createElement('div');
+          resultDiv.className = 'result ' + game.result;
+          resultDiv.textContent = `${game.result === 'correct' ? '✓' : '✗'} ${game.title} — ${game.result === 'correct' ? 'Uzvara precīzi prognozēta' : 'Prognoze garām'} (${game.odd})`;
+          resultsSection.appendChild(resultDiv);
+        });
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "games": [
+    {
+      "title": "Latvija vs Igaunija",
+      "date": "19.06.2025",
+      "sport": "Futbols",
+      "prediction": "Latvija uzvara",
+      "odd": 1.45,
+      "result": "correct"
+    },
+    {
+      "title": "Francija vs Vācija",
+      "date": "19.06.2025",
+      "sport": "Futbols",
+      "prediction": "Vairāk par 2.5 vārtiem",
+      "odd": 1.72,
+      "result": "wrong"
+    }
+  ]
+}
