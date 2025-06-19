@@ -1,163 +1,193 @@
 <!DOCTYPE html><html lang="lv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Likmju Kods</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-      }
-      body {
-        background-color: #111;
-        color: #fff;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #000;
-        border-bottom: 1px solid #222;
-      }
-      .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-      .logo span {
-        color: #00e0b6;
-      }
-      nav {
-        display: flex;
-        gap: 1rem;
-      }
-      nav a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.3rem 0.6rem;
-        border-radius: 5px;
-      }
-      nav a.active {
-        background-color: #333;
-      }
-      .cta {
-        background-color: #00e0b6;
-        color: #000;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      main {
-        max-width: 1000px;
-        margin: 2rem auto;
-        padding: 0 2rem;
-      }
-      section.hero {
-        text-align: center;
-        background: #222;
-        padding: 5rem 2rem;
-        border-radius: 1rem;
-      }
-      .hero h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-      .hero p {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-      }
-      .games-section, .results-section {
-        margin-top: 3rem;
-      }
-      .game {
-        background: #1c1c1c;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border-left: 4px solid #00e0b6;
-        border-radius: 0.5rem;
-      }
-      .game.error {
-        border-left-color: red;
-      }
-      .game span {
-        display: block;
-        font-weight: 600;
-        margin-top: 0.3rem;
-      }
-    </style>
-  </head>
-  <body onload="setActive('link-sakums')">
-    <header>
-      <div class="logo"><span>LIK</span>MJU KODS</div>
-      <nav>
-        <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-        <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-        <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-        <a class="cta" href="#">Veikt likmi</a>
-      </nav>
-    </header>
-    <main>
-      <section id="section-sakums" class="hero">
-        <h1>Likmju Kods</h1>
-        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-        <a href="#" class="cta">Veikt likmi</a>
-      </section><section id="section-speles" class="games-section" style="display:none;">
-    <h2>Šodienas spēles</h2>
-    <div id="speles-wrapper"></div>
-  </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Likmju Kods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #000;
+      border-bottom: 1px solid #222;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo span {
+      color: #00e0b6;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+    }
+    nav a.active {
+      background-color: #333;
+    }
+    .cta {
+      background-color: #00e0b6;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    section {
+      margin-top: 2rem;
+    }
+    .hero {
+      text-align: center;
+      background: #222;
+      padding: 5rem 2rem;
+      border-radius: 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .game, .result {
+      background: #1c1c1c;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #00e0b6;
+      border-radius: 0.5rem;
+    }
+    .result.false {
+      border-left-color: red;
+    }
+    .filters {
+      margin-bottom: 2rem;
+    }
+    select {
+      padding: 0.5rem;
+      background: #000;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body onload="setActive('link-sakums')">
+  <header>
+    <div class="logo"><span>LIK</span>MJU KODS</div>
+    <nav>
+      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
+      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
+      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+      <a class="cta" href="#">Veikt likmi</a>
+    </nav>
+  </header>  <main>
+    <section id="section-sakums" class="hero">
+      <h1>Likmju Kods</h1>
+      <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+      <a href="#" class="cta">Veikt likmi</a>
+    </section><section id="section-speles" style="display:none;">
+  <h2>Šodienas spēles</h2>
+  <div class="filters">
+    <select id="sportaVeids" onchange="applyFilters()">
+      <option value="">Visi sporta veidi</option>
+      <option value="Futbols">Futbols</option>
+      <option value="Hokejs">Hokejs</option>
+    </select>
+    <select id="datums" onchange="applyFilters()">
+      <option value="">Visi datumi</option>
+      <option value="2025-06-19">19.06.2025</option>
+      <option value="2025-06-20">20.06.2025</option>
+    </select>
+  </div>
+  <div id="speles-wrapper"></div>
+</section>
 
-  <section id="section-rezultati" class="results-section" style="display:none;">
-    <h2>AI prognožu rezultāti</h2>
-    <div id="rezultati-wrapper"></div>
-  </section>
-</main>
+<section id="section-rezultati" style="display:none;">
+  <h2>AI prognožu rezultāti</h2>
+  <div id="rezultati-wrapper"></div>
+</section>
 
-<script>
-  function setActive(tabId) {
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById('section-sakums').style.display = 'none';
-    document.getElementById('section-speles').style.display = 'none';
-    document.getElementById('section-rezultati').style.display = 'none';
-    document.getElementById(tabId).classList.add('active');
+  </main>  <script>
+    function setActive(tab) {
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById('section-sakums').style.display = 'none';
+      document.getElementById('section-speles').style.display = 'none';
+      document.getElementById('section-rezultati').style.display = 'none';
+      document.getElementById(tab).classList.add('active');
+      if(tab === 'link-sakums') document.getElementById('section-sakums').style.display = 'block';
+      else if(tab === 'link-speles') document.getElementById('section-speles').style.display = 'block';
+      else if(tab === 'link-rezultati') document.getElementById('section-rezultati').style.display = 'block';
+    }
 
-    if(tabId === 'link-sakums') document.getElementById('section-sakums').style.display = 'block';
-    if(tabId === 'link-speles') document.getElementById('section-speles').style.display = 'block';
-    if(tabId === 'link-rezultati') document.getElementById('section-rezultati').style.display = 'block';
-  }
+    let visasSpeles = [];
 
-  async function ieladetDatus() {
-    const response = await fetch('data.json');
-    const dati = await response.json();
+    async function loadData() {
+      const res = await fetch('data.json');
+      const data = await res.json();
+      visasSpeles = data.speles;
+      renderSpeles();
+      renderRezultati(data.rezultati);
+    }
 
-    const spelesWrapper = document.getElementById('speles-wrapper');
-    dati.speles.forEach(sp => {
-      const div = document.createElement('div');
-      div.className = 'game';
-      div.innerHTML = `
-        <h3>${sp.komandas}</h3>
-        <span>${sp.sports} – ${sp.datums}</span>
-        <span>Prognoze: ${sp.prognoze}</span>
-        <span>Koeficients: ${sp.koeficients}</span>
-      `;
-      spelesWrapper.appendChild(div);
-    });
+    function applyFilters() {
+      const sportaVeids = document.getElementById('sportaVeids').value;
+      const datums = document.getElementById('datums').value;
+      const filtrētas = visasSpeles.filter(sp => {
+        return (!sportaVeids || sp.sports === sportaVeids) && (!datums || sp.datums === datums);
+      });
+      renderSpeles(filtrētas);
+    }
 
-    const rezultatiWrapper = document.getElementById('rezultati-wrapper');
-    dati.rezultati.forEach(res => {
-      const div = document.createElement('div');
-      div.className = 'game' + (res.pareizi ? '' : ' error');
-      div.innerHTML = `<span>${res.pareizi ? '✓' : '✗'} ${res.teksts}</span>`;
-      rezultatiWrapper.appendChild(div);
-    });
-  }
+    function renderSpeles(speles = visasSpeles) {
+      const wrapper = document.getElementById('speles-wrapper');
+      wrapper.innerHTML = '';
+      speles.forEach(sp => {
+        const div = document.createElement('div');
+        div.className = 'game';
+        div.innerHTML = `<h3>${sp.komandas}</h3>
+          <span>${sp.sports} – ${sp.datums}</span><br>
+          <span>Prognoze: ${sp.prognoze}</span><br>
+          <span>Koeficients: ${sp.koeficients}</span>`;
+        wrapper.appendChild(div);
+      });
+    }
 
-  ieladetDatus();
-</script>
+    function renderRezultati(rez) {
+      const rezWrapper = document.getElementById('rezultati-wrapper');
+      rezWrapper.innerHTML = '';
+      rez.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'result ' + (r.pareiza ? '' : 'false');
+        div.innerHTML = `<span>${r.pareiza ? '✓' : '✗'} ${r.spēle} — ${r.pareiza ? 'Prognoze pareiza' : 'Prognoze garām'} (${r.koeficients})</span>`;
+        rezWrapper.appendChild(div);
+      });
+    }
 
-  </body>
+    loadData();
+  </script></body>
 </html>
