@@ -1,250 +1,191 @@
 <!DOCTYPE html><html lang="lv">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Likmju Kods</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-      }
-      body {
-        background-color: #111;
-        color: #fff;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #000;
-        border-bottom: 1px solid #222;
-      }
-      .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-      .logo span {
-        color: #00e0b6;
-      }
-      nav {
-        display: flex;
-        gap: 2rem;
-      }
-      nav a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.3rem 0.6rem;
-        border-radius: 5px;
-      }
-      nav a.active {
-        background-color: #333;
-      }
-      .cta {
-        background-color: #00e0b6;
-        color: #000;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      main {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 2rem;
-      }
-      section.hero {
-        text-align: center;
-        background: #222;
-        padding: 6rem 2rem;
-        border-radius: 1rem;
-      }
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-      }
-      .games-section {
-        margin-top: 4rem;
-      }
-      .game {
-        background: #1c1c1c;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border-left: 5px solid #00e0b6;
-        border-radius: 0.5rem;
-      }
-      .game span {
-        font-weight: 600;
-        display: inline-block;
-        margin-top: 0.3rem;
-      }
-      .filters {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      .filters select {
-        padding: 0.5rem;
-        border-radius: 5px;
-        border: none;
-        font-weight: 600;
-      }
+      *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+      body{background:#111;color:#fff}
+      header{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:#000;border-bottom:1px solid #222}
+      .logo{font-size:1.5rem;font-weight:700}.logo span{color:#00e0b6}
+      nav{display:flex;gap:2rem}
+      nav a{color:#fff;text-decoration:none;font-weight:600;padding:.3rem .6rem;border-radius:5px}
+      nav a.active{background:#333}
+      .cta{background:#00e0b6;color:#000;padding:.5rem 1rem;border-radius:5px;font-weight:700;text-decoration:none}
+      main{max-width:1200px;margin:2rem auto;padding:0 2rem}
+      section.hero{text-align:center;background:#222;padding:6rem 2rem;border-radius:1rem}
+      .hero h1{font-size:3rem;margin-bottom:1rem}.hero p{font-size:1.2rem;margin-bottom:2rem}
+      .games-section,.bonusi-section{margin-top:4rem}
+      .game,.bonus-card{background:#1c1c1c;padding:1rem;margin-bottom:1rem;border-left:5px solid #00e0b6;border-radius:.5rem}
+      .game span,.bonus-card span{font-weight:600;display:inline-block;margin-top:.3rem}
+      .filters{display:flex;gap:1rem;margin-bottom:1.5rem}
+      .filters select{padding:.5rem;border-radius:5px;border:none;font-weight:600}
+      /* bonus cards */
+      .bonus-card{border-left-color:#00e0b6;display:flex;flex-direction:column;gap:.5rem}
+      .bonus-card a{align-self:flex-start;background:#00e0b6;color:#000;padding:.4rem .8rem;border-radius:5px;font-weight:700;text-decoration:none}
+      /* partner popup */
+      #partneru-popup{position:fixed;inset:0;display:none;z-index:9999;font-family:'Inter',sans-serif}
+      .popup-overlay{background:rgba(0,0,0,.7);position:absolute;inset:0}
+      .popup-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;padding:2rem;border-radius:1rem;color:#fff;width:90%;max-width:400px;text-align:center;border:2px solid #00e0b6}
+      .popup-content h2{margin-bottom:1rem;color:#00e0b6}
+      .popup-button{display:inline-block;margin-top:1rem;background:#00e0b6;color:#000;font-weight:700;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none}
+      .close-btn{position:absolute;top:10px;right:10px;background:transparent;border:none;color:#fff;font-size:1.2rem;cursor:pointer}
     </style>
   </head>
-  <body>
+  <body onload="initPage()">
     <header>
       <div class="logo"><span>LIK</span>MJU KODS</div>
       <nav>
         <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
         <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
         <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+        <a href="#" id="link-bonusi" onclick="setActive('link-bonusi')">Bonusi</a>
         <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
       </nav>
-    </header>
-    <main>
-      <section id="section-sakums" class="hero">
-        <h1>Likmju Kods</h1>
-        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-        <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
-      </section>
-      <section id="section-speles" class="games-section" style="display:none;">
-        <h2>Šodienas spēles</h2>
-        <div class="filters">
-          <select id="filter-sports" onchange="renderGames()">
-            <option value="all">Visi sporta veidi</option>
-            <option value="Futbols">Futbols</option>
-            <option value="Hokejs">Hokejs</option>
-          </select>
-          <select id="filter-date" onchange="renderGames()">
-            <option value="all">Visi datumi</option>
-            <option value="2025-06-19">19.06.2025</option>
-            <option value="2025-06-20">20.06.2025</option>
-          </select>
-        </div>
-        <div id="speles-wrapper"></div>
-      </section>
-      <section id="section-rezultati" style="display:none;">
-        <h2>AI prognožu rezultāti</h2>
-        <div class="filters">
-          <select id="filter-sports-result" onchange="renderResults()">
-            <option value="all">Visi sporta veidi</option>
-            <option value="Futbols">Futbols</option>
-            <option value="Hokejs">Hokejs</option>
-          </select>
-          <select id="filter-result-type" onchange="renderResults()">
-            <option value="all">Visi rezultāti</option>
-            <option value="pareizi">Pareizi</option>
-            <option value="garām">Garām</option>
-          </select>
-        </div>
-        <div id="rezultati-wrapper"></div>
-      </section>
-    </main>
-    <div id="popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:2rem;border-radius:1rem;z-index:1000;text-align:center;max-width:90%;">
-      <h3>Drīzumā pieejams!</h3>
-      <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
-      <button onclick="closePopup()" style="margin-top:1rem;padding:0.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
+    </header><main>
+  <!-- Sākums -->
+  <section id="section-sakums" class="hero">
+    <h1>Likmju Kods</h1>
+    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI‑vērtētiem koeficientiem.</p>
+    <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
+  </section>
+
+  <!-- Spēles -->
+  <section id="section-speles" class="games-section" style="display:none;">
+    <h2>Šodienas spēles</h2>
+    <div class="filters">
+      <select id="filter-sports" onchange="renderGames()">
+        <option value="all">Visi sporta veidi</option>
+        <option value="Futbols">Futbols</option>
+        <option value="Hokejs">Hokejs</option>
+      </select>
+      <select id="filter-date" onchange="renderGames()">
+        <option value="all">Visi datumi</option>
+        <option value="2025-06-19">19.06.2025</option>
+        <option value="2025-06-20">20.06.2025</option>
+      </select>
     </div>
-    <script>
-      function setActive(tab) {
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        document.getElementById('section-sakums').style.display = 'none';
-        document.getElementById('section-speles').style.display = 'none';
-        document.getElementById('section-rezultati').style.display = 'none';
-        document.getElementById(tab.replace('link-', 'section-')).style.display = 'block';
-        document.getElementById(tab).classList.add('active');
-      }
-      function showComingSoon() {
-        document.getElementById('popup').style.display = 'block';
-      }
-      function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-      }
-    </script>
- <!-- PARTNERU PIEDĀVĀJUMA POPUP -->
-<div id="partneru-popup" style="display:none;">
-  <div class="popup-overlay"></div>
+    <div id="speles-wrapper"></div>
+  </section>
+
+  <!-- Rezultāti -->
+  <section id="section-rezultati" style="display:none;">
+    <h2>AI prognožu rezultāti</h2>
+    <div class="filters">
+      <select id="filter-sports-result" onchange="renderResults()">
+        <option value="all">Visi sporta veidi</option>
+        <option value="Futbols">Futbols</option>
+        <option value="Hokejs">Hokejs</option>
+      </select>
+      <select id="filter-result-type" onchange="renderResults()">
+        <option value="all">Visi rezultāti</option>
+        <option value="pareizi">Pareizi</option>
+        <option value="garām">Garām</option>
+      </select>
+    </div>
+    <div id="rezultati-wrapper"></div>
+  </section>
+
+  <!-- Bonusi -->
+  <section id="section-bonusi" class="bonusi-section" style="display:none;">
+    <h2>Partneru bonusi</h2>
+    <div id="bonusi-wrapper"></div>
+  </section>
+</main>
+
+<!-- Universālais pop‑ups "drīzumā" -->
+<div id="coming-popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:2rem;border-radius:1rem;z-index:1000;text-align:center;max-width:90%;">
+  <h3>Drīzumā pieejams!</h3>
+  <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
+  <button onclick="closeComing()" style="margin-top:1rem;padding:.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
+</div>
+
+<!-- Partneru piedāvājuma pop‑ups (atveras ik pēc 20 min) -->
+<div id="partneru-popup">
+  <div class="popup-overlay" onclick="closePartner()"></div>
   <div class="popup-content">
     <h2>🎯 Partneru piedāvājums</h2>
     <p>⚡ Jauns spēlētājs? Iegūsti 100€ bonusu!</p>
     <p>📈 Spēlē ar mūsu uzticamo partneri</p>
     <p>✅ Drošs, licencēts bukmeikers</p>
     <a href="#" class="popup-button">Apskatīt piedāvājumu</a>
-    <button onclick="closePopup()" class="close-btn">X</button>
+    <button class="close-btn" onclick="closePartner()">×</button>
   </div>
 </div>
 
-<style>
-  #partneru-popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 9999;
-    font-family: 'Inter', sans-serif;
-  }
-  .popup-overlay {
-    background: rgba(0,0,0,0.7);
-    position: absolute;
-    width: 100%; height: 100%;
-  }
-  .popup-content {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: #111;
-    padding: 2rem;
-    border-radius: 1rem;
-    color: #fff;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    border: 2px solid #00e0b6;
-  }
-  .popup-content h2 {
-    margin-bottom: 1rem;
-    color: #00e0b6;
-  }
-  .popup-button {
-    display: inline-block;
-    margin-top: 1rem;
-    background: #00e0b6;
-    color: #000;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-  }
-  .close-btn {
-    position: absolute;
-    top: 10px; right: 10px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-</style>
-
 <script>
-  function openPopup() {
-    document.getElementById("partneru-popup").style.display = "block";
-  }
-  function closePopup() {
-    document.getElementById("partneru-popup").style.display = "none";
+  // ---------- NAVIGĀCIJA ----------
+  function setActive(id){
+    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+    ['sakums','speles','rezultati','bonusi'].forEach(s=>document.getElementById('section-'+s).style.display='none');
+    const sec=id.replace('link-','section-');
+    document.getElementById(sec).style.display='block';
+    document.getElementById(id).classList.add('active');
   }
 
-  // Atver popup automātiski pēc 6 sekundēm
-  window.onload = function() {
-    setTimeout(openPopup, 6000);
-  };
-</script> 
+  // ---------- POP‑UPS ----------
+  function showComingSoon(){document.getElementById('coming-popup').style.display='block'}
+  function closeComing(){document.getElementById('coming-popup').style.display='none'}
+  function openPartner(){document.getElementById('partneru-popup').style.display='block'}
+  function closePartner(){document.getElementById('partneru-popup').style.display='none'}
+
+  // ---------- DATI ----------
+  const games=[
+    {komandas:'Latvija vs Igaunija',sports:'Futbols',datums:'2025-06-19',prognoze:'Latvija uzvara',koef:'1.45'},
+    {komandas:'Francija vs Vācija',sports:'Futbols',datums:'2025-06-19',prognoze:'Vairāk par 2.5 vārtiem',koef:'1.72'},
+    {komandas:'Zviedrija vs Somija',sports:'Hokejs',datums:'2025-06-20',prognoze:'Zviedrija -1.5',koef:'1.85'}
+  ];
+  const results=[
+    {teksts:'Latvija vs Igaunija — Prognoze pareizi (1.45)',sports:'Futbols',status:'pareizi'},
+    {teksts:'Francija vs Vācija — Prognoze garām (1.72)',sports:'Futbols',status:'garām'}
+  ];
+  const bonusi=[
+    {nos:'SportaBonuss 100€',apr:'Reģistrējies un saņem līdz 100€ free‑bet',link:'#'},
+    {nos:'LiveLikme 50%',apr:'Saņem 50% cashback uz live likmēm',link:'#'}
+  ];
+
+  // ---------- RENDER FUNCTIONS ----------
+  function renderGames(){
+    const wrap=document.getElementById('speles-wrapper');
+    wrap.innerHTML='';
+    const fs=document.getElementById('filter-sports').value;
+    const fd=document.getElementById('filter-date').value;
+    games.filter(g=> (fs==='all'||g.sports===fs)&&(fd==='all'||g.datums===fd) )
+         .forEach(g=>{
+            const div=document.createElement('div');div.className='game';
+            div.innerHTML=`<h3>${g.komandas}</h3><span>${g.sports} – ${g.datums}</span><span>Prognoze: ${g.prognoze}</span><span>Koeficients: ${g.koef}</span>`;
+            wrap.appendChild(div);
+          });
+  }
+  function renderResults(){
+    const wrap=document.getElementById('rezultati-wrapper');wrap.innerHTML='';
+    const fs=document.getElementById('filter-sports-result').value;
+    const fr=document.getElementById('filter-result-type').value;
+    results.filter(r=> (fs==='all'||r.sports===fs)&&(fr==='all'||r.status===fr) )
+           .forEach(r=>{
+             const div=document.createElement('div');div.className='game';
+             div.style.borderLeftColor=r.status==='pareizi'? '#00e0b6':'red';
+             div.textContent=r.teksts;wrap.appendChild(div);
+           });
+  }
+  function renderBonusi(){
+    const wrap=document.getElementById('bonusi-wrapper');wrap.innerHTML='';
+    bonusi.forEach(b=>{
+      const card=document.createElement('div');card.className='bonus-card';
+      card.innerHTML=`<h3>${b.nos}</h3><span>${b.apr}</span><a href="${b.link}">Saņemt</a>`;
+      wrap.appendChild(card);
+    });
+  }
+
+  // ---------- INIT ----------
+  function initPage(){
+    setActive('link-sakums');
+    renderGames();renderResults();renderBonusi();
+    // partner popup ik pēc 20 min
+    setTimeout(openPartner,20000*60);
+  }
+</script>
+
   </body>
 </html>
