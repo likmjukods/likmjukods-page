@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,8 +14,6 @@
       body {
         background-color: #111;
         color: #fff;
-        padding: 0;
-        margin: 0;
       }
       header {
         display: flex;
@@ -56,37 +52,23 @@
         margin: 2rem auto;
         padding: 0 2rem;
       }
-      section.hero {
-        text-align: center;
-        background: url("https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e") center center/cover;
-        padding: 6rem 2rem;
-        border-radius: 1rem;
-        position: relative;
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
       }
-      section.hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        border-radius: 1rem;
+      .filters button {
+        background-color: #222;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
       }
-      section.hero > * {
-        position: relative;
-        z-index: 2;
-      }
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-      }
-      .games-section {
-        margin-top: 4rem;
+      .filters button.active {
+        background-color: #ffd600;
+        color: #000;
       }
       .game {
         background: #1c1c1c;
@@ -111,30 +93,79 @@
         <a href="#">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
-    </header>
+    </header><main>
+  <section class="filters">
+    <button onclick="filterGames('all')" class="active">Visi</button>
+    <button onclick="filterGames('Futbols')">Futbols</button>
+    <button onclick="filterGames('Basketbols')">Basketbols</button>
+    <button onclick="filterGames('Teniss')">Teniss</button>
+    <button onclick="filterGames('eSports')">eSports</button>
+  </section>
 
-    <main>
-      <section class="hero">
-        <h1>Likmju Kods</h1>
-        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-        <a href="#" class="cta">Veikt likmi</a>
-      </section>
+  <section id="games-list"></section>
+</main>
 
-      <section class="games-section">
-        <h2>Šodienas spēles</h2>
-        <div class="game">
-          <h3>Latvija vs Igaunija</h3>
-          <span>Futbols – 19.06.2025</span>
-          <span>Prognoze: Latvija uzvara</span>
-          <span>Koeficients: 1.45</span>
-        </div>
-        <div class="game">
-          <h3>Francija vs Vācija</h3>
-          <span>Futbols – 19.06.2025</span>
-          <span>Prognoze: Vairāk par 2.5 vārtiem</span>
-          <span>Koeficients: 1.72</span>
-        </div>
-      </section>
-    </main>
+<script>
+  const games = [
+    {
+      komandas: "Vācija vs Čehija (U21)",
+      datums: "18.06.2025 20:00",
+      sportaVeids: "Futbols",
+      prognoze: "Vācija uzvar",
+      koeficients: "1.65",
+      statuss: "Not Started"
+    },
+    {
+      komandas: "Nīderlande vs Dānija (U21)",
+      datums: "18.06.2025 22:00",
+      sportaVeids: "Futbols",
+      prognoze: "Nīderlande uzvar",
+      koeficients: "1.72",
+      statuss: "Not Started"
+    },
+    {
+      komandas: "Spānija vs Francija (Basketbols)",
+      datums: "18.06.2025 21:30",
+      sportaVeids: "Basketbols",
+      prognoze: "Zem 165.5 punktiem",
+      koeficients: "1.85",
+      statuss: "Live"
+    },
+    {
+      komandas: "NAVI vs Astralis",
+      datums: "18.06.2025 21:00",
+      sportaVeids: "eSports",
+      prognoze: "NAVI uzvar",
+      koeficients: "1.55",
+      statuss: "Live"
+    }
+  ];
+
+  const container = document.getElementById('games-list');
+  function renderGames(filter = 'all') {
+    container.innerHTML = '';
+    games.forEach(game => {
+      if (filter === 'all' || game.sportaVeids === filter) {
+        const div = document.createElement('div');
+        div.className = 'game';
+        div.innerHTML = `
+          <h3>${game.komandas}</h3>
+          <span>${game.datums} | ${game.sportaVeids}</span><br>
+          <span>Prognoze: ${game.prognoze} | Koeficients: ${game.koeficients} | Statuss: ${game.statuss}</span>
+        `;
+        container.appendChild(div);
+      }
+    });
+  }
+
+  function filterGames(type) {
+    document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.filters button[onclick="filterGames('${type}')"]`).classList.add('active');
+    renderGames(type);
+  }
+
+  renderGames();
+</script>
+
   </body>
 </html>
