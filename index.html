@@ -14,6 +14,8 @@
       body {
         background-color: #111;
         color: #fff;
+        padding: 0;
+        margin: 0;
       }
       header {
         display: flex;
@@ -21,13 +23,15 @@
         align-items: center;
         padding: 1rem 2rem;
         background-color: #000;
+        border-bottom: 1px solid #222;
       }
       .logo {
         font-size: 1.5rem;
         font-weight: 700;
+        cursor: pointer;
       }
       .logo span {
-        color: #ffd600;
+        color: #1de9b6; /* zaļgani-zils */
       }
       nav {
         display: flex;
@@ -37,6 +41,7 @@
         color: #fff;
         text-decoration: none;
         font-weight: 600;
+        cursor: pointer;
       }
       .cta {
         background-color: #ffd600;
@@ -47,121 +52,110 @@
         text-decoration: none;
       }
       main {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 2rem auto;
-        padding: 0 1rem;
+        padding: 0 2rem;
       }
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
+      section.hero {
+        text-align: center;
+        background: url("https://images.unsplash.com/photo-1581092334908-4bc01a31c04c") center center/cover;
+        padding: 6rem 2rem;
+        border-radius: 1rem;
+        position: relative;
+      }
+      section.hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 1rem;
+      }
+      section.hero > * {
+        position: relative;
+        z-index: 2;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
         margin-bottom: 2rem;
       }
-      .filters button {
-        background: #333;
-        color: #fff;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .filters button.active {
-        background: #ffd600;
-        color: #000;
+      .games-section {
+        margin-top: 4rem;
       }
       .game {
         background: #1c1c1c;
         padding: 1rem;
         margin-bottom: 1rem;
-        border-left: 5px solid #ffd600;
+        border-left: 5px solid #1de9b6;
         border-radius: 0.5rem;
       }
       .game span {
-        display: block;
+        font-weight: 600;
+        display: inline-block;
         margin-top: 0.3rem;
       }
     </style>
+    <script>
+      function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    </script>
   </head>
   <body>
     <header>
-      <div class="logo"><span>LIK</span>MJU KODS</div>
+      <div class="logo" onclick="scrollToSection('hero')"><span>LIK</span>MJU KODS</div>
       <nav>
-        <a href="#">Sākums</a>
-        <a href="#">Spēles</a>
-        <a href="#">Rezultāti</a>
+        <a onclick="scrollToSection('hero')">Sākums</a>
+        <a onclick="scrollToSection('games')">Spēles</a>
+        <a onclick="scrollToSection('rezultati')">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
-    </header>
-    <main>
-      <div class="filters">
-        <button class="active" onclick="filterGames('Visi')">Visi</button>
-        <button onclick="filterGames('Futbols')">Futbols</button>
-        <button onclick="filterGames('Basketbols')">Basketbols</button>
-        <button onclick="filterGames('Teniss')">Teniss</button>
-        <button onclick="filterGames('eSports')">eSports</button>
-      </div>
-      <div id="games"></div>
-    </main><script>
-  const gamesData = [
-    {
-      team1: 'Vācija',
-      team2: 'Čehija (U21)',
-      sport: 'Futbols',
-      date: '18.06.2025 20:00',
-      prediction: 'Vācija uzvar',
-      odds: '1.65',
-      status: 'Not Started'
-    },
-    {
-      team1: 'Nīderlande',
-      team2: 'Dānija (U21)',
-      sport: 'Futbols',
-      date: '18.06.2025 22:00',
-      prediction: 'Nīderlande uzvar',
-      odds: '1.72',
-      status: 'Not Started'
-    },
-    {
-      team1: 'Spānija',
-      team2: 'Francija (Basketbols)',
-      sport: 'Basketbols',
-      date: '18.06.2025 21:30',
-      prediction: 'Zem 165.5 punktiem',
-      odds: '1.85',
-      status: 'Live'
-    },
-    {
-      team1: 'NAVI',
-      team2: 'Astralis',
-      sport: 'eSports',
-      date: '18.06.2025 21:00',
-      prediction: 'NAVI uzvar',
-      odds: '1.55',
-      status: 'Live'
-    }
-  ];
+    </header><main>
+  <section class="hero" id="hero">
+    <h1>Likmju Kods</h1>
+    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+    <a href="#" class="cta">Veikt likmi</a>
+  </section>
 
-  function filterGames(filter) {
-    document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    const container = document.getElementById('games');
-    container.innerHTML = '';
-    gamesData
-      .filter(game => filter === 'Visi' || game.sport === filter)
-      .forEach(game => {
-        const el = document.createElement('div');
-        el.className = 'game';
-        el.innerHTML = `
-          <h3>${game.team1} vs ${game.team2}</h3>
-          <span>${game.date} | ${game.sport}</span>
-          <span>Prognoze: ${game.prediction} | Koeficients: ${game.odds} | Statuss: ${game.status}</span>
-        `;
-        container.appendChild(el);
-      });
-  }
+  <section class="games-section" id="games">
+    <h2>Šodienas spēles</h2>
+    <div class="game">
+      <h3>Latvija vs Igaunija</h3>
+      <span>Futbols – 19.06.2025</span>
+      <span>Prognoze: Latvija uzvara</span>
+      <span>Koeficients: 1.45</span>
+    </div>
+    <div class="game">
+      <h3>Francija vs Vācija</h3>
+      <span>Futbols – 19.06.2025</span>
+      <span>Prognoze: Vairāk par 2.5 vārtiem</span>
+      <span>Koeficients: 1.72</span>
+    </div>
+  </section>
 
-  filterGames('Visi');
-</script>
+  <section class="games-section" id="rezultati">
+    <h2>Rezultāti</h2>
+    <div class="game">
+      <h3>Spānija vs Rumānija</h3>
+      <span>Statuss: Beidzies | Rezultāts: 1:0</span>
+      <span>Prognoze: Spānija uzvar</span>
+      <span>Statuss: ❌ Neizgāja</span>
+    </div>
+    <div class="game">
+      <h3>Beļģija vs Itālija</h3>
+      <span>Statuss: Beidzies | Rezultāts: 2:3</span>
+      <span>Prognoze: Vairāk par 2.5 vārtiem</span>
+      <span>Statuss: ✅ Izgāja</span>
+    </div>
+  </section>
+</main>
 
   </body>
 </html>
