@@ -28,16 +28,19 @@
       .logo {
         font-size: 1.5rem;
         font-weight: 700;
+        display: flex;
+        align-items: baseline;
+        gap: 0.2rem;
       }
-      .logo span {
+      .logo .lik {
         color: #00e0b6;
-        font-weight: 700;
-        font-size: 1.5rem;
       }
-      .logo .sub {
+      .logo .mju {
+        color: #fff;
+      }
+      .logo .kods {
+        color: #fff;
         font-size: 1.1rem;
-        font-weight: 600;
-        margin-left: 4px;
       }
       nav {
         display: flex;
@@ -101,58 +104,63 @@
         document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
         document.getElementById('section-sakums').style.display = 'none';
         document.getElementById('section-speles').style.display = 'none';
-        document.getElementById('section-rezultati').style.display = 'none';
-        document.getElementById(tab).classList.add('active');
-        if(tab === 'link-sakums') {
-          document.getElementById('section-sakums').style.display = 'block';
-        } else if(tab === 'link-speles') {
-          document.getElementById('section-speles').style.display = 'block';
-        } else if(tab === 'link-rezultati') {
-          document.getElementById('section-rezultati').style.display = 'block';
-        }
-      }
-    </script>
+        document.getElementById('section-rezultati').style.display = 'none';document.getElementById(tab).classList.add('active');
+
+    if(tab === 'link-sakums') {
+      document.getElementById('section-sakums').style.display = 'block';
+    } else if(tab === 'link-speles') {
+      document.getElementById('section-speles').style.display = 'block';
+    } else if(tab === 'link-rezultati') {
+      document.getElementById('section-rezultati').style.display = 'block';
+    }
+  }
+</script>
+
   </head>
   <body onload="setActive('link-sakums')">
     <header>
-      <div class="logo"><span>LIK</span><span class="sub">MJU KODS</span></div>
+      <div class="logo">
+        <span class="lik">LIK</span><span class="mju">MJU</span><span class="kods"> KODS</span>
+      </div>
       <nav>
         <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
         <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
         <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
-    </header>
-    <main>
-      <section id="section-sakums" class="hero">
-        <h1>Likmju Kods</h1>
-        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-        <a href="#" class="cta">Veikt likmi</a>
-      </section>
-      <section id="section-speles" class="games-section" style="display:none;">
-        <h2>Šodienas spēles</h2>
-        <div class="game">
-          <h3>Latvija vs Igaunija</h3>
-          <span>Futbols – 19.06.2025</span>
-          <span>Prognoze: Latvija uzvara</span>
-          <span>Koeficients: 1.45</span>
-        </div>
-        <div class="game">
-          <h3>Francija vs Vācija</h3>
-          <span>Futbols – 19.06.2025</span>
-          <span>Prognoze: Vairāk par 2.5 vārtiem</span>
-          <span>Koeficients: 1.72</span>
-        </div>
-      </section>
-      <section id="section-rezultati" style="display:none;">
-        <h2>AI prognožu rezultāti</h2>
-        <div class="game" style="border-left-color: #00e0b6;">
-          <span>✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)</span>
-        </div>
-        <div class="game" style="border-left-color: red;">
-          <span>✗ Francija vs Vācija — Prognoze garām (1.72)</span>
-        </div>
-      </section>
-    </main>
+    </header><main>
+  <section id="section-sakums" class="hero">
+    <h1>Likmju Kods</h1>
+    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+    <a href="#" class="cta">Veikt likmi</a>
+  </section>
+
+  <section id="section-speles" class="games-section" style="display:none;">
+    <h2>Šodienas spēles</h2>
+    <div class="game">
+      <h3>Latvija vs Igaunija</h3>
+      <span>Futbols – 19.06.2025</span>
+      <span>Prognoze: Latvija uzvara</span>
+      <span>Koeficients: 1.45</span>
+    </div>
+    <div class="game">
+      <h3>Francija vs Vācija</h3>
+      <span>Futbols – 19.06.2025</span>
+      <span>Prognoze: Vairāk par 2.5 vārtiem</span>
+      <span>Koeficients: 1.72</span>
+    </div>
+  </section>
+
+  <section id="section-rezultati" style="display:none;">
+    <h2>AI prognožu rezultāti</h2>
+    <div class="game" style="border-left-color: #00e0b6;">
+      <span>✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)</span>
+    </div>
+    <div class="game" style="border-left-color: red;">
+      <span>✗ Francija vs Vācija — Prognoze garām (1.72)</span>
+    </div>
+  </section>
+</main>
+
   </body>
 </html>
