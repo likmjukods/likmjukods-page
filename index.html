@@ -3,17 +3,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
     }
     body {
-      background-color: #111;
+      background-color: #000;
       color: #fff;
+      font-family: 'Orbitron', sans-serif;
     }
     header {
       display: flex;
@@ -32,8 +32,7 @@
     }
     nav {
       display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      gap: 2rem;
     }
     nav a {
       color: #fff;
@@ -41,9 +40,8 @@
       font-weight: 600;
       padding: 0.3rem 0.6rem;
       border-radius: 5px;
-      transition: background 0.3s;
     }
-    nav a.active, nav a:hover {
+    nav a.active {
       background-color: #333;
     }
     .cta {
@@ -57,47 +55,30 @@
     main {
       max-width: 1200px;
       margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 0 2rem;
     }
     section.hero {
       text-align: center;
       background: #222;
-      padding: 4rem 1rem;
+      padding: 6rem 2rem;
       border-radius: 1rem;
-      box-shadow: 0 0 25px #00e0b6;
+      box-shadow: 0 0 20px 3px #00e0b6;
     }
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
-      color: #ccc;
     }
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 2rem;
     }
-    .hero .cta {
+    .hero a.cta {
       background-color: #00e0b6;
       color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      padding: 0.6rem 1.2rem;
-    }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      nav {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -105,38 +86,19 @@
   <header>
     <div class="logo"><span>LIK</span>MJU KODS</div>
     <nav>
-      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-      <a href="#" id="link-bonusi" onclick="setActive('link-bonusi')">Bonusi</a>
-      <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
+      <a href="#" class="active">Sākums</a>
+      <a href="#">Spēles</a>
+      <a href="#">Rezultāti</a>
+      <a href="#">Bonusi</a>
+      <a class="cta" href="#">Veikt likmi</a>
     </nav>
   </header>
   <main>
-    <section id="section-sakums" class="hero">
+    <section class="hero">
       <h1>LIKMIJU KODS</h1>
       <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-      <button class="cta" onclick="showComingSoon()">Veikt likmi</button>
+      <a href="#" class="cta">Veikt likmi</a>
     </section>
   </main>
-  <div id="popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:2rem;border-radius:1rem;z-index:1000;text-align:center;max-width:90%;">
-    <h3>Drīzumā pieejams!</h3>
-    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
-    <button onclick="closePopup()" style="margin-top:1rem;padding:0.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
-  </div>
-  <script>
-    function setActive(tab) {
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById('section-sakums').style.display = 'none';
-      document.getElementById(tab.replace('link-', 'section-')).style.display = 'block';
-      document.getElementById(tab).classList.add('active');
-    }
-    function showComingSoon() {
-      document.getElementById('popup').style.display = 'block';
-    }
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-  </script>
 </body>
 </html>
