@@ -28,19 +28,9 @@
       .logo {
         font-size: 1.5rem;
         font-weight: 700;
-        display: flex;
-        align-items: baseline;
-        gap: 0.2rem;
       }
-      .logo .lik {
+      .logo span {
         color: #00e0b6;
-      }
-      .logo .mju {
-        color: #fff;
-      }
-      .logo .kods {
-        color: #fff;
-        font-size: 1.1rem;
       }
       nav {
         display: flex;
@@ -119,9 +109,7 @@
   </head>
   <body onload="setActive('link-sakums')">
     <header>
-      <div class="logo">
-        <span class="lik">LIK</span><span class="mju">MJU</span><span class="kods"> KODS</span>
-      </div>
+      <div class="logo"><span>LIK</span>MJU KODS</div>
       <nav>
         <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
         <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
