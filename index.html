@@ -4,17 +4,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
     body {
       background-color: #111;
       color: #fff;
-      font-family: 'Inter', sans-serif;
     }
     header {
       display: flex;
@@ -63,7 +62,7 @@
       background: #222;
       padding: 6rem 2rem;
       border-radius: 1rem;
-      box-shadow: 0 0 25px 5px #00e0b6;
+      box-shadow: 0 0 30px #00e0b677;
     }
     .hero h1 {
       font-size: 3rem;
@@ -75,8 +74,31 @@
       font-size: 1.2rem;
       margin-bottom: 2rem;
     }
-    .hero .cta {
-      margin-top: 1rem;
+    .games-section {
+      margin-top: 4rem;
+    }
+    .game {
+      background: #1c1c1c;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #00e0b6;
+      border-radius: 0.5rem;
+    }
+    .game span {
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 0.3rem;
+    }
+    .filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .filters select {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -97,6 +119,72 @@
       <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
       <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
     </section>
+    <section id="section-speles" class="games-section" style="display:none;">
+      <h2>Šodienas spēles</h2>
+      <div class="filters">
+        <select id="filter-sports" onchange="renderGames()">
+          <option value="all">Visi sporta veidi</option>
+          <option value="Futbols">Futbols</option>
+          <option value="Hokejs">Hokejs</option>
+        </select>
+        <select id="filter-date" onchange="renderGames()">
+          <option value="all">Visi datumi</option>
+          <option value="2025-06-19">19.06.2025</option>
+          <option value="2025-06-20">20.06.2025</option>
+        </select>
+      </div>
+      <div id="speles-wrapper"></div>
+    </section>
+    <section id="section-rezultati" style="display:none;">
+      <h2>AI prognožu rezultāti</h2>
+      <div class="filters">
+        <select id="filter-sports-result" onchange="renderResults()">
+          <option value="all">Visi sporta veidi</option>
+          <option value="Futbols">Futbols</option>
+          <option value="Hokejs">Hokejs</option>
+        </select>
+        <select id="filter-result-type" onchange="renderResults()">
+          <option value="all">Visi rezultāti</option>
+          <option value="pareizi">Pareizi</option>
+          <option value="garām">Garām</option>
+        </select>
+      </div>
+      <div id="rezultati-wrapper"></div>
+    </section>
+    <section id="section-bonusi" style="display:none;">
+      <h2>Partneru bonusi</h2>
+      <div class="game">
+        <strong>SportaBonuss 100€</strong>
+        <p>Reģistrējies un saņem līdz 100€ free-bet</p>
+        <button class="cta">Saņemt</button>
+      </div>
+      <div class="game">
+        <strong>LiveLikme 50%</strong>
+        <p>Saņem 50% cashback uz live likmēm</p>
+        <button class="cta">Saņemt</button>
+      </div>
+    </section>
   </main>
+  <div id="popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:2rem;border-radius:1rem;z-index:1000;text-align:center;max-width:90%;">
+    <h3>Drīzumā pieejams!</h3>
+    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
+    <button onclick="closePopup()" style="margin-top:1rem;padding:0.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
+  </div>
+  <script>
+    function setActive(tab) {
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      ['sakums', 'speles', 'rezultati', 'bonusi'].forEach(id => {
+        document.getElementById('section-' + id).style.display = 'none';
+      });
+      document.getElementById(tab.replace('link-', 'section-')).style.display = 'block';
+      document.getElementById(tab).classList.add('active');
+    }
+    function showComingSoon() {
+      document.getElementById('popup').style.display = 'block';
+    }
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
