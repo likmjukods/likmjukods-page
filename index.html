@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,6 +53,12 @@
       margin: 2rem auto;
       padding: 0 1rem;
     }
+    .hero, .games-section, .results-section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
     .hero {
       background-color: #222;
       padding: 3rem;
@@ -68,9 +72,6 @@
     .hero p {
       font-size: 1.2rem;
       margin-bottom: 1.5rem;
-    }
-    .games-section, .results-section {
-      margin-top: 3rem;
     }
     .game, .result {
       background-color: #2a2a2a;
@@ -102,56 +103,60 @@
   <header>
     <div class="logo"><span>LIK</span>MJU KODS</div>
     <nav>
-      <a href="#" class="active">Sākums</a>
-      <a href="#">Spēles</a>
-      <a href="#">Rezultāti</a>
+      <a href="#" class="nav-link active" data-section="hero">Sākums</a>
+      <a href="#" class="nav-link" data-section="games">Spēles</a>
+      <a href="#" class="nav-link" data-section="results">Rezultāti</a>
       <a class="cta" href="#">Veikt likmi</a>
     </nav>
-  </header>
-
-  <main>
-    <section class="hero">
+  </header>  <main>
+    <section class="hero section active" id="hero">
       <h1>Likmju Kods</h1>
       <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
       <a class="cta" href="#">Veikt likmi</a>
-    </section>
+    </section><section class="games-section section" id="games">
+  <h2>Šodienas spēles</h2>
+  <div class="game">
+    <h3>Latvija vs Igaunija</h3>
+    <span>Futbols – 19.06.2025</span>
+    <span>Prognoze: Latvija uzvara</span>
+    <span>Koeficients: 1.45</span>
+  </div>
+  <div class="game">
+    <h3>Francija vs Vācija</h3>
+    <span>Futbols – 19.06.2025</span>
+    <span>Prognoze: Vairāk par 2.5 vārtiem</span>
+    <span>Koeficients: 1.72</span>
+  </div>
+</section>
 
-    <section class="games-section">
-      <h2>Šodienas spēles</h2>
-    </section>
+<section class="results-section section" id="results">
+  <h2>AI prognožu rezultāti</h2>
+  <div class="result correct">
+    ✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)
+  </div>
+  <div class="result wrong">
+    ✗ Francija vs Vācija — Prognoze garām (1.72)
+  </div>
+</section>
 
-    <section class="results-section">
-      <h2>AI prognožu rezultāti</h2>
-    </section>
-  </main>
+  </main>  <script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
 
-  <script>
-    fetch('games.json')
-      .then(response => response.json())
-      .then(data => {
-        const gamesSection = document.querySelector('.games-section');
-        const resultsSection = document.querySelector('.results-section');
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
 
-        gamesSection.innerHTML = '<h2>Šodienas spēles</h2>';
-        resultsSection.innerHTML = '<h2>AI prognožu rezultāti</h2>';
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
 
-        data.games.forEach(game => {
-          const gameDiv = document.createElement('div');
-          gameDiv.className = 'game';
-          gameDiv.innerHTML = `
-            <h3>${game.title}</h3>
-            <span>${game.sport} – ${game.date}</span>
-            <span>Prognoze: ${game.prediction}</span>
-            <span>Koeficients: ${game.odd}</span>
-          `;
-          gamesSection.appendChild(gameDiv);
-
-          const resultDiv = document.createElement('div');
-          resultDiv.className = 'result ' + game.result;
-          resultDiv.textContent = `${game.result === 'correct' ? '✓' : '✗'} ${game.title} — ${game.result === 'correct' ? 'Uzvara precīzi prognozēta' : 'Prognoze garām'} (${game.odd})`;
-          resultsSection.appendChild(resultDiv);
+        sections.forEach(section => {
+          section.classList.remove('active');
         });
+
+        const target = link.dataset.section;
+        document.getElementById(target).classList.add('active');
       });
-  </script>
-</body>
+    });
+  </script></body>
 </html>
