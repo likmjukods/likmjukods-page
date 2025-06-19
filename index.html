@@ -71,111 +71,94 @@
         font-size: 1.2rem;
         margin-bottom: 2rem;
       }
-      .games-section, .results-section {
+      .games-section {
         margin-top: 4rem;
       }
-      .game, .result {
+      .game {
         background: #1c1c1c;
         padding: 1rem;
         margin-bottom: 1rem;
         border-left: 5px solid #00e0b6;
         border-radius: 0.5rem;
       }
-      .result.incorrect {
-        border-left-color: red;
-      }
-      .game span, .result span {
+      .game span {
         font-weight: 600;
         display: inline-block;
         margin-top: 0.3rem;
       }
     </style>
   </head>
-  <body onload="loadData()">
+  <body>
     <header>
       <div class="logo"><span>LIK</span>MJU KODS</div>
       <nav>
-        <a href="#" id="link-sakums" onclick="showSection('sakums')">Sākums</a>
-        <a href="#" id="link-speles" onclick="showSection('speles')">Spēles</a>
-        <a href="#" id="link-rezultati" onclick="showSection('rezultati')">Rezultāti</a>
+        <a href="#" id="link-sakums" onclick="setActive('sakums')">Sākums</a>
+        <a href="#" id="link-speles" onclick="setActive('speles')">Spēles</a>
+        <a href="#" id="link-rezultati" onclick="setActive('rezultati')">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
-    </header><main>
-  <section id="sakums" class="hero">
-    <h1>Likmju Kods</h1>
-    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-    <a href="#" class="cta">Veikt likmi</a>
-  </section>
+    </header>
+    <main>
+      <section id="sakums" class="hero">
+        <h1>Likmju Kods</h1>
+        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+        <a href="#" class="cta">Veikt likmi</a>
+      </section>
+      <section id="speles" class="games-section" style="display:none">
+        <h2>Šodienas spēles</h2>
+        <div id="speles-list"></div>
+      </section>
+      <section id="rezultati" class="games-section" style="display:none">
+        <h2>AI prognožu rezultāti</h2>
+        <div id="rezultati-list"></div>
+      </section>
+    </main>
+    <script>
+      function setActive(tabId) {
+        ['sakums', 'speles', 'rezultati'].forEach(id => {
+          document.getElementById(id).style.display = id === tabId ? 'block' : 'none';
+        });['link-sakums', 'link-speles', 'link-rezultati'].forEach(linkId => {
+      document.getElementById(linkId).classList.remove('active');
+    });
 
-  <section id="speles" class="games-section" style="display:none;">
-    <h2>Šodienas spēles</h2>
-    <div id="games-list"></div>
-  </section>
-
-  <section id="rezultati" class="results-section" style="display:none;">
-    <h2>AI prognožu rezultāti</h2>
-    <div id="results-list"></div>
-  </section>
-</main>
-
-<script>
-  function showSection(id) {
-    document.querySelectorAll('main > section').forEach(s => s.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById(`link-${id}`).classList.add('active');
+    document.getElementById('link-' + tabId).classList.add('active');
   }
 
-  async function loadData() {
-    showSection('sakums');
+  async function loadGames() {
     const response = await fetch('data.json');
     const data = await response.json();
 
-    const gamesContainer = document.getElementById('games-list');
-    const resultsContainer = document.getElementById('results-list');
-    gamesContainer.innerHTML = '';
-    resultsContainer.innerHTML = '';
+    const spelesList = document.getElementById('speles-list');
+    const rezultatiList = document.getElementById('rezultati-list');
 
-    data.games.forEach(game => {
-      gamesContainer.innerHTML += `
-        <div class="game">
-          <h3>${game.match}</h3>
-          <span>${game.sport} – ${game.date}</span>
-          <span>Prognoze: ${game.prediction}</span>
-          <span>Koeficients: ${game.odds}</span>
-        </div>`;
-    });
+    data.forEach(sp => {
+      const gameDiv = document.createElement('div');
+      gameDiv.className = 'game';
 
-    data.results.forEach(res => {
-      resultsContainer.innerHTML += `
-        <div class="result ${res.correct ? '' : 'incorrect'}">
-          <span>${res.correct ? '✓' : '✗'} ${res.text}</span>
-        </div>`;
+      gameDiv.innerHTML = `
+        <h3>${sp.komandas || 'undefined'}</h3>
+        <span>${sp.sports} – ${sp.datums}</span>
+        <span>Prognoze: ${sp.prognoze}</span>
+        <span>Koeficients: ${sp.koeficients}</span>
+      `;
+
+      spelesList.appendChild(gameDiv);
+
+      if (sp.rezultats) {
+        const rez = document.createElement('div');
+        rez.className = 'game';
+        rez.style.borderLeftColor = sp.rezultats === 'pareizi' ? '#00e0b6' : 'red';
+        rez.innerHTML = `<span>${sp.rezultats === 'pareizi' ? '✓' : '✗'} ${sp.komandas} — Prognoze ${sp.rezultats} (${sp.koeficients})</span>`;
+        rezultatiList.appendChild(rez);
+      }
     });
   }
-</script>
-</script> <!-- tas jau ir -->
-<script>
-  fetch('data.json')
-    .then(response => response.json())
-    .then(speles => {
-      const spelesSekcija = document.getElementById('section-speles');
-      const spelesWrapper = document.createElement('div');
 
-      speles.forEach(sp => {
-        const div = document.createElement('div');
-        div.className = 'game';
-        div.innerHTML = `
-          <h3>${sp.komandas}</h3>
-          <span>${sp.sports} – ${sp.datums}</span>
-          <span>Prognoze: ${sp.prognoze}</span>
-          <span>Koeficients: ${sp.koeficients}</span>
-        `;
-        spelesWrapper.appendChild(div);
-      });
-
-      spelesSekcija.appendChild(spelesWrapper);
-    });
+  window.onload = () => {
+    setActive('sakums');
+    loadGames();
+  }
 </script>
-</body>
-</html> 
+
+  </body>
+</html>
