@@ -1,154 +1,169 @@
 <!DOCTYPE html><html lang="lv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Likmju Kods</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-      }
-      body {
-        background-color: #111;
-        color: #fff;
-        padding: 0;
-        margin: 0;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #000;
-        border-bottom: 1px solid #222;
-      }
-      .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-      .logo span {
-        color: #00e0b6;
-      }
-      nav {
-        display: flex;
-        gap: 2rem;
-      }
-      nav a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.3rem 0.6rem;
-        border-radius: 5px;
-      }
-      nav a.active {
-        background-color: #333;
-      }
-      .cta {
-        background-color: #00e0b6;
-        color: #000;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      main {
-        max-width: 1200px;
-        margin: 2rem auto;
-        padding: 0 2rem;
-      }
-      section.hero {
-        text-align: center;
-        background: #222;
-        padding: 6rem 2rem;
-        border-radius: 1rem;
-      }
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-      .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-      }
-      .games-section {
-        margin-top: 4rem;
-      }
-      .game {
-        background: #1c1c1c;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border-left: 5px solid #00e0b6;
-        border-radius: 0.5rem;
-      }
-      .game span {
-        font-weight: 600;
-        display: inline-block;
-        margin-top: 0.3rem;
-      }
-    </style>
-    <script>
-      function setActive(tab) {
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        document.getElementById('section-sakums').style.display = 'none';
-        document.getElementById('section-speles').style.display = 'none';
-        document.getElementById('section-rezultati').style.display = 'none';document.getElementById(tab).classList.add('active');
-
-    if(tab === 'link-sakums') {
-      document.getElementById('section-sakums').style.display = 'block';
-    } else if(tab === 'link-speles') {
-      document.getElementById('section-speles').style.display = 'block';
-    } else if(tab === 'link-rezultati') {
-      document.getElementById('section-rezultati').style.display = 'block';
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Likmju Kods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
-  }
-</script>
+    body {
+      background-color: #111;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #000;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .logo span {
+      color: #00f2c3;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+    }
+    nav a.active {
+      background-color: #333;
+    }
+    .cta {
+      background-color: #00f2c3;
+      color: #000;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    section.hero {
+      text-align: center;
+      background-color: #222;
+      padding: 4rem 2rem;
+      border-radius: 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .games-section h2 {
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .game {
+      background: #222;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #00f2c3;
+      border-radius: 0.5rem;
+    }
+    .results {
+      margin-top: 3rem;
+    }
+    .results h2 {
+      margin-bottom: 1rem;
+    }
+    .result.pass {
+      border-left: 5px solid #00f2c3;
+      background-color: #1e1e1e;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+    .result.fail {
+      border-left: 5px solid red;
+      background-color: #1e1e1e;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>LIK</span>MJU KODS</div>
+    <nav>
+      <a href="#" id="nav-home" class="active">Sākums</a>
+      <a href="#" id="nav-games">Spēles</a>
+      <a href="#" id="nav-results">Rezultāti</a>
+      <a class="cta" href="#">Veikt likmi</a>
+    </nav>
+  </header>  <main id="main-content">
+    <section class="hero" id="section-home">
+      <h1>Likmju Kods</h1>
+      <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+      <a href="#" class="cta">Veikt likmi</a>
+    </section><section class="games-section" id="section-games" style="display: none;">
+  <h2>Šodienas spēles</h2>
+  <div class="game">
+    <h3>Latvija vs Igaunija</h3>
+    <span>Futbols – 19.06.2025</span><br />
+    <span>Prognoze: Latvija uzvara</span><br />
+    <span>Koeficients: 1.45</span>
+  </div>
+  <div class="game">
+    <h3>Francija vs Vācija</h3>
+    <span>Futbols – 19.06.2025</span><br />
+    <span>Prognoze: Vairāk par 2.5 vārtiem</span><br />
+    <span>Koeficients: 1.72</span>
+  </div>
+</section>
 
-  </head>
-  <body onload="setActive('link-sakums')">
-    <header>
-      <div class="logo"><span>LIK</span>MJU KODS</div>
-      <nav>
-        <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-        <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-        <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-        <a class="cta" href="#">Veikt likmi</a>
-      </nav>
-    </header><main>
-  <section id="section-sakums" class="hero">
-    <h1>Likmju Kods</h1>
-    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-    <a href="#" class="cta">Veikt likmi</a>
-  </section>
+<section class="results" id="section-results" style="display: none;">
+  <h2>AI prognožu rezultāti</h2>
+  <div class="result pass">
+    ✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)
+  </div>
+  <div class="result fail">
+    ✗ Francija vs Vācija — Prognoze garām (1.72)
+  </div>
+</section>
 
-  <section id="section-speles" class="games-section" style="display:none;">
-    <h2>Šodienas spēles</h2>
-    <div class="game">
-      <h3>Latvija vs Igaunija</h3>
-      <span>Futbols – 19.06.2025</span>
-      <span>Prognoze: Latvija uzvara</span>
-      <span>Koeficients: 1.45</span>
-    </div>
-    <div class="game">
-      <h3>Francija vs Vācija</h3>
-      <span>Futbols – 19.06.2025</span>
-      <span>Prognoze: Vairāk par 2.5 vārtiem</span>
-      <span>Koeficients: 1.72</span>
-    </div>
-  </section>
+  </main>  <script>
+    const navLinks = document.querySelectorAll("nav a");
+    const sections = {
+      "nav-home": document.getElementById("section-home"),
+      "nav-games": document.getElementById("section-games"),
+      "nav-results": document.getElementById("section-results")
+    };
 
-  <section id="section-rezultati" style="display:none;">
-    <h2>AI prognožu rezultāti</h2>
-    <div class="game" style="border-left-color: #00e0b6;">
-      <span>✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)</span>
-    </div>
-    <div class="game" style="border-left-color: red;">
-      <span>✗ Francija vs Vācija — Prognoze garām (1.72)</span>
-    </div>
-  </section>
-</main>
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
 
-  </body>
+        navLinks.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+
+        Object.values(sections).forEach(section => section.style.display = "none");
+
+        const section = sections[link.id];
+        if (section) section.style.display = "block";
+      });
+    });
+  </script></body>
 </html>
