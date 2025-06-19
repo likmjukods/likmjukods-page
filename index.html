@@ -21,7 +21,6 @@
         align-items: center;
         padding: 1rem 2rem;
         background-color: #000;
-        border-bottom: 1px solid #222;
       }
       .logo {
         font-size: 1.5rem;
@@ -48,18 +47,18 @@
         text-decoration: none;
       }
       main {
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 2rem auto;
-        padding: 0 2rem;
+        padding: 0 1rem;
       }
       .filters {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
+        gap: 1rem;
+        margin-bottom: 2rem;
       }
       .filters button {
-        background-color: #222;
+        background: #333;
         color: #fff;
         border: none;
         padding: 0.5rem 1rem;
@@ -67,7 +66,7 @@
         cursor: pointer;
       }
       .filters button.active {
-        background-color: #ffd600;
+        background: #ffd600;
         color: #000;
       }
       .game {
@@ -78,8 +77,7 @@
         border-radius: 0.5rem;
       }
       .game span {
-        font-weight: 600;
-        display: inline-block;
+        display: block;
         margin-top: 0.3rem;
       }
     </style>
@@ -93,78 +91,76 @@
         <a href="#">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
-    </header><main>
-  <section class="filters">
-    <button onclick="filterGames('all')" class="active">Visi</button>
-    <button onclick="filterGames('Futbols')">Futbols</button>
-    <button onclick="filterGames('Basketbols')">Basketbols</button>
-    <button onclick="filterGames('Teniss')">Teniss</button>
-    <button onclick="filterGames('eSports')">eSports</button>
-  </section>
-
-  <section id="games-list"></section>
-</main>
-
-<script>
-  const games = [
+    </header>
+    <main>
+      <div class="filters">
+        <button class="active" onclick="filterGames('Visi')">Visi</button>
+        <button onclick="filterGames('Futbols')">Futbols</button>
+        <button onclick="filterGames('Basketbols')">Basketbols</button>
+        <button onclick="filterGames('Teniss')">Teniss</button>
+        <button onclick="filterGames('eSports')">eSports</button>
+      </div>
+      <div id="games"></div>
+    </main><script>
+  const gamesData = [
     {
-      komandas: "Vācija vs Čehija (U21)",
-      datums: "18.06.2025 20:00",
-      sportaVeids: "Futbols",
-      prognoze: "Vācija uzvar",
-      koeficients: "1.65",
-      statuss: "Not Started"
+      team1: 'Vācija',
+      team2: 'Čehija (U21)',
+      sport: 'Futbols',
+      date: '18.06.2025 20:00',
+      prediction: 'Vācija uzvar',
+      odds: '1.65',
+      status: 'Not Started'
     },
     {
-      komandas: "Nīderlande vs Dānija (U21)",
-      datums: "18.06.2025 22:00",
-      sportaVeids: "Futbols",
-      prognoze: "Nīderlande uzvar",
-      koeficients: "1.72",
-      statuss: "Not Started"
+      team1: 'Nīderlande',
+      team2: 'Dānija (U21)',
+      sport: 'Futbols',
+      date: '18.06.2025 22:00',
+      prediction: 'Nīderlande uzvar',
+      odds: '1.72',
+      status: 'Not Started'
     },
     {
-      komandas: "Spānija vs Francija (Basketbols)",
-      datums: "18.06.2025 21:30",
-      sportaVeids: "Basketbols",
-      prognoze: "Zem 165.5 punktiem",
-      koeficients: "1.85",
-      statuss: "Live"
+      team1: 'Spānija',
+      team2: 'Francija (Basketbols)',
+      sport: 'Basketbols',
+      date: '18.06.2025 21:30',
+      prediction: 'Zem 165.5 punktiem',
+      odds: '1.85',
+      status: 'Live'
     },
     {
-      komandas: "NAVI vs Astralis",
-      datums: "18.06.2025 21:00",
-      sportaVeids: "eSports",
-      prognoze: "NAVI uzvar",
-      koeficients: "1.55",
-      statuss: "Live"
+      team1: 'NAVI',
+      team2: 'Astralis',
+      sport: 'eSports',
+      date: '18.06.2025 21:00',
+      prediction: 'NAVI uzvar',
+      odds: '1.55',
+      status: 'Live'
     }
   ];
 
-  const container = document.getElementById('games-list');
-  function renderGames(filter = 'all') {
-    container.innerHTML = '';
-    games.forEach(game => {
-      if (filter === 'all' || game.sportaVeids === filter) {
-        const div = document.createElement('div');
-        div.className = 'game';
-        div.innerHTML = `
-          <h3>${game.komandas}</h3>
-          <span>${game.datums} | ${game.sportaVeids}</span><br>
-          <span>Prognoze: ${game.prognoze} | Koeficients: ${game.koeficients} | Statuss: ${game.statuss}</span>
-        `;
-        container.appendChild(div);
-      }
-    });
-  }
-
-  function filterGames(type) {
+  function filterGames(filter) {
     document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.filters button[onclick="filterGames('${type}')"]`).classList.add('active');
-    renderGames(type);
+    event.target.classList.add('active');
+    const container = document.getElementById('games');
+    container.innerHTML = '';
+    gamesData
+      .filter(game => filter === 'Visi' || game.sport === filter)
+      .forEach(game => {
+        const el = document.createElement('div');
+        el.className = 'game';
+        el.innerHTML = `
+          <h3>${game.team1} vs ${game.team2}</h3>
+          <span>${game.date} | ${game.sport}</span>
+          <span>Prognoze: ${game.prediction} | Koeficients: ${game.odds} | Statuss: ${game.status}</span>
+        `;
+        container.appendChild(el);
+      });
   }
 
-  renderGames();
+  filterGames('Visi');
 </script>
 
   </body>
