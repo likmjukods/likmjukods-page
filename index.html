@@ -282,6 +282,26 @@
     });
   });
 </script>
+<script>
+  document.getElementById('sport-filter').addEventListener('change', filterResults);
+  document.getElementById('status-filter').addEventListener('change', filterResults);
+
+  function filterResults() {
+    const sport = document.getElementById('sport-filter').value;
+    const status = document.getElementById('status-filter').value;
+
+    document.querySelectorAll('#section-rezultati .game').forEach(game => {
+      const text = game.textContent.toLowerCase();
+      const isSportMatch = sport === 'visi' || text.includes(sport);
+      const isStatusMatch =
+        status === 'visi' ||
+        (status === 'pareizi' && text.includes('✓')) ||
+        (status === 'garam' && text.includes('✗'));
+
+      game.style.display = (isSportMatch && isStatusMatch) ? 'block' : 'none';
+    });
+  }
+</script>
 </body>
   </html>
 
