@@ -126,7 +126,20 @@
   </div>
   <div id="speles-wrapper"></div>
 </section>
+<div id="result-filter" style="margin: 2rem 0; display: flex; gap: 1rem;">
+  <select id="sport-filter" style="padding: 0.5rem; border-radius: 5px;">
+    <option value="visi">Visi sporta veidi</option>
+    <option value="futbols">Futbols</option>
+    <option value="hokejs">Hokejs</option>
+    <!-- Pievieno citus vajadzīgos -->
+  </select>
 
+  <select id="status-filter" style="padding: 0.5rem; border-radius: 5px;">
+    <option value="visi">Visi rezultāti</option>
+    <option value="pareizi">Pareizi prognozēti</option>
+    <option value="garam">Garām prognozēti</option>
+  </select>
+</div>
 <section id="section-rezultati" style="display:none;">
   <h2>AI prognožu rezultāti</h2>
   <div id="rezultati-wrapper"></div>
