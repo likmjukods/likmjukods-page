@@ -14,8 +14,6 @@
       body {
         background-color: #111;
         color: #fff;
-        padding: 0;
-        margin: 0;
       }
       header {
         display: flex;
@@ -73,82 +71,89 @@
         font-size: 1.2rem;
         margin-bottom: 2rem;
       }
-      .games-section {
+      .games-section, .results-section {
         margin-top: 4rem;
       }
-      .game {
+      .game, .result {
         background: #1c1c1c;
         padding: 1rem;
         margin-bottom: 1rem;
         border-left: 5px solid #00e0b6;
         border-radius: 0.5rem;
       }
-      .game span {
+      .result.incorrect {
+        border-left-color: red;
+      }
+      .game span, .result span {
         font-weight: 600;
         display: inline-block;
         margin-top: 0.3rem;
       }
     </style>
-    <script>
-      function setActive(tab) {
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        document.getElementById('section-sakums').style.display = 'none';
-        document.getElementById('section-speles').style.display = 'none';
-        document.getElementById('section-rezultati').style.display = 'none';document.getElementById(tab).classList.add('active');
-
-    if(tab === 'link-sakums') {
-      document.getElementById('section-sakums').style.display = 'block';
-    } else if(tab === 'link-speles') {
-      document.getElementById('section-speles').style.display = 'block';
-    } else if(tab === 'link-rezultati') {
-      document.getElementById('section-rezultati').style.display = 'block';
-    }
-  }
-</script>
-
   </head>
-  <body onload="setActive('link-sakums')">
+  <body onload="loadData()">
     <header>
       <div class="logo"><span>LIK</span>MJU KODS</div>
       <nav>
-        <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-        <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-        <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+        <a href="#" id="link-sakums" onclick="showSection('sakums')">Sākums</a>
+        <a href="#" id="link-speles" onclick="showSection('speles')">Spēles</a>
+        <a href="#" id="link-rezultati" onclick="showSection('rezultati')">Rezultāti</a>
         <a class="cta" href="#">Veikt likmi</a>
       </nav>
     </header><main>
-  <section id="section-sakums" class="hero">
+  <section id="sakums" class="hero">
     <h1>Likmju Kods</h1>
     <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
     <a href="#" class="cta">Veikt likmi</a>
   </section>
 
-  <section id="section-speles" class="games-section" style="display:none;">
+  <section id="speles" class="games-section" style="display:none;">
     <h2>Šodienas spēles</h2>
-    <div class="game">
-      <h3>Latvija vs Igaunija</h3>
-      <span>Futbols – 19.06.2025</span>
-      <span>Prognoze: Latvija uzvara</span>
-      <span>Koeficients: 1.45</span>
-    </div>
-    <div class="game">
-      <h3>Francija vs Vācija</h3>
-      <span>Futbols – 19.06.2025</span>
-      <span>Prognoze: Vairāk par 2.5 vārtiem</span>
-      <span>Koeficients: 1.72</span>
-    </div>
+    <div id="games-list"></div>
   </section>
 
-  <section id="section-rezultati" style="display:none;">
+  <section id="rezultati" class="results-section" style="display:none;">
     <h2>AI prognožu rezultāti</h2>
-    <div class="game" style="border-left-color: #00e0b6;">
-      <span>✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)</span>
-    </div>
-    <div class="game" style="border-left-color: red;">
-      <span>✗ Francija vs Vācija — Prognoze garām (1.72)</span>
-    </div>
+    <div id="results-list"></div>
   </section>
 </main>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('main > section').forEach(s => s.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(`link-${id}`).classList.add('active');
+  }
+
+  async function loadData() {
+    showSection('sakums');
+    const response = await fetch('data.json');
+    const data = await response.json();
+
+    const gamesContainer = document.getElementById('games-list');
+    const resultsContainer = document.getElementById('results-list');
+    gamesContainer.innerHTML = '';
+    resultsContainer.innerHTML = '';
+
+    data.games.forEach(game => {
+      gamesContainer.innerHTML += `
+        <div class="game">
+          <h3>${game.match}</h3>
+          <span>${game.sport} – ${game.date}</span>
+          <span>Prognoze: ${game.prediction}</span>
+          <span>Koeficients: ${game.odds}</span>
+        </div>`;
+    });
+
+    data.results.forEach(res => {
+      resultsContainer.innerHTML += `
+        <div class="result ${res.correct ? '' : 'incorrect'}">
+          <span>${res.correct ? '✓' : '✗'} ${res.text}</span>
+        </div>`;
+    });
+  }
+</script>
 
   </body>
 </html>
