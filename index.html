@@ -189,5 +189,87 @@
     }
 
     loadData();
-  </script></body>
-</html>
+  </script><!DOCTYPE html><html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Likmju Kods - Veikt likmi</title>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }.modal-content {
+  background-color: #222;
+  margin: 15% auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  color: #fff;
+  text-align: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #fff;
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #00e0b6;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+  </style>
+</head>
+<body><!-- Modal HTML --><div id="veiktLikmiModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Drīzumā pieejams!</h2>
+    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
+    <a href="#" class="cta-link">Sekot jaunumiem</a>
+  </div>
+</div><script>
+  function openModal() {
+    document.getElementById("veiktLikmiModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("veiktLikmiModal").style.display = "none";
+  }
+
+  // Automātiski sasaisti ar pogu
+  document.addEventListener("DOMContentLoaded", () => {
+    const veiktLikmiButtons = document.querySelectorAll(".cta, .cta-button");
+    veiktLikmiButtons.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+  });
+</script>
+</body>
+  </html>
+
+
