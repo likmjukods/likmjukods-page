@@ -1,92 +1,121 @@
 <!DOCTYPE html><html lang="lv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LIK MJU KODS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* [IEKĻAUTS STILS — IEKĻAUJAMS PĒC POTENCIĀLĀM KOREKCIJĀM] */
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo"><span>LIK</span>MJU KODS</div>
-    <nav>
-      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-      <a href="#" id="link-bonusi" onclick="setActive('link-bonusi')">Bonusi</a>
-      <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
-    </nav>
-  </header>  <main>
-    <section id="section-sakums" class="hero">
-      <h1>LIK MJU KODS</h1>
-      <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-      <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
-    </section><section id="section-speles" class="games-section" style="display:none;">
-  <h2>Šodienas spēles</h2>
-  <div class="filters">
-    <select id="filter-sports" onchange="renderGames()">
-      <option value="all">Visi sporta veidi</option>
-      <option value="Futbols">Futbols</option>
-      <option value="Hokejs">Hokejs</option>
-    </select>
-    <select id="filter-date" onchange="renderGames()">
-      <option value="all">Visi datumi</option>
-      <option value="2025-06-19">19.06.2025</option>
-      <option value="2025-06-20">20.06.2025</option>
-    </select>
-  </div>
-  <div id="speles-wrapper"></div>
-</section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likmju Kods</title>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+/* ----------   RESET  ---------- */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#0c0c0c;color:#fff;min-height:100vh;display:flex;flex-direction:column}/* ----------   LAYOUT  ---------- */ header{width:100%;background:#000;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid #1f1f1f;position:sticky;top:0;z-index:20} .logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:1px} .logo span{color:#00e0b6} nav{display:flex;gap:1.5rem;flex-wrap:wrap} nav a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:.3rem .7rem;border-radius:.35rem;transition:.25s all} nav a.active,nav a:hover{background:#333} .cta-global{background:#00e0b6;color:#000;font-weight:700;border:none;padding:.45rem 1rem;border-radius:.4rem;cursor:pointer;text-decoration:none}
 
-<section id="section-rezultati" style="display:none;">
-  <h2>AI prognožu rezultāti</h2>
-  <div class="filters">
-    <select id="filter-sports-result" onchange="renderResults()">
-      <option value="all">Visi sporta veidi</option>
-      <option value="Futbols">Futbols</option>
-      <option value="Hokejs">Hokejs</option>
-    </select>
-    <select id="filter-result-type" onchange="renderResults()">
-      <option value="all">Visi rezultāti</option>
-      <option value="pareizi">Pareizi</option>
-      <option value="garām">Garām</option>
-    </select>
-  </div>
-  <div id="rezultati-wrapper"></div>
-</section>
+main{width:100%;max-width:1200px;margin:2rem auto;padding:0 1rem;flex:1 1 auto}
 
-<section id="section-bonusi" style="display:none;">
-  <h2>Ekskluzīvi bonusi</h2>
-  <p>Drīzumā būs pieejami partneru piedāvājumi un īpaši reģistrācijas bonusi tikai "Likmju Kods" lietotājiem!</p>
-</section>
+/* ----------   HERO  ---------- */ section.hero{background:#202020;padding:4rem 1rem;border-radius:1rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem;position:relative;border:2px solid transparent} section.hero::before{content:"";position:absolute;inset:-4px;border-radius:1.1rem;background:linear-gradient(135deg,rgba(0,224,182,.7),rgba(0,255,120,.2));filter:blur(8px);z-index:-1;transition:.4s opacity}
 
-  </main>  <div id="popup" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:2rem;border-radius:1rem;z-index:1000;text-align:center;max-width:90%;">
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:2px} .hero p{font-size:1rem;max-width:550px;text-align:center;line-height:1.4}
+
+/* ----------   LISTS  ---------- */ .games-section h2,#section-rezultati h2{margin-bottom:1rem;font-size:1.5rem} .filters{display:flex;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap} .filters select{background:#111;color:#fff;border:1px solid #333;padding:.45rem .8rem;border-radius:.4rem;font-weight:600}
+
+.card{background:#1b1b1b;border-left:4px solid #00e0b6;border-radius:.5rem;padding:.8rem 1rem;margin-bottom:1rem} .card.red{border-left-color:#ff4040} .card.green{border-left-color:#00e0b6} .card h3{font-size:1.05rem;margin-bottom:.3rem} .card span{display:block;font-size:.85rem;font-weight:500;opacity:.9}
+
+/* ----------   POP‑UP  ---------- */ #popup,#partneru-popup{position:fixed;inset:0;display:none;place-items:center;z-index:30} #popup .modal,#partneru-popup .modal{background:#202020;padding:2rem;border-radius:1rem;max-width:90%;width:420px;text-align:center;border:2px solid #00e0b6} #popup h3,#partneru-popup h2{margin-bottom:1rem} .modal button,.modal a{background:#00e0b6;color:#000;font-weight:700;border:none;padding:.5rem 1.2rem;border-radius:.4rem;cursor:pointer;text-decoration:none;display:inline-block} .modal .close{position:absolute;top:.6rem;right:.8rem;background:transparent;color:#fff;font-size:1.2rem;border:none;cursor:pointer}
+
+/* ----------   RESPONSIVE NAV  ---------- */ @media(max-width:720px){ nav{gap:.5rem;justify-content:center;width:100%;flex-wrap:wrap} nav a,.cta-global{font-size:.82rem;padding:.4rem .6rem} header{flex-direction:column;gap:.6rem} section.hero{padding:3rem 1rem} } </style>
+
+  </head>
+  <body onload="setActive('link-sakums')">
+    <header>
+      <div class="logo"><span>LIK</span>MJU KODS</div>
+      <nav>
+        <a id="link-sakums" href="#" onclick="setActive('link-sakums')">Sākums</a>
+        <a id="link-speles" href="#" onclick="setActive('link-speles')">Spēles</a>
+        <a id="link-rezultati" href="#" onclick="setActive('link-rezultati')">Rezultāti</a>
+        <a id="link-bonusi" href="#" onclick="setActive('link-bonusi')">Bonusi</a>
+        <a class="cta-global" href="#" onclick="showComingSoon()">Veikt likmi</a>
+      </nav>
+    </header><main>
+  <!-- ----------  HERO  ---------- -->
+  <section id="section-sakums" class="hero">
+    <h1>LIKMIJU KODS</h1>
+    <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI‑vērtētiem koeficientiem.</p>
+    <a href="#" class="cta-global" onclick="showComingSoon()">Veikt likmi</a>
+  </section>
+
+  <!-- ----------  SPĒLES  ---------- -->
+  <section id="section-speles" class="games-section" style="display:none;">
+    <h2>Šodienas spēles</h2>
+    <div class="filters">
+      <select id="filter-sports" onchange="renderGames()">
+        <option value="all">Visi sporta veidi</option>
+      </select>
+      <select id="filter-date" onchange="renderGames()">
+        <option value="all">Visi datumi</option>
+      </select>
+    </div>
+    <div id="speles-wrapper"></div>
+  </section>
+
+  <!-- ----------  REZULTĀTI  ---------- -->
+  <section id="section-rezultati" style="display:none;">
+    <h2>AI prognožu rezultāti</h2>
+    <div class="filters">
+      <select id="filter-sports-result" onchange="renderResults()">
+        <option value="all">Visi sporta veidi</option>
+      </select>
+      <select id="filter-result-type" onchange="renderResults()">
+        <option value="all">Visi rezultāti</option>
+        <option value="pareizi">Pareizi</option>
+        <option value="garām">Garām</option>
+      </select>
+    </div>
+    <div id="rezultati-wrapper"></div>
+  </section>
+
+  <!-- ----------  BONUSI  ---------- -->
+  <section id="section-bonusi" style="display:none;">
+    <h2>Partneru bonusi</h2>
+    <div id="bonus-wrapper"></div>
+  </section>
+
+</main>
+
+<!-- ----------  POPUPS  ---------- -->
+<div id="popup">
+  <div class="modal">
+    <button class="close" onclick="closePopup()">✕</button>
     <h3>Drīzumā pieejams!</h3>
-    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
-    <button onclick="closePopup()" style="margin-top:1rem;padding:0.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
-  </div>  <script>
-    function setActive(tab) {
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById('section-sakums').style.display = 'none';
-      document.getElementById('section-speles').style.display = 'none';
-      document.getElementById('section-rezultati').style.display = 'none';
-      document.getElementById('section-bonusi').style.display = 'none';
-      
-      document.getElementById(tab.replace('link-', 'section-')).style.display = 'block';
-      document.getElementById(tab).classList.add('active');
+    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdz jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
+    <button onclick="closePopup()">Sekot jaunumiem</button>
+  </div>
+</div>
 
-      if (tab === "link-speles") renderGames();
-      if (tab === "link-rezultati") renderResults?.();
-    }
+<!-- partner popup template -->
+<template id="bonus-template">
+  <div class="card">
+    <h3 class="title"></h3>
+    <span class="desc"></span>
+    <a class="cta-global" style="margin-top:.6rem;display:inline-block" href="#" target="_blank">Saņemt</a>
+  </div>
+</template>
 
-    function showComingSoon() {
-      document.getElementById('popup').style.display = 'block';
-    }
+<script>
 
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-  </script></body>
+// -----------------  NAVIGATION  ----------------- function setActive(tab){ document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active')); ['sakums','speles','rezultati','bonusi'].forEach(id=>{ const sec=document.getElementById('section-'+id); if(sec)sec.style.display='none'; }); const section=document.getElementById('section-'+tab.replace('link-','')); if(section)section.style.display='block'; document.getElementById(tab).classList.add('active'); } function showComingSoon(){document.getElementById('popup').style.display='grid'} function closePopup(){document.getElementById('popup').style.display='none'}
+
+// -----------------  DATA  ----------------- let games=[];let results=[];let bonusi=[]; // fetch JSON (placeholder) fetch('games.json').then(r=>r.json()).then(d=>{games=d;populateFilters();renderGames()}); fetch('results.json').then(r=>r.json()).then(d=>{results=d;renderResults()}); fetch('bonusi.json').then(r=>r.json()).then(d=>{bonusi=d;renderBonusi()});
+
+function populateFilters(){const sportSet=new Set(games.map(g=>g.sports));sportSet.forEach(s=>{ document.getElementById('filter-sports').innerHTML+=<option>${s}</option>; document.getElementById('filter-sports-result').innerHTML+=<option>${s}</option>;}); const dateSet=new Set(games.map(g=>g.date));dateSet.forEach(d=>{ document.getElementById('filter-date').innerHTML+=<option value="${d}">${formatDate(d)}</option>;});}
+
+// -----------------  RENDER  ----------------- function renderGames(){const sport=document.getElementById('filter-sports').value; const date=document.getElementById('filter-date').value; const wrap=document.getElementById('speles-wrapper');wrap.innerHTML=''; games.filter(g=>(sport==='all'||g.sports===sport)&&(date==='all'||g.date===date)).forEach(g=>{ wrap.innerHTML+=<div class="card"><h3>${g.teams}</h3><span>${g.sports} – ${formatDate(g.date)}</span><span>Prognoze: ${g.prediction}</span><span>Koeficients: ${g.odds}</span></div>;});}
+
+function renderResults(){const sport=document.getElementById('filter-sports-result').value; const type=document.getElementById('filter-result-type').value; const wrap=document.getElementById('rezultati-wrapper');wrap.innerHTML=''; results.filter(r=>(sport==='all'||r.sports===sport)&&(type==='all'||r.result===type)).forEach(r=>{ const cls=r.result==='pareizi'?'green':'red'; wrap.innerHTML+=<div class="card ${cls}"><span>${r.teams} — Prognoze ${r.result} (${r.odds})</span></div>;});}
+
+function renderBonusi(){const wrap=document.getElementById('bonus-wrapper');const tpl=document.getElementById('bonus-template').content; bonusi.forEach(b=>{const n=tpl.cloneNode(true);n.querySelector('.title').textContent=b.title;n.querySelector('.desc').textContent=b.desc;n.querySelector('a').href=b.url;wrap.appendChild(n)})}
+
+function formatDate(d){const [y,m,day]=d.split('-');return ${day}.${m}.${y}} </script>
+
+  </body>
 </html>
