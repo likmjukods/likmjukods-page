@@ -1,40 +1,15 @@
+// Šis ir JS koda fragments, kas automātiski pārvieto spēles uz rezultātu sarakstu pēc spēles datuma // Pieņemam, ka tev jau ir pievienots "games.json" un "results.json"
 
-document.addEventListener("DOMContentLoaded", () => {
-  const gamesList = document.getElementById("games-list");
-  const resultsList = document.getElementById("results-list");
+function checkPastGamesAndMoveToResults(games) { const today = new Date().toISOString().split("T")[0]; const pastGames = games.filter(game => game.date < today); const upcomingGames = games.filter(game => game.date >= today);
 
-  fetch("data.json")
-    .then((res) => res.json())
-    .then((data) => {
-      data.games.forEach((game) => {
-        const div = document.createElement("div");
-        div.className = "game";
-        div.innerHTML = `
-          <h3>${game.title}</h3>
-          <p>${game.sport} – ${game.date}</p>
-          <p>Prognoze: ${game.prediction}</p>
-          <p>Koeficients: ${game.odds}</p>
-        `;
-        gamesList.appendChild(div);
-      });
+const resultsToAdd = pastGames.map(game => ({ sport: game.sport, match: game.match, date: game.date, prediction: game.prediction, odds: game.odds, result: "nav zināms" // var vēlāk atzīmēt pareizi/garām }));
 
-      data.games.forEach((game) => {
-        if (game.result) {
-          const div = document.createElement("div");
-          div.className = "result " + (game.result === "win" ? "correct" : "incorrect");
-          div.textContent = (game.result === "win" ? "✓" : "✗") + " " + game.title + " — " + (game.result === "win" ? "Uzvara precīzi prognozēta" : "Prognoze garām") + ` (${game.odds})`;
-          resultsList.appendChild(div);
-        }
-      });
-    });
+// Saglabājam jauno results.json fetch("results.json") .then(res => res.json()) .then(currentResults => { const combined = [...currentResults, ...resultsToAdd]; saveJSON("results.json", combined); });
 
-  document.querySelectorAll("nav a.nav-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      document.querySelectorAll("nav a.nav-link").forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-      const section = document.querySelector(link.getAttribute("href"));
-      if (section) section.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-});
+// Atjauninām games.json saveJSON("games.json", upcomingGames); }
+
+function saveJSON(filename, data) { const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click(); }
+
+// Izsaucam tikai vienu reizi kad ielādē lapa window.onload = function() { fetch("games.json") .then(res => res.json()) .then(games => { checkPastGamesAndMoveToResults(games); setActive("link-sakums"); }); };
+
+                                             
