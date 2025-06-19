@@ -154,6 +154,28 @@
     });
   }
 </script>
+</script> <!-- tas jau ir -->
+<script>
+  fetch('data.json')
+    .then(response => response.json())
+    .then(speles => {
+      const spelesSekcija = document.getElementById('section-speles');
+      const spelesWrapper = document.createElement('div');
 
-  </body>
-</html>
+      speles.forEach(sp => {
+        const div = document.createElement('div');
+        div.className = 'game';
+        div.innerHTML = `
+          <h3>${sp.komandas}</h3>
+          <span>${sp.sports} – ${sp.datums}</span>
+          <span>Prognoze: ${sp.prognoze}</span>
+          <span>Koeficients: ${sp.koeficients}</span>
+        `;
+        spelesWrapper.appendChild(div);
+      });
+
+      spelesSekcija.appendChild(spelesWrapper);
+    });
+</script>
+</body>
+</html> 
