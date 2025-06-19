@@ -53,12 +53,6 @@
       margin: 2rem auto;
       padding: 0 1rem;
     }
-    .hero, .games-section, .results-section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-    }
     .hero {
       background-color: #222;
       padding: 3rem;
@@ -72,6 +66,9 @@
     .hero p {
       font-size: 1.2rem;
       margin-bottom: 1.5rem;
+    }
+    .games-section, .results-section {
+      margin-top: 3rem;
     }
     .game, .result {
       background-color: #2a2a2a;
@@ -103,17 +100,17 @@
   <header>
     <div class="logo"><span>LIK</span>MJU KODS</div>
     <nav>
-      <a href="#" class="nav-link active" data-section="hero">Sākums</a>
-      <a href="#" class="nav-link" data-section="games">Spēles</a>
-      <a href="#" class="nav-link" data-section="results">Rezultāti</a>
+      <a href="#" class="active">Sākums</a>
+      <a href="#">Spēles</a>
+      <a href="#">Rezultāti</a>
       <a class="cta" href="#">Veikt likmi</a>
     </nav>
   </header>  <main>
-    <section class="hero section active" id="hero">
+    <section class="hero">
       <h1>Likmju Kods</h1>
       <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
       <a class="cta" href="#">Veikt likmi</a>
-    </section><section class="games-section section" id="games">
+    </section><section class="games-section">
   <h2>Šodienas spēles</h2>
   <div class="game">
     <h3>Latvija vs Igaunija</h3>
@@ -129,7 +126,7 @@
   </div>
 </section>
 
-<section class="results-section section" id="results">
+<section class="results-section">
   <h2>AI prognožu rezultāti</h2>
   <div class="result correct">
     ✓ Latvija vs Igaunija — Uzvara precīzi prognozēta (1.45)
@@ -139,24 +136,6 @@
   </div>
 </section>
 
-  </main>  <script>
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.section');
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-
-        sections.forEach(section => {
-          section.classList.remove('active');
-        });
-
-        const target = link.dataset.section;
-        document.getElementById(target).classList.add('active');
-      });
-    });
-  </script></body>
+  </main>
+</body>
 </html>
