@@ -192,7 +192,32 @@
     <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
     <button onclick="closePopup()" style="margin-top:1rem;padding:0.5rem 1rem;background:#00e0b6;border:none;border-radius:5px;font-weight:700;cursor:pointer;">Sekot jaunumiem</button>
   </div>  <script>
-    function setActive(tab) {
+   <script>
+async function renderGames() {
+  const wrapper = document.getElementById("speles-wrapper");
+  wrapper.innerHTML = "";
+
+  try {
+    const res = await fetch("speles_7dienas.json");
+    const data = await res.json();
+
+    data.forEach(sp => {
+      const game = document.createElement("div");
+      game.className = "game";
+      game.innerHTML = `
+        <h3>${sp.team1} vs ${sp.team2}</h3>
+        <span>Sporta veids: ${sp.sport}</span><br>
+        <span>Datums: ${sp.date}</span><br>
+        <span>Prognoze: ${sp.prediction} (${sp.confidence})</span><br>
+        <span>Koeficients: ${sp.odds}</span>
+      `;
+      wrapper.appendChild(game);
+    });
+  } catch (err) {
+    console.error("Kļūda ielādējot spēles:", err);
+  }
+}
+</script> function setActive(tab) {
       document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
       ['sakums','speles','rezultati','bonusi'].forEach(id => document.getElementById('section-' + id).style.display = 'none');
       const section = document.getElementById(tab.replace('link-', 'section-'));
