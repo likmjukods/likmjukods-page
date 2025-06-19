@@ -1,308 +1,151 @@
 <!DOCTYPE html><html lang="lv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Likmju Kods</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-    body {
-      background-color: #111;
-      color: #fff;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #000;
-      border-bottom: 1px solid #222;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-    .logo span {
-      color: #00e0b6;
-    }
-    nav {
-      display: flex;
-      gap: 1rem;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-    }
-    nav a.active {
-      background-color: #333;
-    }
-    .cta {
-      background-color: #00e0b6;
-      color: #000;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
-    section {
-      margin-top: 2rem;
-    }
-    .hero {
-      text-align: center;
-      background: #222;
-      padding: 5rem 2rem;
-      border-radius: 1rem;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .game, .result {
-      background: #1c1c1c;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-left: 5px solid #00e0b6;
-      border-radius: 0.5rem;
-    }
-    .result.false {
-      border-left-color: red;
-    }
-    .filters {
-      margin-bottom: 2rem;
-    }
-    select {
-      padding: 0.5rem;
-      background: #000;
-      color: #fff;
-      border: 1px solid #444;
-      border-radius: 5px;
-    }
-  </style>
-</head>
-<body onload="setActive('link-sakums')">
-  <header>
-    <div class="logo"><span>LIK</span>MJU KODS</div>
-    <nav>
-      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-      <a class="cta" href="#">Veikt likmi</a>
-    </nav>
-  </header>  <main>
-    <section id="section-sakums" class="hero">
-      <h1>Likmju Kods</h1>
-      <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
-      <a href="#" class="cta">Veikt likmi</a>
-    </section><section id="section-speles" style="display:none;">
-  <h2>Šodienas spēles</h2>
-  <div class="filters">
-    <select id="sportaVeids" onchange="applyFilters()">
-      <option value="">Visi sporta veidi</option>
-      <option value="Futbols">Futbols</option>
-      <option value="Hokejs">Hokejs</option>
-    </select>
-    <select id="datums" onchange="applyFilters()">
-      <option value="">Visi datumi</option>
-      <option value="2025-06-19">19.06.2025</option>
-      <option value="2025-06-20">20.06.2025</option>
-    </select>
-  </div>
-  <div id="speles-wrapper"></div>
-</section>
-<div id="result-filter" style="margin: 2rem 0; display: flex; gap: 1rem;">
-  <select id="sport-filter" style="padding: 0.5rem; border-radius: 5px;">
-    <option value="visi">Visi sporta veidi</option>
-    <option value="futbols">Futbols</option>
-    <option value="hokejs">Hokejs</option>
-    <!-- Pievieno citus vajadzīgos -->
-  </select>
-
-  <select id="status-filter" style="padding: 0.5rem; border-radius: 5px;">
-    <option value="visi">Visi rezultāti</option>
-    <option value="pareizi">Pareizi prognozēti</option>
-    <option value="garam">Garām prognozēti</option>
-  </select>
-</div>
-<section id="section-rezultati" style="display:none;">
-  <h2>AI prognožu rezultāti</h2>
-  <div id="rezultati-wrapper"></div>
-</section>
-
-  </main>  <script>
-    function setActive(tab) {
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById('section-sakums').style.display = 'none';
-      document.getElementById('section-speles').style.display = 'none';
-      document.getElementById('section-rezultati').style.display = 'none';
-      document.getElementById(tab).classList.add('active');
-      if(tab === 'link-sakums') document.getElementById('section-sakums').style.display = 'block';
-      else if(tab === 'link-speles') document.getElementById('section-speles').style.display = 'block';
-      else if(tab === 'link-rezultati') document.getElementById('section-rezultati').style.display = 'block';
-    }
-
-    let visasSpeles = [];
-
-    async function loadData() {
-      const res = await fetch('data.json');
-      const data = await res.json();
-      visasSpeles = data.speles;
-      renderSpeles();
-      renderRezultati(data.rezultati);
-    }
-
-    function applyFilters() {
-      const sportaVeids = document.getElementById('sportaVeids').value;
-      const datums = document.getElementById('datums').value;
-      const filtrētas = visasSpeles.filter(sp => {
-        return (!sportaVeids || sp.sports === sportaVeids) && (!datums || sp.datums === datums);
-      });
-      renderSpeles(filtrētas);
-    }
-
-    function renderSpeles(speles = visasSpeles) {
-      const wrapper = document.getElementById('speles-wrapper');
-      wrapper.innerHTML = '';
-      speles.forEach(sp => {
-        const div = document.createElement('div');
-        div.className = 'game';
-        div.innerHTML = `<h3>${sp.komandas}</h3>
-          <span>${sp.sports} – ${sp.datums}</span><br>
-          <span>Prognoze: ${sp.prognoze}</span><br>
-          <span>Koeficients: ${sp.koeficients}</span>`;
-        wrapper.appendChild(div);
-      });
-    }
-
-    function renderRezultati(rez) {
-      const rezWrapper = document.getElementById('rezultati-wrapper');
-      rezWrapper.innerHTML = '';
-      rez.forEach(r => {
-        const div = document.createElement('div');
-        div.className = 'result ' + (r.pareiza ? '' : 'false');
-        div.innerHTML = `<span>${r.pareiza ? '✓' : '✗'} ${r.spēle} — ${r.pareiza ? 'Prognoze pareiza' : 'Prognoze garām'} (${r.koeficients})</span>`;
-        rezWrapper.appendChild(div);
-      });
-    }
-
-    loadData();
-  </script><!DOCTYPE html><html lang="lv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Likmju Kods - Veikt likmi</title>
-  <style>
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-    }.modal-content {
-  background-color: #222;
-  margin: 15% auto;
-  padding: 2rem;
-  border-radius: 1rem;
-  width: 90%;
-  max-width: 500px;
-  color: #fff;
-  text-align: center;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: #fff;
-}
-
-.cta-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #00e0b6;
-  color: #000;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-  </style>
-</head>
-<body><!-- Modal HTML --><div id="veiktLikmiModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Drīzumā pieejams!</h2>
-    <p>"Likmju Kods" sadarbojas ar labākajiem sporta totalizatoriem. Sekojiet līdzi jaunumiem un sagatavojies likt likmi ar AI priekšrocību!</p>
-    <a href="#" class="cta-link">Sekot jaunumiem</a>
-  </div>
-</div><script>
-  function openModal() {
-    document.getElementById("veiktLikmiModal").style.display = "block";
-  }
-
-  function closeModal() {
-    document.getElementById("veiktLikmiModal").style.display = "none";
-  }
-
-  // Automātiski sasaisti ar pogu
-  document.addEventListener("DOMContentLoaded", () => {
-    const veiktLikmiButtons = document.querySelectorAll(".cta, .cta-button");
-    veiktLikmiButtons.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        openModal();
-      });
-    });
-  });
-</script>
-<script>
-  document.getElementById('sport-filter').addEventListener('change', filterResults);
-  document.getElementById('status-filter').addEventListener('change', filterResults);
-
-  function filterResults() {
-    const sport = document.getElementById('sport-filter').value;
-    const status = document.getElementById('status-filter').value;
-
-    document.querySelectorAll('#section-rezultati .game').forEach(game => {
-      const text = game.textContent.toLowerCase();
-      const isSportMatch = sport === 'visi' || text.includes(sport);
-      const isStatusMatch =
-        status === 'visi' ||
-        (status === 'pareizi' && text.includes('✓')) ||
-        (status === 'garam' && text.includes('✗'));
-
-      game.style.display = (isSportMatch && isStatusMatch) ? 'block' : 'none';
-    });
-  }
-</script>
-</body>
-  </html>
-
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likmju Kods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+      }
+      body {
+        background-color: #111;
+        color: #fff;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #000;
+        border-bottom: 1px solid #222;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .logo span {
+        color: #00e0b6;
+      }
+      nav {
+        display: flex;
+        gap: 1rem;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+      }
+      nav a.active {
+        background-color: #333;
+      }
+      .cta {
+        background-color: #00e0b6;
+        color: #000;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      main {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+      section.hero {
+        text-align: center;
+        background: #222;
+        padding: 5rem 2rem;
+        border-radius: 1rem;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+      .games-section, .results-section {
+        margin-top: 2rem;
+      }
+      .game, .result {
+        background: #1c1c1c;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 5px solid #00e0b6;
+        border-radius: 0.5rem;
+      }
+      .result.red {
+        border-left-color: red;
+      }
+      .filter-bar {
+        margin-bottom: 1rem;
+      }
+      select {
+        margin-right: 1rem;
+        padding: 0.3rem;
+        background: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body onload="setActive('link-sakums')">
+    <header>
+      <div class="logo"><span>LIK</span>MJU KODS</div>
+      <nav>
+        <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
+        <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
+        <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+        <a class="cta" href="#">Veikt likmi</a>
+      </nav>
+    </header>
+    <main>
+      <section id="section-sakums" class="hero">
+        <h1>Likmju Kods</h1>
+        <p>Tava vieta profesionālām sporta prognozēm, datu analīzei un AI-vērtētiem koeficientiem.</p>
+        <a href="#" class="cta">Veikt likmi</a>
+      </section>
+      <section id="section-speles" class="games-section" style="display:none;">
+        <h2>Šodienas spēles</h2>
+        <div class="filter-bar">
+          <select id="sporta-veidi"></select>
+          <select id="datumi"></select>
+        </div>
+        <div id="speles-wrapper"></div>
+      </section>
+      <section id="section-rezultati" class="results-section" style="display:none;">
+        <h2>AI prognožu rezultāti</h2>
+        <div class="filter-bar">
+          <select id="rezultati-sports"></select>
+          <select id="rezultati-statuss"></select>
+        </div>
+        <div id="rezultati-wrapper"></div>
+      </section>
+    </main>
+    <script>
+      function setActive(tab) {
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById('section-sakums').style.display = 'none';
+        document.getElementById('section-speles').style.display = 'none';
+        document.getElementById('section-rezultati').style.display = 'none';
+        document.getElementById(tab).classList.add('active');
+        if(tab === 'link-sakums') {
+          document.getElementById('section-sakums').style.display = 'block';
+        } else if(tab === 'link-speles') {
+          document.getElementById('section-speles').style.display = 'block';
+        } else if(tab === 'link-rezultati') {
+          document.getElementById('section-rezultati').style.display = 'block';
+        }
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
