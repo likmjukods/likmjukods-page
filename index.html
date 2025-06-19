@@ -1,148 +1,225 @@
-<!DOCTYPE html>
-<html lang="lv">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Likmju Kods</title>
+<!DOCTYPE html><html lang="lv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likmju Kods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Orbitron', sans-serif;
+      }
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #000;
+        border-bottom: 1px solid #222;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .logo span {
+        color: #00e0b6;
+      }
+      nav {
+        display: flex;
+        gap: 2rem;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+      }
+      nav a.active {
+        background-color: #333;
+      }
+      .cta {
+        background-color: #00e0b6;
+        color: #000;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      main {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+      .hero {
+        text-align: center;
+        background: #111;
+        padding: 6rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 20px #00e0b6;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #ccc;
+      }
+      .games-section {
+        margin-top: 4rem;
+      }
+      .game {
+        background: #1c1c1c;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 5px solid #00e0b6;
+        border-radius: 0.5rem;
+      }
+      .filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .filters select {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo"><span>LIK</span>MJU KODS</div>
+      <nav>
+        <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
+        <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
+        <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+        <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
+      </nav>
+    </header>
+    <main>
+      <section id="section-sakums" class="hero">
+        <h1>LIKMIJU KODS</h1>
+        <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+        <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
+      </section>
+      <section id="section-speles" class="games-section" style="display:none;">
+        <h2>Šodienas spēles</h2>
+        <div class="filters">
+          <select id="filter-sports" onchange="renderGames()">
+            <option value="all">Visi sporta veidi</option>
+          </select>
+          <select id="filter-date" onchange="renderGames()">
+            <option value="all">Visi datumi</option>
+          </select>
+        </div>
+        <div id="speles-wrapper"></div>
+      </section>
+      <section id="section-rezultati" style="display:none;">
+        <h2>AI prognožu rezultāti</h2>
+        <div class="filters">
+          <select id="filter-result" onchange="renderResults()">
+            <option value="all">Visi</option>
+            <option value="pareizi">Pareizi</option>
+            <option value="garām">Garām</option>
+          </select>
+        </div>
+        <div id="rezultati-wrapper"></div>
+      </section>
+    </main>
+    <script>
+      function setActive(id) {
+        document.querySelectorAll('main section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById(id.replace('link-', 'section-')).style.display = 'block';
+        document.getElementById(id).classList.add('active');
+      }
+      function showComingSoon() {
+        alert("Drīzumā pieejams!");
+      }
+      async function renderGames() {
+        const res = await fetch('games.json');
+        const games = await res.json();
+        const wrapper = document.getElementById('speles-wrapper');
+        wrapper.innerHTML = '';
+        games.forEach(g => {
+          const div = document.createElement('div');
+          div.className = 'game';
+          div.textContent = `${g.team1} vs ${g.team2} — ${g.date} — Prognoze: ${g.prediction} (Koef: ${g.odds})`;
+          wrapper.appendChild(div);
+        });
+      }
+      async function renderResults() {
+        const res = await fetch('results.json');
+        const results = await res.json();
+        const wrapper = document.getElementById('rezultati-wrapper');
+        const filter = document.getElementById('filter-result').value;
+        wrapper.innerHTML = '';
+        results.filter(r => filter === 'all' || r.outcome === filter)
+               .forEach(r => {
+          const div = document.createElement('div');
+          div.className = 'game';
+          div.textContent = `${r.team1} vs ${r.team2} — Prognoze ${r.outcome} (${r.odds})`;
+          wrapper.appendChild(div);
+        });
+      }window.onload = async function () {
+    await processGamesToResults();
+    setActive('link-sakums');
+  };
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    /* ——— Bāzes stils ——— */
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:#0b0b0b;color:#fff;font-family:'Inter',sans-serif}
-    header{display:flex;justify-content:space-between;align-items:center;
-           background:#000;padding:1rem 2rem;border-bottom:1px solid #1f1f1f;flex-wrap:wrap}
-    .logo{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700}
-    .logo span{color:#00e0b6}
-    nav{display:flex;gap:1.3rem;flex-wrap:wrap}
-    nav a{color:#fff;text-decoration:none;font-weight:600;padding:.35rem .6rem;border-radius:4px;transition:.25s}
-    nav a.active,nav a:hover{background:#333}
-    main{max-width:1100px;margin:2rem auto;padding:0 1rem;min-height:60vh}
-    h1,h2{font-family:'Orbitron',sans-serif}
-    /* ——— Kartes ——— */
-    .card{background:#1b1b1b;border-left:4px solid #00e0b6;border-radius:.5rem;
-          padding:1rem;margin:.7rem 0}
-    .card.red{border-left-color:#ff4040}.card.green{border-left-color:#2ecc71}
-    /* ——— Filtri ——— */
-    .filters{display:flex;gap:1rem;flex-wrap:wrap;margin:.8rem 0}
-    .filters select{background:#111;color:#fff;border:none;padding:.45rem .8rem;font-weight:600;border-radius:4px}
-    /* ——— Hero ——— */
-    .hero{background:#202020;border-radius:1rem;padding:4rem 1rem;text-align:center;box-shadow:0 0 25px #00e0b670}
-    .hero h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
-    .hero p{max-width:550px;margin:auto;margin-bottom:1.6rem}
-    .cta{display:inline-block;background:#00e0b6;color:#000;font-weight:700;
-         padding:.5rem 1.1rem;border-radius:5px;text-decoration:none}
-    /* ——— Responsīvais ——— */
-    @media(max-width:720px){header{flex-direction:column;gap:.6rem}}
-  </style>
-</head>
-<body onload="activate('sakums')">
+  async function processGamesToResults() {
+    try {
+      const response = await fetch('games.json');
+      const games = await response.json();
+      const today = new Date().toISOString().split('T')[0];
 
-<header>
-  <div class="logo"><span>LIK</span>MJU KODS</div>
-  <nav>
-    <a id="nav-sakums"     onclick="activate('sakums')">Sākums</a>
-    <a id="nav-speles"     onclick="activate('speles')">Spēles</a>
-    <a id="nav-rezultati"  onclick="activate('rezultati')">Rezultāti</a>
-  </nav>
-</header>
+      const upcomingGames = [];
+      const finishedGames = [];
 
-<main>
-  <!-- Sākums -->
-  <section id="sakums" class="hero">
-    <h1>Likmju Kods</h1>
-    <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-    <a class="cta" href="#">Veikt likmi</a>
-  </section>
+      for (const game of games) {
+        if (game.date < today) {
+          finishedGames.push({
+            ...game,
+            outcome: 'nav zināms'
+          });
+        } else {
+          upcomingGames.push(game);
+        }
+      }
 
-  <!-- Spēles -->
-  <section id="speles" style="display:none">
-    <h2>Šodienas spēles</h2>
-    <div class="filters">
-      <select id="f-sport"  onchange="renderGames()"><option value="all">Visi sporta veidi</option></select>
-      <select id="f-date"   onchange="renderGames()"><option value="all">Visi datumi</option></select>
-    </div>
-    <div id="games-wrap"></div>
-  </section>
+      await saveToFile('games.json', upcomingGames);
 
-  <!-- Rezultāti -->
-  <section id="rezultati" style="display:none">
-    <h2>AI prognožu rezultāti</h2>
-    <div class="filters">
-      <select id="f-type" onchange="renderResults()">
-        <option value="all">Visi</option>
-        <option value="pareizi">Pareizi</option>
-        <option value="garām">Garām</option>
-      </select>
-    </div>
-    <div id="results-wrap"></div>
-  </section>
-</main>
+      const resultsResp = await fetch('results.json');
+      const results = await resultsResp.json();
+      const updatedResults = [...results, ...finishedGames];
+      await saveToFile('results.json', updatedResults);
 
-<script>
-/* ——— Navigācija ——— */
-function activate(id){
-  document.querySelectorAll('section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
-  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-  if(id==='speles')   { loadGames();   renderGames();   }
-  if(id==='rezultati'){ loadResults(); renderResults(); }
-}
+    } catch (err) {
+      console.error('Kļūda apstrādājot notikumus:', err);
+    }
+  }
 
-/* ——— Datu ielāde no ārējiem JSON ——— */
-let games=[], results=[];
-async function loadGames(){
-  if(games.length) return;                       // jau ielādēts
-  try{
-    games = await fetch('games.json').then(r=>r.json());
-    // aizpilda filtrus
-    fillOptions('f-sport', [...new Set(games.map(g=>g.sportaVeids))]);
-    fillOptions('f-date' , [...new Set(games.map(g=>g.datums))], d=>formatDate(d));
-  }catch(e){ console.error('games.json nav atrasts',e); }
-}
-async function loadResults(){
-  if(results.length) return;
-  try{
-    results = await fetch('results.json').then(r=>r.json());
-  }catch(e){ console.error('results.json nav atrasts',e); }
-}
-
-/* ——— Render ——— */
-function renderGames(){
-  const wrap = document.getElementById('games-wrap'); wrap.innerHTML='';
-  const fs = document.getElementById('f-sport').value;
-  const fd = document.getElementById('f-date').value;
-  const list = games.filter(g => (fs==='all'||g.sportaVeids===fs) && (fd==='all'||g.datums===fd));
-  if(!list.length){ wrap.textContent='Spēles nav atrastas'; return; }
-  list.forEach(g=>{
-    wrap.innerHTML += `<div class="card">
-      <strong>${g.komandas}</strong><br>
-      <span>${formatDate(g.datums)} • ${g.laiks} • ${g.sportaVeids}</span><br>
-      <span>Prognoze: ${g.prognoze} (Koef: ${g.koeficients})</span>
-    </div>`;
-  });
-}
-function renderResults(){
-  const wrap = document.getElementById('results-wrap'); wrap.innerHTML='';
-  const ft = document.getElementById('f-type').value;
-  const list = results.filter(r=> ft==='all'||r.result===ft );
-  if(!list.length){ wrap.textContent='Rezultātu nav'; return; }
-  list.forEach(r=>{
-    const cls = r.result==='pareizi'?'green':'red';
-    wrap.innerHTML += `<div class="card ${cls}">
-      <strong>${formatDate(r.datums)} • ${r.komandas}</strong><br>
-      <span>Prognoze: ${r.prognoze} — <b>${r.result.toUpperCase()}</b> (Koef: ${r.koeficients})</span>
-    </div>`;
-  });
-}
-
-/* ——— Palīg-funkcijas ——— */
-function fillOptions(id, arr, labelFn=(v)=>v){
-  const sel=document.getElementById(id);
-  arr.forEach(v=> sel.innerHTML += `<option value="${v}">${labelFn(v)}</option>`);
-}
-function formatDate(d){const [y,m,day]=d.split('-');return `${day}.${m}.${y}`;}
+  async function saveToFile(filename, data) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
 </script>
-</body>
+
+  </body>
 </html>
