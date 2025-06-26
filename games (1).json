@@ -1,0 +1,51 @@
+[
+    {
+        "date": "2025-06-26",
+        "time": "18:00",
+        "sport": "futbols",
+        "team1": "Riga FC",
+        "team2": "Valmiera"
+    },
+    {
+        "date": "2025-06-27",
+        "time": "18:00",
+        "sport": "basketbols",
+        "team1": "Liepāja",
+        "team2": "Daugavpils"
+    },
+    {
+        "date": "2025-06-28",
+        "time": "18:00",
+        "sport": "teniss",
+        "team1": "VEF Rīga",
+        "team2": "Ventspils"
+    },
+    {
+        "date": "2025-06-29",
+        "time": "18:00",
+        "sport": "futbols",
+        "team1": "Latvia Davis",
+        "team2": "Estonia Davis"
+    },
+    {
+        "date": "2025-06-30",
+        "time": "18:00",
+        "sport": "basketbols",
+        "team1": "Tennis Club A",
+        "team2": "Tennis Club B"
+    },
+    {
+        "date": "2025-07-01",
+        "time": "18:00",
+        "sport": "teniss",
+        "team1": "Rīgas Stars",
+        "team2": "Jelgava Strikers"
+    },
+    {
+        "date": "2025-07-02",
+        "time": "18:00",
+        "sport": "futbols",
+        "team1": "Auda",
+        "team2": "Metta"
+    }
+]
