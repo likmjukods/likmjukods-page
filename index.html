@@ -1,153 +1,128 @@
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Likmju Kods</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Likmju Kods</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="main.js"></script>
-    <style>
-        /* Fonts un pamatstils */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-        body {
-            margin: 0;
-            font-family: 'Orbitron', sans-serif;
-            background-color: #000;
-            color: #fff;
-            scroll-behavior: smooth;
-        }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000;
+  border-bottom: 1px solid #0f0;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: #0c0c0c;
-            border-bottom: 1px solid #222;
-        }
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #00ffcc, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-        header h1 {
-            font-size: 1.8em;
-            background: linear-gradient(to right, #00ffc3, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+nav {
+  display: flex;
+  gap: 1rem;
+}
 
-        nav {
-            display: flex;
-            gap: 20px;
-        }
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 14px;
-            border-radius: 6px;
-            transition: background 0.3s;
-        }
+nav a.active,
+nav a:hover {
+  background-color: #00ffcc;
+  color: black;
+}
 
-        nav a.active,
-        nav a:hover {
-            background-color: #00ffc3;
-            color: #000;
-        }
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  text-align: center;
+  padding: 2rem;
+  background-color: #111;
+  border-radius: 20px;
+  margin: 2rem;
+  box-shadow: 0 0 20px #00ffcc;
+}
 
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 80px);
-            text-align: center;
-            padding: 20px;
-        }
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
 
-        .hero-content {
-            background-color: #1a1a1a;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 0 20px #00ffc3;
-            max-width: 700px;
-            margin: auto;
-        }
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
 
-        .hero h2 {
-            font-size: 2.8em;
-            margin-bottom: 20px;
-        }
+.btn {
+  padding: 0.7rem 1.5rem;
+  background-color: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-        .hero p {
-            font-size: 1.1em;
-            color: #ccc;
-        }
+.btn:hover {
+  transform: scale(1.05);
+}
 
-        .hero button {
-            margin-top: 20px;
-            padding: 12px 24px;
-            background-color: #00ffc3;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #000;
+  color: #555;
+  font-size: 0.9rem;
+}
 
-        .hero button:hover {
-            background-color: #00cba5;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #555;
-            font-size: 0.9em;
-            border-top: 1px solid #222;
-            margin-top: 60px;
-        }
-
-        /* Pārejas */
-        .fade-in {
-            animation: fadeIn 1.4s ease-in-out both;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <h1>LIK<em style="color:#00ffc3">MJU</em> KODS</h1>
-        <nav>
-            <a href="#" class="active">Sākums</a>
-            <a href="#speles">Spēles</a>
-            <a href="#rezultati">Rezultāti</a>
-            <a href="#" style="background-color:#00ffc3;color:#000">Veikt likmi</a>
-        </nav>
-    </header>
-
-    <section class="hero fade-in">
-        <div class="hero-content">
-            <h2>LIKMIJU KODS</h2>
-            <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-            <button onclick="window.location.href='#speles'">Veikt likmi</button>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2025 Likmju Kods. Visas tiesības aizsargātas.
-    </footer>
-</body>
-
+  </style>
+</head><body>
+  <header>
+    <div class="logo">LIKMIJU KODS</div>
+    <nav>
+      <a href="#sakums" class="active">Sākums</a>
+      <a href="#speles">Spēles</a>
+      <a href="#rezultati">Rezultāti</a>
+      <a href="#veikt" class="btn">Veikt likmi</a>
+    </nav>
+  </header>  <section class="hero" id="sakums">
+    <h1>LIKMIJU KODS</h1>
+    <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+    <a href="#veikt" class="btn">Veikt likmi</a>
+  </section>  <section id="speles" class="hero">
+    <h1>Šodienas spēles</h1>
+    <p>Filtri un spēļu dati būs pieejami, kad būs hostēts serveris.</p>
+  </section>  <section id="rezultati" class="hero">
+    <h1>AI prognožu rezultāti</h1>
+    <p>Drīzumā pieejams!</p>
+  </section>  <footer>
+    &copy; 2025 Likmju Kods. Visas tiesības aizsargātas.
+  </footer></body>
 </html>
-
