@@ -1,133 +1,155 @@
 <!DOCTYPE html><html lang="lv"><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Likmju Kods</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0a0a0a;
-      color: #fff;
-      scroll-behavior: smooth;
-    }nav {
-  background: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  border-bottom: 2px solid #00ffcc44;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Likmju Kods</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #0e0e0e;
+            color: white;
+        }header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #000;
+        border-bottom: 2px solid #00ffcc33;
+    }
 
-.logo {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #00ffcc;
-}
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #00ffcc;
+    }
 
-.nav-links button {
-  background-color: #1a1a1a;
-  color: white;
-  border: 2px solid #00ffcc;
-  border-radius: 5px;
-  margin-left: 10px;
-  padding: 6px 12px;
-  font-size: 0.95em;
-  cursor: pointer;
-  transition: all 0.3s;
-}
+    nav button {
+        background: transparent;
+        border: 2px solid #00ffcc;
+        border-radius: 5px;
+        color: white;
+        padding: 5px 12px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
 
-.nav-links button:hover,
-.nav-links button.active {
-  background-color: #00ffcc;
-  color: #000;
-}
+    nav button:hover,
+    nav button.active {
+        background-color: #00ffcc;
+        color: black;
+    }
 
-section {
-  padding: 100px 20px 60px;
-  max-width: 800px;
-  margin: auto;
-  border-radius: 20px;
-  background: #121212;
-  box-shadow: 0 0 15px #00ffcc33;
-  margin-top: 40px;
-}
+    section {
+        padding: 60px 20px;
+        max-width: 900px;
+        margin: auto;
+    }
 
-.game-card {
-  background: #1a1a1a;
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ffcc33;
-}
+    .card {
+        background-color: #1a1a1a;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px #00ffcc33;
+        margin-bottom: 40px;
+    }
 
-  </style>
+    .game-card {
+        background-color: #151515;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 4px solid #00ffcc;
+    }
+
+    .filter-buttons button {
+        background: #222;
+        border: 1px solid #00ffcc;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 5px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .filter-buttons button.active {
+        background: #00ffcc;
+        color: black;
+    }
+</style>
+
 </head><body>
-  <nav>
-    <div class="logo">LIK<em>MJU</em> KODS</div>
-    <div class="nav-links">
-      <button onclick="scrollToSection('sakums')" id="link-sakums">Sākums</button>
-      <button onclick="scrollToSection('speles')" id="link-speles">Spēles</button>
-      <button onclick="scrollToSection('rezultati')" id="link-rezultati">Rezultāti</button>
-      <button style="background-color: #00ffcc; color: black;">Veikt likmi</button>
+    <header>
+        <div class="logo">LIK<span style="color:white">MJU</span> KODS</div>
+        <nav>
+            <button onclick="showSection('sakums')" id="btn-sakums">Sākums</button>
+            <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
+            <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
+            <button style="background-color:#00ffcc; color:black;">Veikt likmi</button>
+        </nav>
+    </header><section id="sakums">
+    <div class="card">
+        <h1>LIKMIJU KODS</h1>
+        <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+        <button style="margin-top: 10px; background-color: #00ffcc; color: black; border: none; padding: 8px 14px; border-radius: 4px;">Veikt likmi</button>
     </div>
-  </nav>  <section id="sakums">
-    <h1 style="text-align:center">LIKMIJU KODS</h1>
-    <p style="text-align:center">Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-    <div style="text-align:center; margin-top:20px">
-      <button onclick="scrollToSection('speles')">Veikt likmi</button>
+</section>
+
+<section id="speles" style="display:none;">
+    <div class="card">
+        <h2>Šodienas spēles</h2>
+        <div class="filter-buttons">
+            <button class="active" onclick="filterGames('visi')">Visi</button>
+            <button onclick="filterGames('futbols')">Futbols</button>
+            <button onclick="filterGames('basketbols')">Basketbols</button>
+            <button onclick="filterGames('teniss')">Teniss</button>
+        </div>
+        <div id="games-list"></div>
     </div>
-  </section>  <section id="speles">
-    <h2 style="text-align:center">Šodienas spēles</h2>
-    <div id="games-container"></div>
-  </section>  <section id="rezultati">
-    <h2 style="text-align:center">AI prognožu rezultāti</h2>
-    <p style="text-align:center">Drīzumā pieejams!</p>
-  </section>  <footer style="text-align:center; margin-top:50px; padding:20px; font-size:0.8em;">
-    &copy; 2025 Likmju Kods. Visas tiesības aizsargātas.
-  </footer>  <script>
+</section>
+
+<section id="rezultati" style="display:none;">
+    <div class="card">
+        <h2>AI prognožu rezultāti</h2>
+        <p>Drīzumā pieejams!</p>
+    </div>
+</section>
+
+<script>
+    const sections = ['sakums', 'speles', 'rezultati'];
+
+    function showSection(id) {
+        sections.forEach(s => {
+            document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
+            document.getElementById('btn-' + s).classList.remove('active');
+        });
+        document.getElementById('btn-' + id).classList.add('active');
+    }
+
     const games = [
-      {
-        sport: "Futbols",
-        teams: "Manchester City vs Real Madrid",
-        time: "18:00",
-        odds: { home: 1.85, draw: 3.40, away: 4.20 },
-        prediction: "Manchester City uzvara"
-      },
-      {
-        sport: "Hokejs",
-        teams: "Latvija vs Zviedrija",
-        time: "20:30",
-        odds: { home: 3.80, draw: 4.10, away: 1.60 },
-        prediction: "Zviedrija uzvara"
-      }
+        { komandas: 'Manchester City vs Real Madrid', veids: 'futbols', laiks: '18:00' },
+        { komandas: 'Lakers vs Celtics', veids: 'basketbols', laiks: '21:00' },
+        { komandas: 'Djokovic vs Nadal', veids: 'teniss', laiks: '16:30' },
+        { komandas: 'Barcelona vs PSG', veids: 'futbols', laiks: '19:00' },
     ];
 
-    function generateGames() {
-      const container = document.getElementById("games-container");
-      container.innerHTML = "";
-      games.forEach((game) => {
-        const div = document.createElement("div");
-        div.className = "game-card";
-        div.innerHTML = `
-          <h3>${game.teams}</h3>
-          <p><b>Sporta veids:</b> ${game.sport}</p>
-          <p><b>Laiks:</b> ${game.time}</p>
-          <p><b>Prognoze:</b> ${game.prediction}</p>
-          <p><b>Koeficienti:</b> 🏠 ${game.odds.home} | 🤝 ${game.odds.draw} | 🛫 ${game.odds.away}</p>
-        `;
-        container.appendChild(div);
-      });
+    function filterGames(veids) {
+        const list = document.getElementById('games-list');
+        list.innerHTML = '';
+        document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.filter-buttons button[onclick*="' + veids + '"]').classList.add('active');
+
+        games.filter(g => veids === 'visi' || g.veids === veids)
+            .forEach(g => {
+                const el = document.createElement('div');
+                el.className = 'game-card';
+                el.innerHTML = `<strong>${g.komandas}</strong><br><small>Sporta veids: ${g.veids}</small><br><small>Laiks: ${g.laiks}</small>`;
+                list.appendChild(el);
+            });
     }
 
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
+    // Default spēļu ielāde
+    filterGames('visi');
+</script>
 
-    window.onload = () => {
-      generateGames();
-    }
-  </script></body></html>
+</body></html>
