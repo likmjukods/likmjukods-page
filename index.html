@@ -2,170 +2,158 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Likmju Kods</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #000;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      background: linear-gradient(to right, #00ffc3, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav button {
+      background-color: #111;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      font-weight: bold;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    nav button:hover {
+      background-color: #00ffc3;
+      color: #000;
+    }
+
+    .hero {
+      margin: 3rem auto;
+      max-width: 800px;
+      padding: 2rem;
+      background-color: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #00ffc3;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .hero p {
+      margin-top: 0.5rem;
+      color: #ddd;
+    }
+
+    .hero a {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background-color: #00ffc3;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .games-section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      border: 1px solid #00ffc3;
+      border-radius: 10px;
+    }
+
+    .games-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .game-card {
+      background-color: #111;
+      border: 1px solid #00ffc3;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .game-card strong {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      margin: 3rem 0;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <span>L</span><span>I</span><span>K</span><span>M</span><span>J</span><span>U</span>
-      <span>K</span><span>O</span><span>D</span><span>S</span>
-    </div>
+    <div class="logo">LIKMIJUKODS</div>
     <nav>
-      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
-      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
-      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
-      <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
+      <button>Sākums</button>
+      <button>Spēles</button>
+      <button>Rezultāti</button>
+      <button>Veikt likmi</button>
     </nav>
   </header>
 
-  <main>
-    <section id="section-sakums" class="hero">
-      <h1>LIKMIJUKODS</h1>
-      <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-      <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
-    </section>
+  <div class="hero">
+    <h1>LIKMIJUKODS</h1>
+    <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+    <a href="#">Veikt likmi</a>
+  </div>
 
-    <section id="section-speles" class="games-section" style="display:none;">
-      <h2>Šodienas spēles</h2>
-      <div class="filters">
-        <select id="filter-sports" onchange="renderGames()">
-          <option value="all">Visi sporta veidi</option>
-        </select>
-        <select id="filter-date" onchange="renderGames()">
-          <option value="all">Visi datumi</option>
-        </select>
-      </div>
-      <div id="speles-wrapper"></div>
-    </section>
+  <div class="games-section">
+    <h2>Šodienas spēles</h2>
 
-    <section id="section-rezultati" class="results-section" style="display:none;">
-      <h2>AI prognožu rezultāti</h2>
-      <div class="filters">
-        <select id="filter-result" onchange="renderResults()">
-          <option value="all">Visi</option>
-          <option value="pareizi">Pareizi</option>
-          <option value="garām">Garām</option>
-        </select>
-      </div>
-      <div id="rezultati-wrapper"></div>
-    </section>
-  </main>
+    <div class="game-card">
+      <strong>Latvija vs Igaunija</strong><br>
+      Sporta veids: Futbols<br>
+      Datums: 2025-06-28<br>
+      Laiks: 18:00<br>
+      Prognoze: Latvija uzvar<br>
+    </div>
 
-  <script>
-    function setActive(id) {
-      document.querySelectorAll('main section').forEach(s => s.style.display = 'none');
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-      document.getElementById(id.replace('link-', 'section-')).style.display = 'block';
-      document.getElementById(id).classList.add('active');
-    }
+    <div class="game-card">
+      <strong>ASV vs Kanāda</strong><br>
+      Sporta veids: Hokejs<br>
+      Datums: 2025-06-28<br>
+      Laiks: 21:30<br>
+      Prognoze: Vairāk par 5.5 vārtiem<br>
+    </div>
 
-    function showComingSoon() {
-      alert("Drīzumā pieejams!");
-    }
+    <div class="game-card">
+      <strong>Real Madrid vs Barcelona</strong><br>
+      Sporta veids: Futbols<br>
+      Datums: 2025-06-28<br>
+      Laiks: 22:00<br>
+      Prognoze: Abas komandas gūs vārtus<br>
+    </div>
+  </div>
 
-    async function renderGames() {
-      const res = await fetch('games.json');
-      const games = await res.json();
-      const wrapper = document.getElementById('speles-wrapper');
-      const sportFilter = document.getElementById('filter-sports').value;
-      const dateFilter = document.getElementById('filter-date').value;
-
-      wrapper.innerHTML = '';
-
-      const sports = new Set();
-      const dates = new Set();
-
-      const filteredGames = games.filter(g => {
-        sports.add(g.sport);
-        dates.add(g.date);
-        return (sportFilter === 'all' || g.sport === sportFilter) &&
-               (dateFilter === 'all' || g.date === dateFilter);
-      });
-
-      // Update dropdown options
-      updateSelect('filter-sports', sports);
-      updateSelect('filter-date', dates);
-
-      filteredGames.forEach(g => {
-        const div = document.createElement('div');
-        div.className = 'game';
-        div.textContent = `${g.team1} vs ${g.team2} — ${g.date} — ${g.sport} — Prognoze: ${g.prediction} (Koef: ${g.odds})`;
-        wrapper.appendChild(div);
-      });
-    }
-
-    async function renderResults() {
-      const res = await fetch('results.json');
-      const results = await res.json();
-      const wrapper = document.getElementById('rezultati-wrapper');
-      const filter = document.getElementById('filter-result').value;
-
-      wrapper.innerHTML = '';
-      results.filter(r => filter === 'all' || r.outcome === filter)
-             .forEach(r => {
-        const div = document.createElement('div');
-        div.className = 'result ' + (r.outcome === 'pareizi' ? 'correct' : 'incorrect');
-        div.textContent = `${r.team1} vs ${r.team2} — Prognoze: ${r.prediction} (${r.odds}) — Rezultāts: ${r.outcome}`;
-        wrapper.appendChild(div);
-      });
-    }
-
-    function updateSelect(id, items) {
-      const select = document.getElementById(id);
-      const current = select.value;
-      const options = Array.from(items).sort();
-      select.innerHTML = `<option value="all">Visi</option>` + options.map(i => 
-        `<option value="${i}" ${i === current ? 'selected' : ''}>${i}</option>`).join('');
-    }
-
-    window.onload = async function () {
-      await processGamesToResults();
-      setActive('link-sakums');
-    };
-
-    async function processGamesToResults() {
-      try {
-        const response = await fetch('games.json');
-        const games = await response.json();
-        const today = new Date().toISOString().split('T')[0];
-
-        const upcomingGames = [];
-        const finishedGames = [];
-
-        for (const game of games) {
-          if (game.date < today) {
-            finishedGames.push({
-              ...game,
-              outcome: 'nav zināms'
-            });
-          } else {
-            upcomingGames.push(game);
-          }
-        }
-
-        await saveToFile('games.json', upcomingGames);
-
-        const resultsResp = await fetch('results.json');
-        const results = await resultsResp.json();
-        const updatedResults = [...results, ...finishedGames];
-        await saveToFile('results.json', updatedResults);
-
-      } catch (err) {
-        console.error('Kļūda apstrādājot notikumus:', err);
-      }
-    }
-
-    async function saveToFile(filename, data) {
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  </script>
+  <footer>
+    &copy; 2025 LikmjuKods. Visas tiesības aizsargātas.
+  </footer>
 </body>
 </html>
