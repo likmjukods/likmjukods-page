@@ -1,86 +1,99 @@
 <!DOCTYPE html><html lang="lv"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Profesionālās sporta prognozes un AI analīze Likmju Kods mājaslapā." />
   <title>Likmju Kods</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 </head><body>
   <header>
-    <div class="container">
-      <h1 class="logo">LIKMIJU KODS</h1>
-      <nav>
-        <a href="#" class="nav-btn active">Sākums</a>
-        <a href="#speles" class="nav-btn">Spēles</a>
-        <a href="#rezultati" class="nav-btn">Rezultāti</a>
-        <a href="#bonusi" class="nav-btn">Bonusi</a>
-        <a href="#veikt-likmi" class="nav-btn call">Veikt likmi</a>
+    <div class="header-container">
+      <h1 class="logo">LIKMJU KODS</h1>
+      <nav class="nav-buttons">
+        <button onclick="setActive('sakums')">Sākums</button>
+        <button onclick="setActive('speles')">Spēles</button>
+        <button onclick="setActive('rezultati')">Rezultāti</button>
+        <button onclick="setActive('bonusi')">Bonusi</button>
+        <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
       </nav>
     </div>
   </header>  <main>
-    <section class="hero">
-      <div class="hero-content">
+    <section id="sakums" class="section">
+      <div class="container center">
         <h2>Profesionālās sporta prognozes</h2>
         <p>AI analīze, likmju vēsture un partneru piedāvājumi vienuviet.</p>
-        <a href="#veikt-likmi" class="cta">Veikt likmi</a>
+        <a class="cta-link" href="https://example.com" target="_blank">Veikt likmi</a>
       </div>
-    </section><section id="speles" class="section">
-  <h2>Šodienas spēles</h2>
-  <div class="filter-btns">
-    <button class="filter active">Visi</button>
-    <button class="filter">Futbols</button>
-    <button class="filter">Basketbols</button>
-    <button class="filter">Teniss</button>
-  </div>
-  <div class="games">
-    <div class="game">
-      <h3>Manchester City vs Real Madrid</h3>
-      <p>Sporta veids: futbols</p>
-      <p>Laiks: 18:00</p>
+    </section><section id="speles" class="section hidden">
+  <div class="container">
+    <h2>Šodienas spēles</h2>
+    <div class="filter-buttons">
+      <button onclick="filterGames('Visi')">Visi</button>
+      <button onclick="filterGames('futbols')">Futbols</button>
+      <button onclick="filterGames('basketbols')">Basketbols</button>
+      <button onclick="filterGames('teniss')">Teniss</button>
     </div>
-    <div class="game">
-      <h3>Lakers vs Celtics</h3>
-      <p>Sporta veids: basketbols</p>
-      <p>Laiks: 21:00</p>
-    </div>
-    <div class="game">
-      <h3>Djokovic vs Nadal</h3>
-      <p>Sporta veids: teniss</p>
-      <p>Laiks: 16:30</p>
-    </div>
-    <div class="game">
-      <h3>Barcelona vs PSG</h3>
-      <p>Sporta veids: futbols</p>
-      <p>Laiks: 19:00</p>
-    </div>
+    <div id="games-container"></div>
   </div>
 </section>
 
-<section id="rezultati" class="section">
-  <h2>AI prognožu rezultāti</h2>
-  <p>Drīzumā pieejams!</p>
+<section id="rezultati" class="section hidden">
+  <div class="container center">
+    <h2>AI prognožu rezultāti</h2>
+    <p>Drīzumā pieejams!</p>
+  </div>
 </section>
 
-<section id="bonusi" class="section">
-  <h2>Bonusi un piedāvājumi</h2>
-  <p>Aktīvie partneru bonusi drīzumā būs pieejami!</p>
-</section>
-
-<section id="veikt-likmi" class="section">
-  <h2>Veikt likmi</h2>
-  <p>Izvēlies spēli un veic savu prognozi kā profesionālis!</p>
+<section id="bonusi" class="section hidden">
+  <div class="container center">
+    <h2>Bonusi un piedāvājumi</h2>
+    <p>Aktīvie partneru bonusi drīzumā būs pieejami!</p>
+  </div>
 </section>
 
   </main>  <footer>
-    <div class="footer-content">
+    <div class="footer">
       <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-      <div class="footer-links">
-        <a href="#">Privātuma politika</a> |
-        <a href="#">Noteikumi</a> |
-        <a href="#">Telegram</a>
-      </div>
+      <p><a href="#">Privātuma politika</a> | <a href="#">Noteikumi</a> | <a href="#">Telegram</a></p>
     </div>
-  </footer>
-</body></html>
+  </footer>  <script>
+    const sakums = document.getElementById("sakums");
+    const speles = document.getElementById("speles");
+    const rezultati = document.getElementById("rezultati");
+    const bonusi = document.getElementById("bonusi");
+
+    function setActive(sectionId) {
+      [sakums, speles, rezultati, bonusi].forEach((s) => s.classList.add("hidden"));
+      document.getElementById(sectionId).classList.remove("hidden");
+    }
+
+    const games = [
+      { nosaukums: "Manchester City vs Real Madrid", veids: "futbols", laiks: "18:00" },
+      { nosaukums: "Lakers vs Celtics", veids: "basketbols", laiks: "21:00" },
+      { nosaukums: "Djokovic vs Nadal", veids: "teniss", laiks: "16:30" },
+      { nosaukums: "Barcelona vs PSG", veids: "futbols", laiks: "19:00" },
+    ];
+
+    function displayGames(filteredType = "Visi") {
+      const container = document.getElementById("games-container");
+      container.innerHTML = "";
+      games
+        .filter((g) => filteredType === "Visi" || g.veids === filteredType)
+        .forEach((g) => {
+          const el = document.createElement("div");
+          el.className = "game-card";
+          el.innerHTML = `
+            <strong>${g.nosaukums}</strong><br />
+            Sporta veids: ${g.veids}<br />
+            Laiks: ${g.laiks}
+          `;
+          container.appendChild(el);
+        });
+    }
+
+    function filterGames(tips) {
+      displayGames(tips);
+    }
+
+    window.onload = () => {
+      displayGames();
+    };
+  </script></body></html>
