@@ -1,95 +1,171 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1 id="logo"><span class="fade-text">LIKMJUKODS</span></h1>
+    <div class="logo">
+      <span>L</span><span>I</span><span>K</span><span>M</span><span>J</span><span>U</span>
+      <span>K</span><span>O</span><span>D</span><span>S</span>
+    </div>
     <nav>
-      <ul>
-        <li><a href="#sakums" class="active">Sākums</a></li>
-        <li><a href="#speles">Spēles</a></li>
-        <li><a href="#rezultati">Rezultāti</a></li>
-        <li><a href="#bonusi">Bonusi</a></li>
-      </ul>
+      <a href="#" id="link-sakums" onclick="setActive('link-sakums')">Sākums</a>
+      <a href="#" id="link-speles" onclick="setActive('link-speles')">Spēles</a>
+      <a href="#" id="link-rezultati" onclick="setActive('link-rezultati')">Rezultāti</a>
+      <a class="cta" href="#" onclick="showComingSoon()">Veikt likmi</a>
     </nav>
   </header>
 
-  <section id="sakums" class="card with-glow">
-    <h2>LIKMIJU KODS</h2>
-    <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-    <a href="#speles" class="btn">Veikt likmi</a>
-  </section>
+  <main>
+    <section id="section-sakums" class="hero">
+      <h1>LIKMIJUKODS</h1>
+      <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+      <a href="#" class="cta" onclick="showComingSoon()">Veikt likmi</a>
+    </section>
 
-  <section id="speles" class="card green-bordered">
-    <h2>Šodienas spēles</h2>
-    <select id="filter-sports">
-      <option value="visi">Visi sporta veidi</option>
-      <option value="futbols">Futbols</option>
-      <option value="basketbols">Basketbols</option>
-      <option value="hokejs">Hokejs</option>
-    </select>
-    <select id="filter-date">
-      <option value="visi">Visi datumi</option>
-      <option value="2025-06-28">Šodien</option>
-      <option value="2025-06-29">Rītdien</option>
-      <option value="2025-06-30">Pārparīt</option>
-    </select>
-    <div id="game-list">
-      <!-- Šeit tiek automātiski ielādētas spēles ar JS -->
-    </div>
-  </section>
+    <section id="section-speles" class="games-section" style="display:none;">
+      <h2>Šodienas spēles</h2>
+      <div class="filters">
+        <select id="filter-sports" onchange="renderGames()">
+          <option value="all">Visi sporta veidi</option>
+        </select>
+        <select id="filter-date" onchange="renderGames()">
+          <option value="all">Visi datumi</option>
+        </select>
+      </div>
+      <div id="speles-wrapper"></div>
+    </section>
 
-  <section id="rezultati" class="card green-bordered">
-    <h2>Rezultāti</h2>
-    <p>Drīzumā tiks pievienoti reālie rezultāti ar AI precizitātes analīzi.</p>
-  </section>
-
-  <section id="bonusi" class="card green-bordered">
-    <h2>Bonusi</h2>
-    <p>Izmanto mūsu partneru ekskluzīvos piedāvājumus sporta likmēm.</p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-  </footer>
+    <section id="section-rezultati" class="results-section" style="display:none;">
+      <h2>AI prognožu rezultāti</h2>
+      <div class="filters">
+        <select id="filter-result" onchange="renderResults()">
+          <option value="all">Visi</option>
+          <option value="pareizi">Pareizi</option>
+          <option value="garām">Garām</option>
+        </select>
+      </div>
+      <div id="rezultati-wrapper"></div>
+    </section>
+  </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const gameList = document.getElementById('game-list');
-      const filterSports = document.getElementById('filter-sports');
-      const filterDate = document.getElementById('filter-date');
+    function setActive(id) {
+      document.querySelectorAll('main section').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id.replace('link-', 'section-')).style.display = 'block';
+      document.getElementById(id).classList.add('active');
+    }
 
-      const allGames = [
-        { sport: 'futbols', date: '2025-06-28', teams: 'Liverpool vs Chelsea' },
-        { sport: 'basketbols', date: '2025-06-28', teams: 'Lakers vs Celtics' },
-        { sport: 'hokejs', date: '2025-06-29', teams: 'Dinamo Rīga vs Jokerit' },
-        { sport: 'futbols', date: '2025-06-30', teams: 'Real Madrid vs PSG' }
-      ];
+    function showComingSoon() {
+      alert("Drīzumā pieejams!");
+    }
 
-      function renderGames() {
-        const sport = filterSports.value;
-        const date = filterDate.value;
+    async function renderGames() {
+      const res = await fetch('games.json');
+      const games = await res.json();
+      const wrapper = document.getElementById('speles-wrapper');
+      const sportFilter = document.getElementById('filter-sports').value;
+      const dateFilter = document.getElementById('filter-date').value;
 
-        const filteredGames = allGames.filter(game =>
-          (sport === 'visi' || game.sport === sport) &&
-          (date === 'visi' || game.date === date)
-        );
+      wrapper.innerHTML = '';
 
-        gameList.innerHTML = filteredGames.length > 0
-          ? filteredGames.map(g => `<div class="game-item">${g.teams} — ${g.date}</div>`).join('')
-          : '<p>Nav atbilstošu spēļu.</p>';
+      const sports = new Set();
+      const dates = new Set();
+
+      const filteredGames = games.filter(g => {
+        sports.add(g.sport);
+        dates.add(g.date);
+        return (sportFilter === 'all' || g.sport === sportFilter) &&
+               (dateFilter === 'all' || g.date === dateFilter);
+      });
+
+      // Update dropdown options
+      updateSelect('filter-sports', sports);
+      updateSelect('filter-date', dates);
+
+      filteredGames.forEach(g => {
+        const div = document.createElement('div');
+        div.className = 'game';
+        div.textContent = `${g.team1} vs ${g.team2} — ${g.date} — ${g.sport} — Prognoze: ${g.prediction} (Koef: ${g.odds})`;
+        wrapper.appendChild(div);
+      });
+    }
+
+    async function renderResults() {
+      const res = await fetch('results.json');
+      const results = await res.json();
+      const wrapper = document.getElementById('rezultati-wrapper');
+      const filter = document.getElementById('filter-result').value;
+
+      wrapper.innerHTML = '';
+      results.filter(r => filter === 'all' || r.outcome === filter)
+             .forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'result ' + (r.outcome === 'pareizi' ? 'correct' : 'incorrect');
+        div.textContent = `${r.team1} vs ${r.team2} — Prognoze: ${r.prediction} (${r.odds}) — Rezultāts: ${r.outcome}`;
+        wrapper.appendChild(div);
+      });
+    }
+
+    function updateSelect(id, items) {
+      const select = document.getElementById(id);
+      const current = select.value;
+      const options = Array.from(items).sort();
+      select.innerHTML = `<option value="all">Visi</option>` + options.map(i => 
+        `<option value="${i}" ${i === current ? 'selected' : ''}>${i}</option>`).join('');
+    }
+
+    window.onload = async function () {
+      await processGamesToResults();
+      setActive('link-sakums');
+    };
+
+    async function processGamesToResults() {
+      try {
+        const response = await fetch('games.json');
+        const games = await response.json();
+        const today = new Date().toISOString().split('T')[0];
+
+        const upcomingGames = [];
+        const finishedGames = [];
+
+        for (const game of games) {
+          if (game.date < today) {
+            finishedGames.push({
+              ...game,
+              outcome: 'nav zināms'
+            });
+          } else {
+            upcomingGames.push(game);
+          }
+        }
+
+        await saveToFile('games.json', upcomingGames);
+
+        const resultsResp = await fetch('results.json');
+        const results = await resultsResp.json();
+        const updatedResults = [...results, ...finishedGames];
+        await saveToFile('results.json', updatedResults);
+
+      } catch (err) {
+        console.error('Kļūda apstrādājot notikumus:', err);
       }
+    }
 
-      filterSports.addEventListener('change', renderGames);
-      filterDate.addEventListener('change', renderGames);
-
-      renderGames(); // pirmais ielādējums
-    });
+    async function saveToFile(filename, data) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>
