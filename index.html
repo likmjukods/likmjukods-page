@@ -1,55 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Likmju Kods</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <div class="logo">
-      <h1><span class="fade-green">L</span><span class="fade-green">I</span><span class="fade-green">K</span><span class="fade-green">M</span><span class="fade-green">J</span><span class="fade-green">U</span>
-        <span class="fade-white">K</span><span class="fade-white">O</span><span class="fade-white">D</span><span class="fade-white">S</span>
-      </h1>
-    </div>
+    <h1 id="logo"><span class="fade-text">LIKMJUKODS</span></h1>
     <nav>
       <ul>
-        <li><a href="#">Sākums</a></li>
-        <li><a href="#games">Spēles</a></li>
-        <li><a href="#results">Rezultāti</a></li>
-        <li><a href="#bonuses">Bonusi</a></li>
+        <li><a href="#sakums" class="active">Sākums</a></li>
+        <li><a href="#speles">Spēles</a></li>
+        <li><a href="#rezultati">Rezultāti</a></li>
+        <li><a href="#bonusi">Bonusi</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h2>LIKMIJU KODS</h2>
-      <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-      <a href="#" class="bet-button">Veikt likmi</a>
-    </section>
+  <section id="sakums" class="card with-glow">
+    <h2>LIKMIJU KODS</h2>
+    <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+    <a href="#speles" class="btn">Veikt likmi</a>
+  </section>
 
-    <section id="games" class="games-section">
-      <h2>Šodienas spēles</h2>
-      <div class="filters">
-        <select>
-          <option>Visi sporta veidi</option>
-          <option>Futbols</option>
-          <option>Basketbols</option>
-          <option>Hokejs</option>
-        </select>
-        <select>
-          <option>Visi datumi</option>
-          <option>Šodiena</option>
-          <option>Rītdiena</option>
-        </select>
-      </div>
-      <div class="games-list">
-        <!-- Šeit tiks ielādētas spēles -->
-      </div>
-    </section>
-  </main>
+  <section id="speles" class="card green-bordered">
+    <h2>Šodienas spēles</h2>
+    <select id="filter-sports">
+      <option value="visi">Visi sporta veidi</option>
+      <option value="futbols">Futbols</option>
+      <option value="basketbols">Basketbols</option>
+      <option value="hokejs">Hokejs</option>
+    </select>
+    <select id="filter-date">
+      <option value="visi">Visi datumi</option>
+      <option value="2025-06-28">Šodien</option>
+      <option value="2025-06-29">Rītdien</option>
+      <option value="2025-06-30">Pārparīt</option>
+    </select>
+    <div id="game-list">
+      <!-- Šeit tiek automātiski ielādētas spēles ar JS -->
+    </div>
+  </section>
+
+  <section id="rezultati" class="card green-bordered">
+    <h2>Rezultāti</h2>
+    <p>Drīzumā tiks pievienoti reālie rezultāti ar AI precizitātes analīzi.</p>
+  </section>
+
+  <section id="bonusi" class="card green-bordered">
+    <h2>Bonusi</h2>
+    <p>Izmanto mūsu partneru ekskluzīvos piedāvājumus sporta likmēm.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gameList = document.getElementById('game-list');
+      const filterSports = document.getElementById('filter-sports');
+      const filterDate = document.getElementById('filter-date');
+
+      const allGames = [
+        { sport: 'futbols', date: '2025-06-28', teams: 'Liverpool vs Chelsea' },
+        { sport: 'basketbols', date: '2025-06-28', teams: 'Lakers vs Celtics' },
+        { sport: 'hokejs', date: '2025-06-29', teams: 'Dinamo Rīga vs Jokerit' },
+        { sport: 'futbols', date: '2025-06-30', teams: 'Real Madrid vs PSG' }
+      ];
+
+      function renderGames() {
+        const sport = filterSports.value;
+        const date = filterDate.value;
+
+        const filteredGames = allGames.filter(game =>
+          (sport === 'visi' || game.sport === sport) &&
+          (date === 'visi' || game.date === date)
+        );
+
+        gameList.innerHTML = filteredGames.length > 0
+          ? filteredGames.map(g => `<div class="game-item">${g.teams} — ${g.date}</div>`).join('')
+          : '<p>Nav atbilstošu spēļu.</p>';
+      }
+
+      filterSports.addEventListener('change', renderGames);
+      filterDate.addEventListener('change', renderGames);
+
+      renderGames(); // pirmais ielādējums
+    });
+  </script>
 </body>
 </html>
