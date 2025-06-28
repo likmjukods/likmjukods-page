@@ -20,6 +20,12 @@
         <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
         <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
       </div>
+      <footer>
+        <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
+        <a href="#">Privātuma politika</a> |
+        <a href="#">Noteikumi</a> |
+        <a href="#">Telegram</a>
+      </footer>
     </section><section id="speles" class="section hidden">
   <div class="container">
     <h2>Šodienas spēles</h2>
@@ -43,20 +49,15 @@
 <section id="bonusi" class="section hidden">
   <div class="container center">
     <h2>Ekskluzīvi bonusi</h2>
-    <ul class="bonus-list">
-      <li><strong>Optibet:</strong> 100€ bezriska likmes — <a href="#">Saņemt</a></li>
-      <li><strong>11.lv:</strong> 3 x 11€ likmes + bezmaksas griezieni — <a href="#">Izmēģini</a></li>
-      <li><strong>Betsafe:</strong> 50% cashback līdz 100€ — <a href="#">Pievienojies</a></li>
+    <ul>
+      <li>Optibet: 100€ bezriska likmes — <a href="#">Saņemt</a></li>
+      <li>11.lv: 3 likmes + bezmaksas griezieni — <a href="#">Izmēģini</a></li>
+      <li>Betsafe: 50% cashback līdz 100€ — <a href="#">Pievienojies</a></li>
     </ul>
   </div>
 </section>
 
-  </main>  <footer>
-    <div class="footer-container">
-      <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-      <p><a href="#">Privātuma politika</a> | <a href="#">Noteikumi</a> | <a href="https://t.me/likmjukods" target="_blank">Telegram</a></p>
-    </div>
-  </footer>  <script>
+  </main>  <script>
     const sakums = document.getElementById("sakums");
     const speles = document.getElementById("speles");
     const rezultati = document.getElementById("rezultati");
@@ -68,10 +69,26 @@
     }
 
     const games = [
-      { nosaukums: "Manchester City vs Real Madrid", veids: "futbols", laiks: "18:00" },
-      { nosaukums: "Lakers vs Celtics", veids: "basketbols", laiks: "21:00" },
-      { nosaukums: "Djokovic vs Nadal", veids: "teniss", laiks: "16:30" },
-      { nosaukums: "Barcelona vs PSG", veids: "futbols", laiks: "19:00" }
+      {
+        nosaukums: "Manchester City vs Real Madrid",
+        veids: "futbols",
+        laiks: "18:00",
+      },
+      {
+        nosaukums: "Lakers vs Celtics",
+        veids: "basketbols",
+        laiks: "21:00",
+      },
+      {
+        nosaukums: "Djokovic vs Nadal",
+        veids: "teniss",
+        laiks: "16:30",
+      },
+      {
+        nosaukums: "Barcelona vs PSG",
+        veids: "futbols",
+        laiks: "19:00",
+      },
     ];
 
     function displayGames(filteredType = "Visi") {
