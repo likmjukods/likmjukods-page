@@ -2,172 +2,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap">
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
       scroll-behavior: smooth;
-    }body {
-  font-family: 'Orbitron', sans-serif;
-  background-color: #0a0a0a;
-  color: #fff;
-}
-
-header {
-  background-color: #000;
+    }nav {
+  background: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 2px solid #00ffcc;
+  padding: 10px 20px;
+  border-bottom: 2px solid #00ffcc44;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5em;
   font-weight: bold;
   color: #00ffcc;
 }
 
-nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #fff;
-  background-color: #111;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: background 0.3s;
+.nav-links button {
+  background-color: #1a1a1a;
+  color: white;
+  border: 2px solid #00ffcc;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 6px 12px;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-nav a:hover,
-nav a.active {
+.nav-links button:hover,
+.nav-links button.active {
   background-color: #00ffcc;
   color: #000;
 }
 
 section {
-  padding: 4rem 2rem;
-  border-bottom: 2px solid #00ffcc22;
+  padding: 100px 20px 60px;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 20px;
+  background: #121212;
+  box-shadow: 0 0 15px #00ffcc33;
+  margin-top: 40px;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #111;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 20px #00ffcc44;
-}
-
-h1, h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.button-main {
-  display: block;
-  margin: 2rem auto 0;
-  background-color: #00ffcc;
-  color: #000;
-  border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.button-main:hover {
-  background-color: #00c9aa;
-}
-
-.filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.filter-container select {
-  padding: 0.5rem;
-  background-color: #222;
-  border: 1px solid #00ffcc;
-  color: #fff;
-  border-radius: 6px;
-}
-
-.games-list {
-  margin-top: 2rem;
-}
-
-.game-item {
+.game-card {
   background: #1a1a1a;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-left: 4px solid #00ffcc;
+  margin: 20px 0;
+  padding: 20px;
   border-radius: 10px;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: #aaa;
+  box-shadow: 0 0 10px #00ffcc33;
 }
 
   </style>
 </head><body>
-  <header>
-    <div class="logo">LIK<span style="color:#fff">MJU</span> KODS</div>
-    <nav>
-      <a href="#sakums" class="active">Sākums</a>
-      <a href="#speles">Spēles</a>
-      <a href="#rezultati">Rezultāti</a>
-      <a href="#" class="button-main" style="display:inline-block; padding:0.5rem 1rem; font-size:0.9rem;">Veikt likmi</a>
-    </nav>
-  </header>  <section id="sakums">
-    <div class="container">
-      <h1>LIKMIJU KODS</h1>
-      <p style="text-align:center; font-size:1.2rem;">Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-      <button class="button-main">Veikt likmi</button>
+  <nav>
+    <div class="logo">LIK<em>MJU</em> KODS</div>
+    <div class="nav-links">
+      <button onclick="scrollToSection('sakums')" id="link-sakums">Sākums</button>
+      <button onclick="scrollToSection('speles')" id="link-speles">Spēles</button>
+      <button onclick="scrollToSection('rezultati')" id="link-rezultati">Rezultāti</button>
+      <button style="background-color: #00ffcc; color: black;">Veikt likmi</button>
+    </div>
+  </nav>  <section id="sakums">
+    <h1 style="text-align:center">LIKMIJU KODS</h1>
+    <p style="text-align:center">Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+    <div style="text-align:center; margin-top:20px">
+      <button onclick="scrollToSection('speles')">Veikt likmi</button>
     </div>
   </section>  <section id="speles">
-    <div class="container">
-      <h2>Šodienas spēles</h2>
-      <div class="filter-container">
-        <select>
-          <option>Visi sporta veidi</option>
-          <option>Futbols</option>
-          <option>Hokejs</option>
-          <option>Basketbols</option>
-        </select>
-        <select>
-          <option>Datums</option>
-          <option>Šodien</option>
-          <option>Rītdien</option>
-        </select>
-        <select>
-          <option>AI uzvaras varbūtība</option>
-          <option>> 80%</option>
-          <option>> 60%</option>
-        </select>
-      </div>
-      <div class="games-list">
-        <div class="game-item">⚽ Manchester City vs Arsenal — Prognoze: Man City 2:1</div>
-        <div class="game-item">🏒 Latvia vs Finland — Prognoze: Finland (zem 5.5)</div>
-        <div class="game-item">🏀 Lakers vs Celtics — Prognoze: Celtics -4.5</div>
-        <!-- Vēlāk tiks ielādēts dinamiski no API -->
-      </div>
-    </div>
+    <h2 style="text-align:center">Šodienas spēles</h2>
+    <div id="games-container"></div>
   </section>  <section id="rezultati">
-    <div class="container">
-      <h2>AI prognožu rezultāti</h2>
-      <p style="text-align:center;">Drīzumā pieejams! Tiks rādīti pēdējo dienu prognožu rezultāti.</p>
-    </div>
-  </section>  <footer>
+    <h2 style="text-align:center">AI prognožu rezultāti</h2>
+    <p style="text-align:center">Drīzumā pieejams!</p>
+  </section>  <footer style="text-align:center; margin-top:50px; padding:20px; font-size:0.8em;">
     &copy; 2025 Likmju Kods. Visas tiesības aizsargātas.
-  </footer>
-</body></html>
+  </footer>  <script>
+    const games = [
+      {
+        sport: "Futbols",
+        teams: "Manchester City vs Real Madrid",
+        time: "18:00",
+        odds: { home: 1.85, draw: 3.40, away: 4.20 },
+        prediction: "Manchester City uzvara"
+      },
+      {
+        sport: "Hokejs",
+        teams: "Latvija vs Zviedrija",
+        time: "20:30",
+        odds: { home: 3.80, draw: 4.10, away: 1.60 },
+        prediction: "Zviedrija uzvara"
+      }
+    ];
+
+    function generateGames() {
+      const container = document.getElementById("games-container");
+      container.innerHTML = "";
+      games.forEach((game) => {
+        const div = document.createElement("div");
+        div.className = "game-card";
+        div.innerHTML = `
+          <h3>${game.teams}</h3>
+          <p><b>Sporta veids:</b> ${game.sport}</p>
+          <p><b>Laiks:</b> ${game.time}</p>
+          <p><b>Prognoze:</b> ${game.prediction}</p>
+          <p><b>Koeficienti:</b> 🏠 ${game.odds.home} | 🤝 ${game.odds.draw} | 🛫 ${game.odds.away}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.onload = () => {
+      generateGames();
+    }
+  </script></body></html>
