@@ -1,159 +1,155 @@
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background-color: #000;
-      color: #fff;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #000;
-    }
-
-    .logo {
-      font-weight: bold;
-      font-size: 1.4rem;
-      background: linear-gradient(to right, #00ffc3, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    nav button {
       background-color: #111;
-      border: none;
-      padding: 0.5rem 1rem;
-      color: #fff;
+    }
+    .logo .fade {
       font-weight: bold;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      border-radius: 4px;
+      font-size: 1.8rem;
+      font-family: monospace;
     }
+    .fade:nth-child(1) { color: #00ffe0; }
+    .fade:nth-child(2) { color: #33ffe5; }
+    .fade:nth-child(3) { color: #66ffea; }
+    .fade:nth-child(4) { color: #99ffef; }
+    .fade:nth-child(5) { color: #ccfff4; }
+    .fade:nth-child(6) { color: #e0fff7; }
+    .fade:nth-child(7) { color: #f2fffa; }
+    .fade:nth-child(8) { color: #f8fffc; }
+    .fade:nth-child(9) { color: #fcfffe; }
+    .fade:nth-child(10) { color: #ffffff; }nav a {
+  color: white;
+  background: #222;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+nav a:hover {
+  background-color: #333;
+}
+.hero {
+  margin: 2rem;
+  padding: 2rem;
+  background: #111;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00ffe0;
+  text-align: center;
+}
+.hero button {
+  padding: 0.8rem 1.5rem;
+  background-color: #00ffcc;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.games-section {
+  margin: 2rem;
+  padding: 1rem;
+  border: 1px solid #00ffe0;
+  border-radius: 12px;
+}
+.filters select {
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+.game {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  box-shadow: 0 0 10px #00ffe0;
+}
 
-    nav button:hover {
-      background-color: #00ffc3;
-      color: #000;
-    }
-
-    .hero {
-      margin: 3rem auto;
-      max-width: 800px;
-      padding: 2rem;
-      background-color: #111;
-      border-radius: 20px;
-      box-shadow: 0 0 25px #00ffc3;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    .hero p {
-      margin-top: 0.5rem;
-      color: #ddd;
-    }
-
-    .hero a {
-      margin-top: 1rem;
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      background-color: #00ffc3;
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .games-section {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      border: 1px solid #00ffc3;
-      border-radius: 10px;
-    }
-
-    .games-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .game-card {
-      background-color: #111;
-      border: 1px solid #00ffc3;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .game-card strong {
-      font-size: 1.1rem;
-    }
-
-    footer {
-      text-align: center;
-      margin: 3rem 0;
-      color: #444;
-    }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">LIKMIJUKODS</div>
+    <h1 class="logo">
+      <span class="fade">L</span><span class="fade">I</span><span class="fade">K</span><span class="fade">M</span><span class="fade">J</span><span class="fade">U</span><span class="fade">K</span><span class="fade">O</span><span class="fade">D</span><span class="fade">S</span>
+    </h1>
     <nav>
-      <button>Sākums</button>
-      <button>Spēles</button>
-      <button>Rezultāti</button>
-      <button>Veikt likmi</button>
+      <a href="#sākums">Sākums</a>
+      <a href="#spēles">Spēles</a>
+      <a href="#rezultāti">Rezultāti</a>
+      <a href="#bonusi">Veikt likmi</a>
     </nav>
-  </header>
-
-  <div class="hero">
-    <h1>LIKMIJUKODS</h1>
-    <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-    <a href="#">Veikt likmi</a>
+  </header>  <main>
+    <section class="hero" id="sākums">
+      <h2>LIKMIJU KODS</h2>
+      <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+      <button>Veikt likmi</button>
+    </section><section class="games-section" id="spēles">
+  <h2>Šodienas spēles</h2>
+  <div class="filters">
+    <select id="sportaVeids" onchange="filterGames()">
+      <option value="Visi">Visi sporta veidi</option>
+      <option value="Futbols">Futbols</option>
+      <option value="Basketbols">Basketbols</option>
+      <option value="Hokejs">Hokejs</option>
+    </select>
+    <select id="datums" onchange="filterGames()">
+      <option value="Visi">Visi datumi</option>
+      <option value="2025-06-28">2025-06-28</option>
+    </select>
   </div>
 
-  <div class="games-section">
-    <h2>Šodienas spēles</h2>
-
-    <div class="game-card">
-      <strong>Latvija vs Igaunija</strong><br>
-      Sporta veids: Futbols<br>
-      Datums: 2025-06-28<br>
-      Laiks: 18:00<br>
-      Prognoze: Latvija uzvar<br>
+  <div id="gamesList">
+    <div class="game" data-sports="Futbols" data-date="2025-06-28">
+      <h3>Latvija vs Igaunija</h3>
+      <p>Sporta veids: Futbols</p>
+      <p>Datums: 2025-06-28</p>
+      <p>Laiks: 18:00</p>
+      <p>Prognoze: Latvija uzvar</p>
     </div>
-
-    <div class="game-card">
-      <strong>ASV vs Kanāda</strong><br>
-      Sporta veids: Hokejs<br>
-      Datums: 2025-06-28<br>
-      Laiks: 21:30<br>
-      Prognoze: Vairāk par 5.5 vārtiem<br>
+    <div class="game" data-sports="Hokejs" data-date="2025-06-28">
+      <h3>ASV vs Kanāda</h3>
+      <p>Sporta veids: Hokejs</p>
+      <p>Datums: 2025-06-28</p>
+      <p>Laiks: 20:30</p>
+      <p>Prognoze: Kanāda uzvar</p>
     </div>
-
-    <div class="game-card">
-      <strong>Real Madrid vs Barcelona</strong><br>
-      Sporta veids: Futbols<br>
-      Datums: 2025-06-28<br>
-      Laiks: 22:00<br>
-      Prognoze: Abas komandas gūs vārtus<br>
+    <div class="game" data-sports="Basketbols" data-date="2025-06-28">
+      <h3>Spānija vs Lietuva</h3>
+      <p>Sporta veids: Basketbols</p>
+      <p>Datums: 2025-06-28</p>
+      <p>Laiks: 21:00</p>
+      <p>Prognoze: Spānija uzvar</p>
     </div>
   </div>
+</section>
 
-  <footer>
-    &copy; 2025 LikmjuKods. Visas tiesības aizsargātas.
-  </footer>
-</body>
+  </main>  <script>
+    function filterGames() {
+      const sportaVeids = document.getElementById('sportaVeids').value;
+      const datums = document.getElementById('datums').value;
+      const games = document.querySelectorAll('.game');
+
+      games.forEach(game => {
+        const gameSports = game.getAttribute('data-sports');
+        const gameDate = game.getAttribute('data-date');
+        const show = (sportaVeids === 'Visi' || sportaVeids === gameSports) &&
+                     (datums === 'Visi' || datums === gameDate);
+        game.style.display = show ? 'block' : 'none';
+      });
+    }
+  </script></body>
 </html>
