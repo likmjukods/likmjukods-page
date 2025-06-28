@@ -1,40 +1,143 @@
-body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(180deg, #0a0f0d, #121212); color: #e0ffe7; min-height: 100vh; overflow-x: hidden; }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
-header { background: #000; padding: 1.5em 1em; text-align: center; box-shadow: 0 4px 10px rgba(0, 255, 153, 0.2); }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to bottom right, #00ffe1, #ffffff);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-header h1 { margin: 0; font-size: 2em; color: #00ff99; letter-spacing: 2px; }
+nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-nav { margin-top: 1em; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+nav .logo {
+  color: #00ffc8;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
 
-nav button { background: #00ff99; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 30px; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 153, 0.5); }
+nav .nav-links {
+  display: flex;
+  gap: 1rem;
+}
 
-nav button:hover { background: #00cc7a; transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 255, 153, 0.8); }
+nav .nav-links a {
+  background-color: #00ffc8;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
 
-.section { padding: 3em 1em 5em; display: none; animation: fadeIn 0.6s ease forwards; }
+nav .nav-links a:hover {
+  background-color: #00c7a8;
+}
 
-.section:not(.hidden) { display: block; }
+main {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 900px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
+}
 
-.container { max-width: 1000px; margin: auto; }
+section {
+  margin-bottom: 2rem;
+}
 
-.center { text-align: center; }
+h1, h2, h3 {
+  color: #00ffe1;
+  margin-bottom: 1rem;
+}
 
-button { font-size: 1em; border-radius: 10px; }
+button, .btn {
+  background-color: #00ffc8;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
 
-.filter-buttons { margin-bottom: 2em; text-align: center; }
+button:hover, .btn:hover {
+  background-color: #00c7a8;
+}
 
-.filter-buttons button { background-color: #00ff99; color: black; border: none; margin: 5px; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; }
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #bbb;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
 
-.filter-buttons button:hover { background-color: #00cc7a; transform: scale(1.05); }
+footer a {
+  color: #a78bfa;
+  margin: 0 0.5rem;
+  text-decoration: none;
+}
 
-.game-card { border: 2px solid #00ff99; padding: 1.5em; border-radius: 15px; margin: 1.5em 0; background-color: #161d1a; box-shadow: 0 0 15px rgba(0, 255, 153, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+footer a:hover {
+  text-decoration: underline;
+}
 
-.game-card:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(0, 255, 153, 0.4); }
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
 
-@keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+.filter-buttons button {
+  background-color: #00ffc8;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
-@media (max-width: 768px) { nav button { padding: 10px 14px; font-size: 0.9em; }
+.filter-buttons button:hover {
+  background-color: #00c7a8;
+}
 
-.game-card { padding: 1em; }
+.game-card {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ffe1;
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
 
-.filter-buttons button { padding: 8px 14px; } }
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  nav .nav-links {
+    flex-wrap: wrap;
+  }
+
+  main {
+    width: 95%;
+    padding: 1rem;
+  }
+}
