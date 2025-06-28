@@ -1,128 +1,58 @@
-<!DOCTYPE html><html lang="lv"><head>
+<!DOCTYPE html><html lang="lv">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
   <link rel="stylesheet" href="style.css" />
-</head><body>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
   <header>
-    <h1><span style="color: #00ff99">LIKMJU KODS</span></h1>
+    <div class="logo">LIKMIJU KODS</div>
     <nav>
-      <button onclick="setActive('sakums')">Sākums</button>
-      <button onclick="setActive('speles')">Spēles</button>
-      <button onclick="setActive('rezultati')">Rezultāti</button>
-      <button onclick="setActive('bonusi')">Bonusi</button>
-      <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
+      <button onclick="setActive('link-sakums')">Sākums</button>
+      <button onclick="setActive('link-speles')">Spēles</button>
+      <button onclick="setActive('link-rezultati')">Rezultāti</button>
+      <button onclick="setActive('link-bonusi')">Bonusi</button>
+      <button onclick="setActive('link-veikt')">Veikt likmi</button>
     </nav>
   </header>  <main>
-    <section id="sakums" class="section">
-      <div class="container center">
-        <h2>LIKMJU KODS</h2>
-        <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-        <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
-      </div>
-      <footer>
-        <p>© 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-        <a href="#">Privātuma politika</a> |
-        <a href="#">Noteikumi</a> |
-        <a href="#">Telegram</a>
-      </footer>
-    </section><section id="speles" class="section hidden">
-  <div class="container">
-    <h2>Šodienas spēles</h2>
-    <div class="filter-buttons">
-      <button onclick="filterGames('Visi')">Visi</button>
-      <button onclick="filterGames('futbols')">Futbols</button>
-      <button onclick="filterGames('basketbols')">Basketbols</button>
-      <button onclick="filterGames('teniss')">Teniss</button>
-    </div>
-    <div id="games-container"></div>
-    <footer>
-      <p>© 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
+    <section id="sakums" class="content-section">
+      <h1>LIKMIJU KODS</h1>
+      <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+      <a class="cta-button" onclick="setActive('link-veikt')">Veikt likmi</a>
+    </section><section id="speles" class="content-section">
+  <h2>Šodienas spēles</h2>
+  <div class="filters">
+    <button onclick="filterGames('visi')">Visi</button>
+    <button onclick="filterGames('futbols')">Futbols</button>
+    <button onclick="filterGames('basketbols')">Basketbols</button>
+    <button onclick="filterGames('teniss')">Teniss</button>
+  </div>
+  <div id="games-container"></div>
+</section>
+
+<section id="rezultati" class="content-section">
+  <h2>AI prognožu rezultāti</h2>
+  <p>Drīzumā pieejams!</p>
+</section>
+
+<section id="bonusi" class="content-section">
+  <h2>Bonusi un piedāvājumi</h2>
+  <p>Aktīvie partneru piedāvājumi un bonusi drīzumā būs pieejami.</p>
+</section>
+
+<section id="veikt" class="content-section">
+  <h2>Veikt likmi</h2>
+  <p>Izvēlies spēli un veic savu prognozi kā profesionālis!</p>
+</section>
+
+  </main>  <footer>
+    <p>
+      &copy; 2025 Likmju Kods. Visas tiesības aizsargātas.<br />
       <a href="#">Privātuma politika</a> |
       <a href="#">Noteikumi</a> |
       <a href="#">Telegram</a>
-    </footer>
-  </div>
-</section>
-
-<section id="rezultati" class="section hidden">
-  <div class="container center">
-    <h2>AI prognožu rezultāti</h2>
-    <p>Drīzumā pieejams!</p>
-    <footer>
-      <p>© 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-      <a href="#">Privātuma politika</a> |
-      <a href="#">Noteikumi</a> |
-      <a href="#">Telegram</a>
-    </footer>
-  </div>
-</section>
-
-<section id="bonusi" class="section hidden">
-  <div class="container center">
-    <h2>Bonusi un piedāvājumi</h2>
-    <p>Aktīvie partneru piedāvājumi un bonusi drīzumā būs pieejami.</p>
-    <footer>
-      <p>© 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-      <a href="#">Privātuma politika</a> |
-      <a href="#">Noteikumi</a> |
-      <a href="#">Telegram</a>
-    </footer>
-  </div>
-</section>
-
-  </main>  <script>
-    const sakums = document.getElementById("sakums");
-    const speles = document.getElementById("speles");
-    const rezultati = document.getElementById("rezultati");
-    const bonusi = document.getElementById("bonusi");
-
-    function setActive(sectionId) {
-      [sakums, speles, rezultati, bonusi].forEach((s) => s.classList.add("hidden"));
-      document.getElementById(sectionId).classList.remove("hidden");
-    }
-
-    const games = [
-      {
-        nosaukums: "Manchester City vs Real Madrid",
-        veids: "futbols",
-        laiks: "18:00",
-      },
-      {
-        nosaukums: "Lakers vs Celtics",
-        veids: "basketbols",
-        laiks: "21:00",
-      },
-      {
-        nosaukums: "Djokovic vs Nadal",
-        veids: "teniss",
-        laiks: "16:30",
-      },
-      {
-        nosaukums: "Barcelona vs PSG",
-        veids: "futbols",
-        laiks: "19:00",
-      },
-    ];
-
-    function displayGames(filteredType = "Visi") {
-      const container = document.getElementById("games-container");
-      container.innerHTML = "";
-      games
-        .filter((g) => filteredType === "Visi" || g.veids === filteredType)
-        .forEach((g) => {
-          const el = document.createElement("div");
-          el.className = "game-card";
-          el.innerHTML = `<strong>${g.nosaukums}</strong><br/>Sporta veids: ${g.veids}<br/>Laiks: ${g.laiks}`;
-          container.appendChild(el);
-        });
-    }
-
-    function filterGames(tips) {
-      displayGames(tips);
-    }
-
-    window.onload = () => {
-      displayGames();
-    };
-  </script></body></html>
+    </p>
+  </footer>  <script src="script.js"></script></body>
+</html>
