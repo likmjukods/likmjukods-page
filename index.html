@@ -1,99 +1,84 @@
-<!DOCTYPE html><html lang="lv"><head>
+<!DOCTYPE html>
+<html lang="lv">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
   <link rel="stylesheet" href="style.css" />
-</head><body>
+</head>
+<body>
   <header>
-    <div class="header-container">
-      <h1 class="logo">LIKMJU KODS</h1>
-      <nav class="nav-buttons">
-        <button onclick="setActive('sakums')">Sākums</button>
-        <button onclick="setActive('speles')">Spēles</button>
-        <button onclick="setActive('rezultati')">Rezultāti</button>
-        <button onclick="setActive('bonusi')">Bonusi</button>
-        <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
-      </nav>
-    </div>
-  </header>  <main>
-    <section id="sakums" class="section">
-      <div class="container center">
-        <h2>Profesionālās sporta prognozes</h2>
-        <p>AI analīze, likmju vēsture un partneru piedāvājumi vienuviet.</p>
-        <a class="cta-link" href="https://example.com" target="_blank">Veikt likmi</a>
+    <div class="logo">LIKMIJU KODS</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Sākums</a></li>
+        <li><a href="#">Spēles</a></li>
+        <li><a href="#">Rezultāti</a></li>
+        <li><a href="#">Bonusi</a></li>
+        <li><a href="#">Veikt likmi</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Profesionālās sporta prognozes</h1>
+      <p>AI analīze, likmju vēsture un partneru piedāvājumi vienuviet.</p>
+      <a href="#" class="cta-button">Veikt likmi</a>
+    </section>
+
+    <section class="games-section">
+      <h2>Šodienas spēles</h2>
+      <div class="filters">
+        <button class="filter-btn active">Visi</button>
+        <button class="filter-btn">Futbols</button>
+        <button class="filter-btn">Basketbols</button>
+        <button class="filter-btn">Teniss</button>
       </div>
-    </section><section id="speles" class="section hidden">
-  <div class="container">
-    <h2>Šodienas spēles</h2>
-    <div class="filter-buttons">
-      <button onclick="filterGames('Visi')">Visi</button>
-      <button onclick="filterGames('futbols')">Futbols</button>
-      <button onclick="filterGames('basketbols')">Basketbols</button>
-      <button onclick="filterGames('teniss')">Teniss</button>
+
+      <div class="game-card">
+        <h3>Manchester City vs Real Madrid</h3>
+        <p>Sporta veids: <span>futbols</span></p>
+        <p>Laiks: 18:00</p>
+      </div>
+
+      <div class="game-card">
+        <h3>Lakers vs Celtics</h3>
+        <p>Sporta veids: <span>basketbols</span></p>
+        <p>Laiks: 21:00</p>
+      </div>
+
+      <div class="game-card">
+        <h3>Djokovic vs Nadal</h3>
+        <p>Sporta veids: <span>teniss</span></p>
+        <p>Laiks: 16:30</p>
+      </div>
+
+      <div class="game-card">
+        <h3>Barcelona vs PSG</h3>
+        <p>Sporta veids: <span>futbols</span></p>
+        <p>Laiks: 19:00</p>
+      </div>
+    </section>
+
+    <section class="ai-section">
+      <h2>AI prognožu rezultāti</h2>
+      <p>Drīzumā pieejams!</p>
+    </section>
+
+    <section class="bonusi-section">
+      <h2>Bonusi un piedāvājumi</h2>
+      <p>Aktīvie partneru bonusi drīzumā būs pieejami!</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privātuma politika</a>
+      <a href="#">Noteikumi</a>
+      <a href="#">Telegram</a>
     </div>
-    <div id="games-container"></div>
-  </div>
-</section>
-
-<section id="rezultati" class="section hidden">
-  <div class="container center">
-    <h2>AI prognožu rezultāti</h2>
-    <p>Drīzumā pieejams!</p>
-  </div>
-</section>
-
-<section id="bonusi" class="section hidden">
-  <div class="container center">
-    <h2>Bonusi un piedāvājumi</h2>
-    <p>Aktīvie partneru bonusi drīzumā būs pieejami!</p>
-  </div>
-</section>
-
-  </main>  <footer>
-    <div class="footer">
-      <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
-      <p><a href="#">Privātuma politika</a> | <a href="#">Noteikumi</a> | <a href="#">Telegram</a></p>
-    </div>
-  </footer>  <script>
-    const sakums = document.getElementById("sakums");
-    const speles = document.getElementById("speles");
-    const rezultati = document.getElementById("rezultati");
-    const bonusi = document.getElementById("bonusi");
-
-    function setActive(sectionId) {
-      [sakums, speles, rezultati, bonusi].forEach((s) => s.classList.add("hidden"));
-      document.getElementById(sectionId).classList.remove("hidden");
-    }
-
-    const games = [
-      { nosaukums: "Manchester City vs Real Madrid", veids: "futbols", laiks: "18:00" },
-      { nosaukums: "Lakers vs Celtics", veids: "basketbols", laiks: "21:00" },
-      { nosaukums: "Djokovic vs Nadal", veids: "teniss", laiks: "16:30" },
-      { nosaukums: "Barcelona vs PSG", veids: "futbols", laiks: "19:00" },
-    ];
-
-    function displayGames(filteredType = "Visi") {
-      const container = document.getElementById("games-container");
-      container.innerHTML = "";
-      games
-        .filter((g) => filteredType === "Visi" || g.veids === filteredType)
-        .forEach((g) => {
-          const el = document.createElement("div");
-          el.className = "game-card";
-          el.innerHTML = `
-            <strong>${g.nosaukums}</strong><br />
-            Sporta veids: ${g.veids}<br />
-            Laiks: ${g.laiks}
-          `;
-          container.appendChild(el);
-        });
-    }
-
-    function filterGames(tips) {
-      displayGames(tips);
-    }
-
-    window.onload = () => {
-      displayGames();
-    };
-  </script></body></html>
+    <p>© 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
+  </footer>
+</body>
+</html>
