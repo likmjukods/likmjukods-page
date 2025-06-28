@@ -3,103 +3,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Likmju Kods</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background-color: #111;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #000;
-  border-bottom: 1px solid #333;
-}
-
-h1 {
-  font-size: 24px;
-  margin: 0;
-  color: #00ff99;
-}
-
-nav button {
-  margin-left: 10px;
-  padding: 8px 14px;
-  background-color: #00ff99;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-nav button:hover {
-  background-color: #00cc77;
-}
-
-.section {
-  display: none;
-  padding: 40px 20px;
-}
-
-.section:not(.hidden) {
-  display: block;
-}
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.center {
-  text-align: center;
-}
-
-.game-card {
-  background-color: #1c1c1c;
-  margin: 15px 0;
-  padding: 15px;
-  border: 1px solid #00ff99;
-  border-radius: 8px;
-}
-
-.filter-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.filter-buttons button {
-  background-color: #00ff99;
-  color: black;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.filter-buttons button:hover {
-  background-color: #00cc77;
-}
-
-  </style>
 </head><body>
   <header>
-    <h1>LIKMJU KODS</h1>
+    <h1><span style="color: #00ff99">LIKMJU KODS</span></h1>
     <nav>
       <button onclick="setActive('sakums')">Sākums</button>
       <button onclick="setActive('speles')">Spēles</button>
       <button onclick="setActive('rezultati')">Rezultāti</button>
+      <button onclick="setActive('bonusi')">Bonusi</button>
       <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
     </nav>
   </header>  <main>
     <section id="sakums" class="section">
       <div class="container center">
-        <h2 style="font-size: 32px;">LIKMJU KODS</h2>
-        <p style="font-size: 18px; margin-bottom: 20px;">Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+        <h2>LIKMJU KODS</h2>
+        <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
         <button onclick="window.open('https://example.com', '_blank')">Veikt likmi</button>
       </div>
     </section><section id="speles" class="section hidden">
@@ -122,37 +40,38 @@ nav button:hover {
   </div>
 </section>
 
-  </main>  <script>
+<section id="bonusi" class="section hidden">
+  <div class="container center">
+    <h2>Ekskluzīvi bonusi</h2>
+    <ul class="bonus-list">
+      <li><strong>Optibet:</strong> 100€ bezriska likmes — <a href="#">Saņemt</a></li>
+      <li><strong>11.lv:</strong> 3 x 11€ likmes + bezmaksas griezieni — <a href="#">Izmēģini</a></li>
+      <li><strong>Betsafe:</strong> 50% cashback līdz 100€ — <a href="#">Pievienojies</a></li>
+    </ul>
+  </div>
+</section>
+
+  </main>  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Likmju Kods. Visas tiesības aizsargātas.</p>
+      <p><a href="#">Privātuma politika</a> | <a href="#">Noteikumi</a> | <a href="https://t.me/likmjukods" target="_blank">Telegram</a></p>
+    </div>
+  </footer>  <script>
     const sakums = document.getElementById("sakums");
     const speles = document.getElementById("speles");
     const rezultati = document.getElementById("rezultati");
+    const bonusi = document.getElementById("bonusi");
 
     function setActive(sectionId) {
-      [sakums, speles, rezultati].forEach((s) => s.classList.add("hidden"));
+      [sakums, speles, rezultati, bonusi].forEach((s) => s.classList.add("hidden"));
       document.getElementById(sectionId).classList.remove("hidden");
     }
 
     const games = [
-      {
-        nosaukums: "Manchester City vs Real Madrid",
-        veids: "futbols",
-        laiks: "18:00",
-      },
-      {
-        nosaukums: "Lakers vs Celtics",
-        veids: "basketbols",
-        laiks: "21:00",
-      },
-      {
-        nosaukums: "Djokovic vs Nadal",
-        veids: "teniss",
-        laiks: "16:30",
-      },
-      {
-        nosaukums: "Barcelona vs PSG",
-        veids: "futbols",
-        laiks: "19:00",
-      },
+      { nosaukums: "Manchester City vs Real Madrid", veids: "futbols", laiks: "18:00" },
+      { nosaukums: "Lakers vs Celtics", veids: "basketbols", laiks: "21:00" },
+      { nosaukums: "Djokovic vs Nadal", veids: "teniss", laiks: "16:30" },
+      { nosaukums: "Barcelona vs PSG", veids: "futbols", laiks: "19:00" }
     ];
 
     function displayGames(filteredType = "Visi") {
