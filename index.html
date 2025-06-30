@@ -1,146 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LIKMIJUKODS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #000;
-      color: white;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: #0a0a0a;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      background: linear-gradient(to right, #00ffc8, #00ffaa, #00ff88, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    nav a {
-      background-color: transparent;
-      color: #00ffc8;
-      border: 1px solid #00ffc8;
-      padding: 8px 14px;
-      border-radius: 10px;
-      margin-left: 10px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      background-color: #00ffc8;
-      color: black;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .hero {
-      background: #111;
-      border-radius: 20px;
-      padding: 50px;
-      box-shadow: 0 0 20px #00ffc8;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      color: #ccc;
-    }
-
-    .hero button {
-      margin-top: 25px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: 2px solid #00ffc8;
-      background-color: black;
-      color: #00ffc8;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .hero button:hover {
-      background-color: #00ffc8;
-      color: black;
-    }
-
-    footer {
-      padding: 40px;
-      text-align: center;
-      color: #999;
-    }
-
-    h2 {
-      color: #00ffc8;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-      color: #ccc;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikmjuKods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #0e0e0e;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .logo span {
+            background: linear-gradient(to right, #00ffcc, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: 2px solid #00ffcc;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .hero-box {
+            background-color: #1c1c1c;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px #00ffcc;
+        }
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+        }
+        .section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section h2 {
+            color: #00ffcc;
+            font-size: 28px;
+        }
+        .section p {
+            font-size: 18px;
+        }
+        .cta-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #00ffcc;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">LIKMIJUKODS</div>
-    <nav>
-      <a href="#sakums">Sākums</a>
-      <a href="#speles">Spēles</a>
-      <a href="#rezultati">Rezultāti</a>
-      <a href="#abonamenti">Abonamenti</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo"><span>LIKMIJUKODS</span></div>
+        <nav>
+            <a href="#sakums">Sākums</a>
+            <a href="#speles">Spēles</a>
+            <a href="#rezultati">Rezultāti</a>
+            <a href="#likme">Veikt likmi</a>
+            <a href="#abonamenti">Abonamenti</a>
+        </nav>
+    </header>
 
-  <section class="hero" id="sakums">
-    <h1>LIKMIJU KODS</h1>
-    <p>Profesionālās sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
-    <button>Veikt likmi</button>
-  </section>
+    <section class="hero" id="sakums">
+        <div class="hero-box">
+            <h1>LIKMIJU KODS</h1>
+            <p>Profesionālas sporta prognozes, AI analīze un partneru piedāvājumi vienuviet.</p>
+            <button class="cta-button">Veikt likmi</button>
+        </div>
+    </section>
 
-  <section id="speles">
-    <h2>Spēles</h2>
-    <p>[Šeit būs spēļu saraksts ar filtriem]</p>
-  </section>
+    <section class="section" id="speles">
+        <h2>Spēles</h2>
+        <p>[Šeit būs spēļu saraksts ar filtriem]</p>
+    </section>
 
-  <section id="rezultati">
-    <h2>Rezultāti</h2>
-    <p>[Prognožu precizitāte]</p>
-  </section>
+    <section class="section" id="rezultati">
+        <h2>Rezultāti</h2>
+        <p>[Prognožu precizitāte]</p>
+    </section>
 
-  <section id="abonamenti">
-    <h2>Abonamenti</h2>
-    <p>[Piedāvājumi un cenas]</p>
-  </section>
+    <section class="section" id="likme">
+        <h2>Veikt likmi</h2>
+        <p>[Drošākie koeficienti un ieteikumi]</p>
+    </section>
 
-  <footer>
-    &copy; 2025 LikmjuKods. Visas tiesības aizsargātas.
-  </footer>
+    <section class="section" id="abonamenti">
+        <h2>Abonamenti</h2>
+        <p>[Piedāvājumi un cenas]</p>
+    </section>
 </body>
 </html>
