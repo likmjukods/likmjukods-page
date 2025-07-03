@@ -7,49 +7,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 <style>
 body {
-    margin:0;
-    font-family:'Orbitron',sans-serif;
-    background:#0e0e0e;
-    color:#fff;
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0e0e0e;
+    color: white;
 }
 header {
-    background:#000;
-    padding:15px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    background-color: #000;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .logo {
-    font-size:28px;
-    font-weight:700;
-    background:linear-gradient(to right,#00ffc8,#fff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(to right, #00ffc8, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 nav a {
-    margin-left:15px;
-    text-decoration:none;
-    color:#00ffc8;
-    border:1px solid #00ffc8;
-    padding:6px 12px;
-    border-radius:8px;
+    margin-left: 15px;
+    text-decoration: none;
+    color: #00ffc8;
+    border: 1px solid #00ffc8;
+    padding: 6px 12px;
+    border-radius: 8px;
 }
 section {
-    display:none;
-    padding:40px 20px;
-    max-width:900px;
-    margin:auto;
+    display: none;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
 }
 section.active {
-    display:block;
+    display: block;
 }
 h2 {
-    color:#00ffc8;
-    font-size:28px;
+    color: #00ffc8;
+    font-size: 28px;
+}
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #00ffc8;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
 }
 </style>
 </head>
 <body>
+
 <header>
 <div class="logo">LIKMIJUKODS</div>
 <nav>
@@ -63,21 +73,29 @@ h2 {
 <section id="sakums" class="active">
 <h2>Sākums</h2>
 <p>Laipni lūdzam LikmjuKods – tavi AI sporta prognožu partneri.</p>
+<a href="#" class="btn" onclick="showSection('abonementi')">Veikt likmi</a>
 </section>
 
 <section id="speles">
 <h2>Spēles</h2>
-<p>Šeit būs spēļu saraksts ar filtriem.</p>
+<p>Šodienas spēles:</p>
+<div>Futbols: Real Madrid vs Barcelona - Prognoze: Zem 2.5</div>
+<div>Hokejs: Rīga vs Jokerit - Prognoze: Jokerit uzvara</div>
 </section>
 
 <section id="rezultati">
 <h2>Rezultāti</h2>
-<p>Prognožu precizitātes statistika.</p>
+<p>Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
+<div>✅ Real Madrid vs Barcelona — Uzvara</div>
+<div>❌ Rīga vs Jokerit — Zaudējums</div>
 </section>
 
 <section id="abonementi">
 <h2>Abonementi</h2>
-<p>Piedāvājumi un cenas mūsu pakalpojumiem.</p>
+<p>Izvēlies savu plānu:</p>
+<div>Basic — 2.99€/mēn — 1 prognoze dienā</div>
+<div>Pro — 9.99€/mēn — 3 prognozes dienā + statistika</div>
+<div>Elite — 29.99€/mēn — Neierobežoti + privāts Telegram</div>
 </section>
 
 <script>
@@ -86,5 +104,6 @@ function showSection(id) {
     document.getElementById(id).classList.add('active');
 }
 </script>
+
 </body>
 </html>
