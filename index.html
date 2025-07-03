@@ -4,83 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LikmjuKods</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
 body {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    background-color: #0e0e0e;
-    color: white;
+  margin: 0;
+  background-color: #111;
+  color: #ccc;
+  font-family: 'Orbitron', sans-serif;
 }
 header {
-    background-color: #000;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: #000;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.logo {
-    font-size: 28px;
-    font-weight: 700;
-    background: linear-gradient(to right, #00ffc8, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  background: linear-gradient(90deg, #00ffcc, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-nav a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #00ffc8;
-    border: 1px solid #00ffc8;
-    padding: 6px 12px;
-    border-radius: 8px;
+nav button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid #00ffcc;
+  color: #00ffcc;
+  border-radius: 5px;
+  cursor: pointer;
 }
 section {
-    display: none;
-    padding: 40px 20px;
-    max-width: 900px;
-    margin: auto;
+  display: none;
+  padding: 20px;
 }
 section.active {
-    display: block;
+  display: block;
+}
+button:hover {
+  background: #00ffcc;
+  color: #000;
 }
 h2 {
-    color: #00ffc8;
-    font-size: 28px;
-}
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 24px;
-    background: #00ffc8;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
-}
-.filter {
-    margin: 10px 0;
-}
-.card {
-    background: #1a1a1a;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
+  color: #00ffcc;
 }
 </style>
 </head>
 <body>
 
 <header>
-<div class="logo">LIKMIJUKODS</div>
-<nav>
-    <a href="#" onclick="showSection('sakums')">Sākums</a>
-    <a href="#" onclick="showSection('speles')">Spēles</a>
-    <a href="#" onclick="showSection('rezultati')">Rezultāti</a>
-    <a href="#" onclick="showSection('abonementi')">Abonementi</a>
-</nav>
+  <h1>LIKMIJUKODS</h1>
+  <nav>
+    <button onclick="showSection('sakums')">Sākums</button>
+    <button onclick="showSection('speles')">Spēles</button>
+    <button onclick="showSection('rezultati')">Rezultāti</button>
+    <button onclick="showSection('abonementi')">Abonementi</button>
+  </nav>
 </header>
 
 <section id="sakums" class="active">
-<h2>Sākums</h2>
-<p>Laipni lūdzam LikmjuKods – tavi AI sporta prognožu partneri.</p>
-<a href="#" class="btn" onclick="showSection('abonementi')">Skatīt abonementus</a>
+  <h2>Sākums</h2>
+  <p>Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
+  <button>Veikt likmi</button>
 </section>
+
+<section id="speles">
+  <h2>Spēles</h2>
+  <p>Šodienas spēles:</p>
+  <ul>
+    <li>Futbols: Real Madrid vs Barcelona - Prognoze: Zem 2.5</li>
+    <li>Hokejs: Rīga vs Jokerit - Prognoze: Jokerit uzvara</li>
+  </ul>
+</section>
+
+<section id="rezultati">
+  <h2>Rezultāti</h2>
+  <p>Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
+  <ul>
+    <li>✅ Real Madrid vs Barcelona – Uzvara</li>
+    <li>❌ Rīga vs Jokerit – Zaudējums</li>
+  </ul>
+</section>
+
+<section id="abonementi">
+  <h2>Abonementi</h2>
+  <p>Izvēlies savu plānu:</p>
+  <ul>
+    <li>Basic — 2.99€/mēn — 1 prognoze dienā</li>
+    <li>Pro — 9.99€/mēn — 3 prognozes dienā + statistika</li>
+    <li>Elite — 29.99€/mēn — Neierobežoti + privāts Telegram</li>
+  </ul>
+</section>
+
+<script>
+function showSection(sectionId) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+}
+</script>
+
+</body>
+</html>
