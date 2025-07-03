@@ -56,6 +56,15 @@ h2 {
     text-decoration: none;
     border-radius: 8px;
 }
+.filter {
+    margin: 10px 0;
+}
+.card {
+    background: #1a1a1a;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
 </style>
 </head>
 <body>
@@ -73,37 +82,5 @@ h2 {
 <section id="sakums" class="active">
 <h2>Sākums</h2>
 <p>Laipni lūdzam LikmjuKods – tavi AI sporta prognožu partneri.</p>
-<a href="#" class="btn" onclick="showSection('abonementi')">Veikt likmi</a>
+<a href="#" class="btn" onclick="showSection('abonementi')">Skatīt abonementus</a>
 </section>
-
-<section id="speles">
-<h2>Spēles</h2>
-<p>Šodienas spēles:</p>
-<div>Futbols: Real Madrid vs Barcelona - Prognoze: Zem 2.5</div>
-<div>Hokejs: Rīga vs Jokerit - Prognoze: Jokerit uzvara</div>
-</section>
-
-<section id="rezultati">
-<h2>Rezultāti</h2>
-<p>Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
-<div>✅ Real Madrid vs Barcelona — Uzvara</div>
-<div>❌ Rīga vs Jokerit — Zaudējums</div>
-</section>
-
-<section id="abonementi">
-<h2>Abonementi</h2>
-<p>Izvēlies savu plānu:</p>
-<div>Basic — 2.99€/mēn — 1 prognoze dienā</div>
-<div>Pro — 9.99€/mēn — 3 prognozes dienā + statistika</div>
-<div>Elite — 29.99€/mēn — Neierobežoti + privāts Telegram</div>
-</section>
-
-<script>
-function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-</script>
-
-</body>
-</html>
