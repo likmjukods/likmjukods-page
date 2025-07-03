@@ -11,24 +11,30 @@ body {
   background-color: #111;
   color: #ccc;
   font-family: 'Orbitron', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 header {
   background: #000;
   padding: 10px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
 header h1 {
   margin: 0;
-  font-size: 1.8em;
+  font-size: 2em;
   background: linear-gradient(90deg, #00ffcc, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+nav {
+  margin-top: 10px;
+}
 nav button {
   margin: 0 5px;
-  padding: 5px 10px;
+  padding: 8px 12px;
   background: transparent;
   border: 1px solid #00ffcc;
   color: #00ffcc;
@@ -38,6 +44,12 @@ nav button {
 section {
   display: none;
   padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  margin-top: 20px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffcc50;
 }
 section.active {
   display: block;
@@ -48,6 +60,7 @@ button:hover {
 }
 h2 {
   color: #00ffcc;
+  text-align: center;
 }
 </style>
 </head>
@@ -55,26 +68,26 @@ h2 {
 
 <header>
   <h1>LIKMIJUKODS</h1>
-  <nav>
-    <button onclick="showSection('sakums')">Sākums</button>
-    <button onclick="showSection('speles')">Spēles</button>
-    <button onclick="showSection('rezultati')">Rezultāti</button>
-    <button onclick="showSection('abonementi')">Abonementi</button>
-  </nav>
 </header>
+
+<nav>
+  <button onclick="showSection('sakums')">Sākums</button>
+  <button onclick="showSection('speles')">Spēles</button>
+  <button onclick="showSection('rezultati')">Rezultāti</button>
+  <button onclick="showSection('abonementi')">Abonementi</button>
+</nav>
 
 <section id="sakums" class="active">
   <h2>Sākums</h2>
-  <p>Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-  <button>Veikt likmi</button>
+  <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
 </section>
 
 <section id="speles">
   <h2>Spēles</h2>
   <p>Šodienas spēles:</p>
   <ul>
-    <li>Futbols: Real Madrid vs Barcelona - Prognoze: Zem 2.5</li>
-    <li>Hokejs: Rīga vs Jokerit - Prognoze: Jokerit uzvara</li>
+    <li>Futbols: Real Madrid vs Barcelona - Zem 2.5</li>
+    <li>Hokejs: Rīga vs Jokerit - Jokerit uzvara</li>
   </ul>
 </section>
 
