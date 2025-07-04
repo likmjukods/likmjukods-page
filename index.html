@@ -18,6 +18,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 header h1 {
   margin: 0;
@@ -28,7 +29,7 @@ header h1 {
   font-family: 'Orbitron', sans-serif;
 }
 nav button {
-  margin: 0 5px;
+  margin: 5px;
   padding: 8px 12px;
   background: transparent;
   border: 1px solid #00ffcc;
@@ -47,7 +48,7 @@ nav button:hover {
 section {
   display: none;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 20px auto;
   background: #1a1a1a;
   border-radius: 10px;
@@ -69,21 +70,42 @@ h2 {
   color: #00ffcc;
   text-align: center;
 }
-.tooltip {
-  position: relative;
-  cursor: pointer;
+.filter {
+  text-align: center;
+  margin-bottom: 15px;
 }
-.tooltip:hover::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-size: 0.8em;
+.filter button {
+  margin: 5px;
+}
+.abonements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.abon-card {
+  background: #222;
+  border: 1px solid #00ffcc;
+  border-radius: 8px;
+  padding: 15px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0 0 10px #00ffcc30;
+}
+.abon-card h3 {
+  margin: 10px 0;
+  color: #00ffcc;
+}
+.abon-card p {
+  font-size: 0.9em;
+}
+.social {
+  margin-top: 10px;
+}
+.social a {
+  margin: 0 5px;
+  color: #00ffcc;
+  text-decoration: none;
 }
 @keyframes fadeIn {
   from {opacity: 0;}
@@ -110,10 +132,17 @@ h2 {
 
 <section id="speles">
   <h2>Spēles</h2>
-  <div style="text-align:center;">Šodienas spēles:</div>
+  <div class="filter">
+    <button>⚽ Futbols</button>
+    <button>🏀 Basketbols</button>
+    <button>🏒 Hokejs</button>
+    <button>🎾 Teniss</button>
+    <button>🎮 eSports</button>
+  </div>
   <ul>
-    <li>Futbols: Real Madrid vs Barcelona - Zem 2.5</li>
-    <li>Hokejs: Rīga vs Jokerit - Jokerit uzvara</li>
+    <li>⚽ Real Madrid vs Barcelona - Zem 2.5</li>
+    <li>🏒 Rīga vs Jokerit - Jokerit uzvara</li>
+    <li>🎾 Federer vs Nadal - Federers uzvara</li>
   </ul>
 </section>
 
@@ -128,19 +157,36 @@ h2 {
 
 <section id="abonementi">
   <h2>Abonementi</h2>
-  <div class="tooltip" data-tip="Ieteicams iesācējiem">
-    Basic — 2.99€/mēn — 1 prognoze dienā
-  </div>
-  <div class="tooltip" data-tip="Vispopulārākais">
-    Pro — 9.99€/mēn — 3 prognozes dienā + statistika
-  </div>
-  <div class="tooltip" data-tip="Privāts serviss">
-    Elite — 29.99€/mēn — Neierobežoti + privāts Telegram
+  <div class="abonements">
+    <div class="abon-card">
+      <h3>Basic</h3>
+      <p>0.99€/mēn<br>Bez reklāmām</p>
+    </div>
+    <div class="abon-card">
+      <h3>Silver</h3>
+      <p>2.99€/mēn<br>1 prognoze/dienā</p>
+    </div>
+    <div class="abon-card">
+      <h3>Gold</h3>
+      <p>4.99€/mēn<br>3 prognozes/dienā</p>
+    </div>
+    <div class="abon-card">
+      <h3>Platinum</h3>
+      <p>9.99€/mēn<br>Neierobežoti</p>
+    </div>
+    <div class="abon-card">
+      <h3>Elite</h3>
+      <p>19.99€/mēn<br>VIP privāts serviss</p>
+    </div>
   </div>
 </section>
 
 <footer>
-  © 2025 LikmjuKods. All rights reserved.
+  <div>Partneri: (logos here)</div>
+  <div class="social">
+    <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
+  </div>
+  <div>© 2025 LikmjuKods. All rights reserved.</div>
 </footer>
 
 <script>
