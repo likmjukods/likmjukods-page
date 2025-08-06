@@ -1,135 +1,135 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LikmjuKods</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body {
-  margin: 0;
-  background-color: #111;
-  color: #ccc;
-  font-family: 'Roboto', sans-serif;
-}
-header {
-  background: linear-gradient(90deg, #000, #022);
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-header h1 {
-  margin: 0;
-  font-size: 2em;
-  background: linear-gradient(90deg, #00ffcc, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Orbitron', sans-serif;
-}
-nav button {
-  margin: 5px;
-  padding: 8px 12px;
-  background: transparent;
-  border: 1px solid #00ffcc;
-  color: #00ffcc;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-nav button.active {
-  background: #00ffcc;
-  color: #000;
-}
-nav button:hover {
-  background: #00ffcc;
-  color: #000;
-}
-section {
-  display: none;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 20px auto;
-  background: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #00ffcc80;
-  transition: opacity 0.4s ease;
-}
-section.active {
-  display: block;
-  opacity: 1;
-  animation: fadeIn 0.4s ease-in-out;
-}
-footer {
-  text-align: center;
-  color: #555;
-  margin: 20px 0;
-  font-size: 0.9em;
-}
-h2 {
-  color: #00ffcc;
-  text-align: center;
-}
-.filter {
-  text-align: center;
-  margin-bottom: 15px;
-}
-.filter button {
-  margin: 5px;
-  padding: 5px 10px;
-  background: #222;
-  border: 1px solid #00ffcc;
-  color: #00ffcc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.filter button:hover {
-  background: #00ffcc;
-  color: #000;
-}
-.abonements {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-.abon-card {
-  background: #222;
-  border: 1px solid #00ffcc;
-  border-radius: 8px;
-  padding: 15px;
-  width: 180px;
-  text-align: center;
-  box-shadow: 0 0 10px #00ffcc30;
-}
-.abon-card h3 {
-  margin: 10px 0;
-  color: #00ffcc;
-}
-.abon-card p {
-  font-size: 0.9em;
-}
-.bonusi {
-  text-align: center;
-}
-.bonusi p {
-  font-size: 0.95em;
-  margin: 5px 0;
-}
-.social {
-  margin-top: 10px;
-}
-.social a {
-  margin: 0 5px;
-  color: #00ffcc;
-  text-decoration: none;
-}
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LikmjuKods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #ccc;
+      font-family: 'Roboto', sans-serif;
+    }
+    header {
+      background: linear-gradient(90deg, #000, #022);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      background: linear-gradient(90deg, #00ffcc, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Orbitron', sans-serif;
+    }
+    nav button {
+      margin: 5px;
+      padding: 8px 12px;
+      background: transparent;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    nav button.active {
+      background: #00ffcc;
+      color: #000;
+    }
+    nav button:hover {
+      background: #00ffcc;
+      color: #000;
+    }
+    section {
+      display: none;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffcc80;
+      transition: opacity 0.4s ease;
+    }
+    section.active {
+      display: block;
+      opacity: 1;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    footer {
+      text-align: center;
+      color: #555;
+      margin: 20px 0;
+      font-size: 0.9em;
+    }
+    h2 {
+      color: #00ffcc;
+      text-align: center;
+    }
+    .filter {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .filter button {
+      margin: 5px;
+      padding: 5px 10px;
+      background: #222;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filter button:hover {
+      background: #00ffcc;
+      color: #000;
+    }
+    .abonements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .abon-card {
+      background: #222;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      padding: 15px;
+      width: 180px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffcc30;
+    }
+    .abon-card h3 {
+      margin: 10px 0;
+      color: #00ffcc;
+    }
+    .abon-card p {
+      font-size: 0.9em;
+    }
+    .bonusi {
+      text-align: center;
+    }
+    .bonusi p {
+      font-size: 0.95em;
+      margin: 5px 0;
+    }
+    .social {
+      margin-top: 10px;
+    }
+    .social a {
+      margin: 0 5px;
+      color: #00ffcc;
+      text-decoration: none;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
 </head>
 <body>
 
@@ -141,6 +141,7 @@ h2 {
     <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
     <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
     <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
+    <a href="register.html"><button style="border-color:#0f0;">Reģistrēties</button></a>
   </nav>
 </header>
 
@@ -177,26 +178,11 @@ h2 {
 <section id="abonementi">
   <h2>Abonementi</h2>
   <div class="abonements">
-    <div class="abon-card">
-      <h3>Basic</h3>
-      <p>0.99€/mēn<br>Bez reklāmām</p>
-    </div>
-    <div class="abon-card">
-      <h3>Silver</h3>
-      <p>2.99€/mēn<br>1 prognoze/dienā</p>
-    </div>
-    <div class="abon-card">
-      <h3>Gold</h3>
-      <p>4.99€/mēn<br>3 prognozes/dienā</p>
-    </div>
-    <div class="abon-card">
-      <h3>Platinum</h3>
-      <p>9.99€/mēn<br>Neierobežoti</p>
-    </div>
-    <div class="abon-card">
-      <h3>Elite</h3>
-      <p>19.99€/mēn<br>VIP serviss</p>
-    </div>
+    <div class="abon-card"><h3>Basic</h3><p>0.99€/mēn<br>Bez reklāmām</p></div>
+    <div class="abon-card"><h3>Silver</h3><p>2.99€/mēn<br>1 prognoze/dienā</p></div>
+    <div class="abon-card"><h3>Gold</h3><p>4.99€/mēn<br>3 prognozes/dienā</p></div>
+    <div class="abon-card"><h3>Platinum</h3><p>9.99€/mēn<br>Neierobežoti</p></div>
+    <div class="abon-card"><h3>Elite</h3><p>19.99€/mēn<br>VIP serviss</p></div>
   </div>
 </section>
 
@@ -217,12 +203,14 @@ h2 {
 </footer>
 
 <script>
-function showSection(sectionId) {
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(sectionId).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + sectionId).classList.add('active');
-}
+  function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    if(document.getElementById('btn-' + sectionId)) {
+      document.getElementById('btn-' + sectionId).classList.add('active');
+    }
+  }
 </script>
 
 </body>
