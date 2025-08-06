@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,15 +126,41 @@ h2 {
   color: #00ffcc;
   text-decoration: none;
 }
+.coin-balance {
+  text-align: right;
+  margin-right: 20px;
+  font-weight: bold;
+  color: #00ffcc;
+}
+.match {
+  margin: 10px 0;
+  padding: 10px;
+  background: #222;
+  border-radius: 8px;
+}
+.match input {
+  width: 60px;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 10px;
+}
+.match button {
+  padding: 5px 10px;
+  background: #00ffcc;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
 }
 </style>
 </head>
-<body>
-
-<header>
+<body><header>
   <h1>LIKMIJUKODS</h1>
   <nav>
     <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
@@ -147,14 +172,10 @@ h2 {
     <a href="login.html"><button>Pieteikties</button></a>
     <a href="profile.html"><button>Profils</button></a>
   </nav>
-</header>
-
-<section id="sakums" class="active">
+</header><div class="coin-balance">🪙 Coin bilance: <span id="coin-balance">1000</span></div><section id="sakums" class="active">
   <h2>Sākums</h2>
   <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-</section>
-
-<section id="speles">
+</section><section id="speles">
   <h2>Spēles</h2>
   <div class="filter">
     <button>⚽ Futbols</button>
@@ -163,23 +184,24 @@ h2 {
     <button>🎾 Teniss</button>
     <button>🎮 eSports</button>
   </div>
-  <ul>
-    <li>⚽ Real Madrid vs Barcelona - Zem 2.5 <span style="color:red;">● LIVE</span></li>
-    <li>🏒 Rīga vs Jokerit - Jokerit uzvara <span style="color:lime;">● Sāks drīz</span></li>
-    <li>🎾 Federer vs Nadal - Federers uzvara <span style="color:#888;">● Beigusies</span></li>
-  </ul>
-</section>
-
-<section id="rezultati">
+  <div class="match">
+    <div>⚽ Real Madrid vs Barcelona — Zem 2.5 (Koef: 1.65)</div>
+    <input type="number" placeholder="Coin" min="1" id="bet1">
+    <button onclick="placeBet('bet1', 1.65)">Veikt likmi</button>
+  </div>
+  <div class="match">
+    <div>🏒 Rīga vs Jokerit — Jokerit uzvara (Koef: 2.10)</div>
+    <input type="number" placeholder="Coin" min="1" id="bet2">
+    <button onclick="placeBet('bet2', 2.10)">Veikt likmi</button>
+  </div>
+</section><section id="rezultati">
   <h2>Rezultāti</h2>
   <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
   <ul>
     <li>✅ Real Madrid vs Barcelona – Uzvara</li>
     <li>❌ Rīga vs Jokerit – Zaudējums</li>
   </ul>
-</section>
-
-<section id="abonementi">
+</section><section id="abonementi">
   <h2>Abonementi</h2>
   <div class="abonements">
     <div class="abon-card">
@@ -203,33 +225,40 @@ h2 {
       <p>19.99€/mēn<br>VIP serviss</p>
     </div>
   </div>
-</section>
-
-<section id="bonusi">
+</section><section id="bonusi">
   <h2>Bonusi</h2>
   <div class="bonusi">
     <p>🎁 Pirmais mēnesis -50%</p>
     <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
   </div>
-</section>
-
-<footer>
+</section><footer>
   <div>Partneri: (logos here)</div>
   <div class="social">
     <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
   </div>
   <div>© 2025 LikmjuKods. All rights reserved.</div>
-</footer>
-
-<script>
+</footer><script>
 function showSection(sectionId) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   document.getElementById(sectionId).classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('btn-' + sectionId)?.classList.add('active');
 }
-</script>
 
-</body>
-</html>
+let coinBalance = 1000;
 
+function placeBet(inputId, koef) {
+  const input = document.getElementById(inputId);
+  const amount = parseInt(input.value);
+  if (!amount || amount <= 0) return alert('Ievadi derīgu Coin skaitu');
+  if (amount > coinBalance) return alert('Nepietiekams Coin daudzums');
+
+  const win = Math.floor(amount * koef);
+  coinBalance -= amount;
+  coinBalance += win;
+  document.getElementById('coin-balance').textContent = coinBalance;
+  alert('Tu uzvarēji! Ieguvums: ' + win + ' 🪙');
+  input.value = '';
+}
+</script></body>
+  </html>
