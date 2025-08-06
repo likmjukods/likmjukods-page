@@ -1,235 +1,150 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LikmjuKods</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body {
-  margin: 0;
-  background-color: #111;
-  color: #ccc;
-  font-family: 'Roboto', sans-serif;
-}
-header {
-  background: linear-gradient(90deg, #000, #022);
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-header h1 {
-  margin: 0;
-  font-size: 2em;
-  background: linear-gradient(90deg, #00ffcc, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Orbitron', sans-serif;
-}
-nav button,
-nav a button {
-  margin: 5px;
-  padding: 8px 12px;
-  background: transparent;
-  border: 1px solid #00ffcc;
-  color: #00ffcc;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-nav button.active {
-  background: #00ffcc;
-  color: #000;
-}
-nav button:hover,
-nav a button:hover {
-  background: #00ffcc;
-  color: #000;
-}
-section {
-  display: none;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 20px auto;
-  background: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #00ffcc80;
-  transition: opacity 0.4s ease;
-}
-section.active {
-  display: block;
-  opacity: 1;
-  animation: fadeIn 0.4s ease-in-out;
-}
-footer {
-  text-align: center;
-  color: #555;
-  margin: 20px 0;
-  font-size: 0.9em;
-}
-h2 {
-  color: #00ffcc;
-  text-align: center;
-}
-.filter {
-  text-align: center;
-  margin-bottom: 15px;
-}
-.filter button {
-  margin: 5px;
-  padding: 5px 10px;
-  background: #222;
-  border: 1px solid #00ffcc;
-  color: #00ffcc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.filter button:hover {
-  background: #00ffcc;
-  color: #000;
-}
-.abonements {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-.abon-card {
-  background: #222;
-  border: 1px solid #00ffcc;
-  border-radius: 8px;
-  padding: 15px;
-  width: 180px;
-  text-align: center;
-  box-shadow: 0 0 10px #00ffcc30;
-}
-.abon-card h3 {
-  margin: 10px 0;
-  color: #00ffcc;
-}
-.abon-card p {
-  font-size: 0.9em;
-}
-.bonusi {
-  text-align: center;
-}
-.bonusi p {
-  font-size: 0.95em;
-  margin: 5px 0;
-}
-.social {
-  margin-top: 10px;
-}
-.social a {
-  margin: 0 5px;
-  color: #00ffcc;
-  text-decoration: none;
-}
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LikmjuKods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #ccc;
+      font-family: 'Roboto', sans-serif;
+    }
+    header {
+      background: linear-gradient(90deg, #000, #022);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      background: linear-gradient(90deg, #00ffcc, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Orbitron', sans-serif;
+    }
+    nav button {
+      margin: 5px;
+      padding: 8px 12px;
+      background: transparent;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    nav button.active {
+      background: #00ffcc;
+      color: #000;
+    }
+    nav button:hover {
+      background: #00ffcc;
+      color: #000;
+    }
+    section {
+      display: none;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffcc80;
+    }
+    section.active {
+      display: block;
+    }
+    .coin-info {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .game {
+      background: #222;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .game button {
+      padding: 5px 10px;
+      border: none;
+      background: #00ffcc;
+      color: #000;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>LIKMIJUKODS</h1>
-  <nav>
-    <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
-    <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
-    <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
-    <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
-    <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
-    <a href="register.html"><button>Reģistrēties</button></a>
-    <a href="login.html"><button>Pieteikties</button></a>
-    <a href="profile.html"><button>Profils</button></a>
-  </nav>
-</header>
+  <header>
+    <h1>LIKMIJUKODS</h1>
+    <nav>
+      <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
+      <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
+      <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
+      <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
+      <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
+      <button onclick="showSection('likmes')" id="btn-likmes">Likmes</button>
+    </nav>
+  </header>
 
-<section id="sakums" class="active">
-  <h2>Sākums</h2>
-  <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-</section>
+  <section id="sakums" class="active">
+    <h2>Sākums</h2>
+    <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
+  </section>
 
-<section id="speles">
-  <h2>Spēles</h2>
-  <div class="filter">
-    <button>⚽ Futbols</button>
-    <button>🏀 Basketbols</button>
-    <button>🏒 Hokejs</button>
-    <button>🎾 Teniss</button>
-    <button>🎮 eSports</button>
-  </div>
-  <ul>
-    <li>⚽ Real Madrid vs Barcelona - Zem 2.5 <span style="color:red;">● LIVE</span></li>
-    <li>🏒 Rīga vs Jokerit - Jokerit uzvara <span style="color:lime;">● Sāks drīz</span></li>
-    <li>🎾 Federer vs Nadal - Federers uzvara <span style="color:#888;">● Beigusies</span></li>
-  </ul>
-</section>
+  <section id="likmes">
+    <h2>Veic likmes ar Coin</h2>
+    <div class="coin-info">🪙 Tavs Coin atlikums: <span id="coin-balance">100</span></div>
 
-<section id="rezultati">
-  <h2>Rezultāti</h2>
-  <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
-  <ul>
-    <li>✅ Real Madrid vs Barcelona – Uzvara</li>
-    <li>❌ Rīga vs Jokerit – Zaudējums</li>
-  </ul>
-</section>
-
-<section id="abonementi">
-  <h2>Abonementi</h2>
-  <div class="abonements">
-    <div class="abon-card">
-      <h3>Basic</h3>
-      <p>0.99€/mēn<br>Bez reklāmām</p>
+    <div class="game">
+      <div>⚽ Real Madrid vs Barcelona (1.50)</div>
+      <button onclick="placeBet(50, 1.5)">Likme 50</button>
     </div>
-    <div class="abon-card">
-      <h3>Silver</h3>
-      <p>2.99€/mēn<br>1 prognoze/dienā</p>
-    </div>
-    <div class="abon-card">
-      <h3>Gold</h3>
-      <p>4.99€/mēn<br>3 prognozes/dienā</p>
-    </div>
-    <div class="abon-card">
-      <h3>Platinum</h3>
-      <p>9.99€/mēn<br>Neierobežoti</p>
-    </div>
-    <div class="abon-card">
-      <h3>Elite</h3>
-      <p>19.99€/mēn<br>VIP serviss</p>
-    </div>
-  </div>
-</section>
 
-<section id="bonusi">
-  <h2>Bonusi</h2>
-  <div class="bonusi">
-    <p>🎁 Pirmais mēnesis -50%</p>
-    <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
-  </div>
-</section>
+    <div class="game">
+      <div>🏀 Lakers vs Celtics (1.80)</div>
+      <button onclick="placeBet(50, 1.8)">Likme 50</button>
+    </div>
+  </section>
 
-<footer>
-  <div>Partneri: (logos here)</div>
-  <div class="social">
-    <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
-  </div>
-  <div>© 2025 LikmjuKods. All rights reserved.</div>
-</footer>
+  <footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#666;">
+    © 2025 LikmjuKods — Tavs ceļš uz uzvaru
+  </footer>
 
-<script>
-function showSection(sectionId) {
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(sectionId).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + sectionId)?.classList.add('active');
-}
-</script>
+  <script>
+    let balance = 100;
+
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + id).classList.add('active');
+    }
+
+    function placeBet(amount, odds) {
+      if (balance < amount) {
+        alert("Nepietiekami Coin!");
+        return;
+      }
+      balance -= amount;
+      const win = amount * odds;
+      balance += Math.round(win);
+      document.getElementById("coin-balance").textContent = balance;
+      alert(`Likme veikta! Ieguvums: ${Math.round(win)} Coin`);
+    }
+  </script>
 
 </body>
 </html>
+
 
