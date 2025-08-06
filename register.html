@@ -1,29 +1,76 @@
-<!-- register.html --><!DOCTYPE html><html lang="lv">
+<!DOCTYPE html>
+<html lang="lv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reģistrācija - LikmjuKods</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Reģistrēties – LikmjuKods</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #ccc;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #00ffcc;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 250px;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffcc80;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #00ffaa;
+    }
+    .link {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .link a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>Reģistrēties</h2>
-  <form id="registerForm">
-    <input type="text" id="username" placeholder="Lietotājvārds" required><br>
-    <input type="email" id="email" placeholder="E-pasts" required><br>
-    <input type="password" id="password" placeholder="Parole" required><br>
+
+  <h1>Reģistrēties</h1>
+  <form>
+    <input type="text" placeholder="Lietotājvārds" required>
+    <input type="email" placeholder="E-pasts" required>
+    <input type="password" placeholder="Parole" required>
     <button type="submit">Reģistrēties</button>
   </form>
-  <p>Jau ir konts? <a href="login.html">Pieslēgties</a></p>  <script>
-    const form = document.getElementById('registerForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+  <div class="link">
+    Jau ir konts? <a href="login.html">Pieslēgties</a>
+  </div>
 
-      localStorage.setItem('user', JSON.stringify({ username, email, password, coins: 0 }));
-      alert('Reģistrācija veiksmīga!');
-      window.location.href = 'dashboard.html';
-    });
-  </script></body>
+</body>
 </html>
