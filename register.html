@@ -11,13 +11,35 @@
       background-color: #111;
       color: #ccc;
       font-family: 'Roboto', sans-serif;
+    }
+    header {
+      background: linear-gradient(90deg, #000, #022);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+      background: linear-gradient(90deg, #00ffcc, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Orbitron', sans-serif;
+    }
+    header a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    main {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: calc(100vh - 80px);
     }
-    h1 {
+    h2 {
       color: #00ffcc;
       font-family: 'Orbitron', sans-serif;
       margin-bottom: 20px;
@@ -61,16 +83,23 @@
 </head>
 <body>
 
-  <h1>Reģistrēties</h1>
-  <form>
-    <input type="text" placeholder="Lietotājvārds" required>
-    <input type="email" placeholder="E-pasts" required>
-    <input type="password" placeholder="Parole" required>
-    <button type="submit">Reģistrēties</button>
-  </form>
-  <div class="link">
-    Jau ir konts? <a href="login.html">Pieslēgties</a>
-  </div>
+  <header>
+    <h1>LIKMIJUKODS</h1>
+    <a href="index.html">← Atpakaļ uz sākumu</a>
+  </header>
+
+  <main>
+    <h2>Reģistrēties</h2>
+    <form>
+      <input type="text" placeholder="Lietotājvārds" required>
+      <input type="email" placeholder="E-pasts" required>
+      <input type="password" placeholder="Parole" required>
+      <button type="submit">Reģistrēties</button>
+    </form>
+    <div class="link">
+      Jau ir konts? <a href="login.html">Pieslēgties</a>
+    </div>
+  </main>
 
 </body>
 </html>
