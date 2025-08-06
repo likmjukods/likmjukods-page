@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="lv">
+<!DOCTYPE html><html lang="lv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -60,6 +59,19 @@
       border-radius: 10px;
       box-shadow: 0 0 10px #00ffcc30;
     }
+    .coin-box button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .coin-box button:hover {
+      background: #00ffaa;
+    }
     footer {
       margin-top: 40px;
       text-align: center;
@@ -72,25 +84,38 @@
   <header>
     <h1>LIKMIJUKODS</h1>
     <a href="index.html" style="color:#00ffcc; text-decoration:none;">← Atpakaļ uz sākumu</a>
-  </header>
-
-  <main>
+  </header>  <main>
     <div class="section-title">Tavs profils</div>
     <div class="profile-info">
       <div><strong>Lietotājvārds:</strong> <span>RalfsZ21</span></div>
       <div><strong>Abonements:</strong> <span>Gold</span></div>
       <div><strong>Reģistrēts:</strong> <span>2025-08-06</span></div>
       <div><strong>Līmenis:</strong> <span>4</span></div>
-    </div>
+    </div><div class="coin-box">
+  🪙 <strong>Tev ir <span id="coinCount">0</span> Coin</strong><br>
+  <small>Nopelnīti no uzvarētām prognozēm un uzaicinātiem draugiem.</small><br>
+  <button onclick="addCoins(100)">+100 Coin (Test)</button>
+</div>
 
-    <div class="coin-box">
-      🪙 <strong>Tev ir 1,250 Coin</strong><br>
-      <small>Nopelnīti no uzvarētām prognozēm un uzaicinātiem draugiem.</small>
-    </div>
-  </main>
-
-  <footer>
+  </main>  <footer>
     © 2025 LikmjuKods — Tavs ceļš uz uzvaru
-  </footer>
-</body>
+  </footer>  <script>
+    function loadCoins() {
+      let coins = localStorage.getItem("coins");
+      if (!coins) {
+        coins = 0;
+        localStorage.setItem("coins", coins);
+      }
+      document.getElementById("coinCount").textContent = coins;
+    }
+
+    function addCoins(amount) {
+      let coins = parseInt(localStorage.getItem("coins") || "0");
+      coins += amount;
+      localStorage.setItem("coins", coins);
+      document.getElementById("coinCount").textContent = coins;
+    }
+
+    window.onload = loadCoins;
+  </script></body>
 </html>
