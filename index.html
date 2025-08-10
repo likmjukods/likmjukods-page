@@ -9,204 +9,259 @@
   :root{
     --bg:#0a0f13;
     --panel:#1a1a1a;
+    --chip:#182226;
     --mint:#00ffcc;
-    --mint2:#00ffae;
+    --mint-soft:#00e0b6;
+    --red:#ff5c5c;
+    --green:#36d979;
     --text:#ccc;
-    --text-soft:#9aa3a7;
-    --shadow:0 0 15px #00ffcc80;
-    --ok:#24d67b;
+    --text-soft:#9aa7ad;
+    --ring:0 0 15px #00ffcc80;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:'Roboto',sans-serif}
-  header{background:linear-gradient(90deg,#000,#022);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-  .fade-text{margin:0;font-size:28px;font-weight:900;background:linear-gradient(to right,var(--mint2),#fff);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Orbitron',sans-serif;letter-spacing:.5px}
-  nav button,nav a button{margin:6px;padding:8px 12px;background:transparent;border:1px solid var(--mint);color:var(--mint);
-    border-radius:8px;cursor:pointer;font-weight:600;transition:.25s}
-  nav button.active,nav button:hover,nav a button:hover{background:var(--mint);color:#000}
-  .coin-balance{max-width:1000px;margin:14px auto 0;padding:0 6px;text-align:right;font-weight:700;color:var(--mint)}
-  section{display:none;padding:20px;max-width:1000px;margin:20px auto;background:var(--panel);border-radius:10px;box-shadow:var(--shadow)}
-  section.active{display:block;animation:fadeIn .4s ease}
-  h2{color:var(--mint);text-align:center;margin-top:0}
-  footer{text-align:center;color:#56626a;margin:28px 0 22px;font-size:.9em}
-  .filter{text-align:center;margin-bottom:16px}
-  .filter button{margin:5px;padding:6px 12px;background:#182026;border:1px solid var(--mint);color:var(--mint);border-radius:6px;cursor:pointer}
-  .filter button:hover{background:var(--mint);color:#000}
-  .match{margin:12px 0;padding:12px;background:#111a20;border:1px solid #1f2b33;border-radius:10px;display:flex;gap:12px;align-items:center;justify-content:space-between}
-  .left{min-width:0}
-  .title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .meta{color:var(--text-soft);font-size:.92em}
-  .tags{display:flex;gap:6px;align-items:center}
-  .chip{font-size:.8em;padding:4px 8px;border-radius:999px;border:1px solid #2b3942;background:#151e24;color:#9fb2bd}
-  .live{display:inline-flex;align-items:center;gap:6px;background:#201417;border-color:#682828;color:#ffbdbd}
-  .dot{width:7px;height:7px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 8px #ff3b3b}
-  .soon{background:#1b1c12;border-color:#4b5320;color:#d5e6a5}
-  .done{background:#17171b;border-color:#3a3a4a;color:#bfc3d1}
-  .bet{display:flex;gap:8px;align-items:center}
-  .bet input{width:90px;padding:8px;border-radius:8px;border:1px solid #23303a;background:#0d1419;color:#fff}
-  .bet button{padding:8px 12px;background:var(--mint);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:800}
-  .ok{color:var(--ok)}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  @media (max-width:680px){header{justify-content:center}.match{flex-direction:column;align-items:stretch}}
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Roboto',sans-serif; }
+  header{ background:linear-gradient(90deg,#000,#022); padding:14px 20px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .brand{ margin:0; font-size:28px; font-weight:900; background:linear-gradient(90deg,#00ffcc,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Orbitron',sans-serif; letter-spacing:.5px; }
+  nav{ display:flex; flex-wrap:wrap; gap:8px; }
+  nav a, nav button{ appearance:none; border:1px solid var(--mint); background:transparent; color:var(--mint); border-radius:8px; padding:8px 12px; font-weight:600; cursor:pointer; transition:.2s; text-decoration:none }
+  nav button.active, nav a:hover, nav button:hover{ background:var(--mint); color:#000; }
+  .coinbar{ max-width:1000px; margin:12px auto 0; padding:0 6px; text-align:right; color:var(--mint); font-weight:700; }
+
+  section{ display:none; padding:20px; max-width:1000px; margin:16px auto; background:var(--panel); border-radius:12px; box-shadow:var(--ring); }
+  section.active{ display:block; animation:fade .35s ease }
+  h2{ color:var(--mint); text-align:center; margin:0 0 12px }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none} }
+
+  /* Spēles */
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:10px 0 16px }
+  .chip{ background:#1c2730; color:var(--mint); border:1px solid var(--mint-soft); border-radius:999px; padding:6px 10px; font-weight:600; cursor:pointer; }
+  .chip.active{ background:var(--mint); color:#000; }
+  .game{ background:#132026; border:1px solid #0f3639; border-radius:10px; padding:12px; margin:10px 0; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
+  .title{ font-weight:700; }
+  .sub{ color:var(--text-soft); font-size:.95em; margin-top:2px }
+  .row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .status{ display:inline-flex; align-items:center; gap:6px; padding:4px 8px; border-radius:999px; background:#0f1518; border:1px solid #20444a; color:#9fe4d6; font-weight:700; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--red); box-shadow:0 0 8px var(--red) }
+  .soon{ color:#f5d06a }
+  .done{ color:#8aa2a9 }
+  .odds{ font-weight:800; color:#fff }
+  .delta{ padding:2px 6px; border-radius:999px; font-weight:700; border:1px solid transparent }
+  .delta.up{ color:var(--green); border-color:var(--green); }
+  .delta.down{ color:var(--red); border-color:var(--red); }
+  .aside{ display:flex; align-items:center; gap:8px }
+  .aside input{ width:90px; padding:8px; border-radius:8px; border:1px solid #0e2a2f; background:#0e171b; color:#fff; }
+  .aside button{ padding:9px 12px; border:none; border-radius:8px; background:var(--mint); color:#000; font-weight:800; cursor:pointer; }
+  .tag{ background:#0e1b1e; border:1px solid #21474e; color:#9ed7cb; padding:4px 8px; border-radius:999px; font-weight:700 }
+
+  /* Abonementi + citi */
+  .plans{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center }
+  .plan{ width:220px; background:#132026; border:1px solid #0f3639; border-radius:12px; padding:16px; }
+  .plan h3{ color:var(--mint); margin:0 0 8px }
+  .center{ text-align:center }
+  footer{ text-align:center; color:#66757a; margin:28px 0 22px; font-size:.9em }
+
+  @media (max-width:640px){
+    header{ justify-content:center }
+  }
 </style>
 </head>
 <body>
+  <header>
+    <h1 class="brand">LIKMIJUKODS</h1>
+    <nav>
+      <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
+      <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
+      <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
+      <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
+      <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
+      <a href="register.html">Reģistrēties</a>
+      <a href="login.html">Pieteikties</a>
+      <a href="profile.html">Profils</a>
+    </nav>
+  </header>
 
-<header>
-  <h1 class="fade-text">LIKMIJUKODS</h1>
-  <nav>
-    <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
-    <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
-    <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
-    <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
-    <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
-    <a href="register.html"><button>Reģistrēties</button></a>
-    <a href="login.html"><button>Pieteikties</button></a>
-    <a href="profile.html"><button>Profils</button></a>
-  </nav>
-</header>
+  <div class="coinbar">🪙 Coin bilance: <span id="coin-balance">1000</span></div>
 
-<div class="coin-balance">🪙 Coin bilance: <span id="coin-balance">1000</span></div>
+  <!-- Sākums -->
+  <section id="sakums" class="active">
+    <h2>Sākums</h2>
+    <p class="center">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
+  </section>
 
-<section id="sakums" class="active">
-  <h2>Sākums</h2>
-  <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-</section>
+  <!-- Spēles -->
+  <section id="speles">
+    <h2>Spēles</h2>
+    <div class="filters" id="sport-filters"></div>
+    <div id="games-list"></div>
+  </section>
 
-<section id="speles">
-  <h2>Spēles</h2>
-  <div class="filter">
-    <button data-filter="all">Visi</button>
-    <button data-filter="Futbols">⚽ Futbols</button>
-    <button data-filter="Basketbols">🏀 Basketbols</button>
-    <button data-filter="Hokejs">🏒 Hokejs</button>
-    <button data-filter="Teniss">🎾 Teniss</button>
-    <button data-filter="eSports">🎮 eSports</button>
-  </div>
-  <div id="games-wrap"></div>
-</section>
+  <!-- Rezultāti -->
+  <section id="rezultati">
+    <h2>Rezultāti</h2>
+    <p class="center">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
+    <ul style="max-width:720px;margin:12px auto">
+      <li>✅ Real Madrid vs Barcelona – Uzvara</li>
+      <li>❌ Rīga vs Jokerit – Zaudējums</li>
+    </ul>
+  </section>
 
-<section id="rezultati">
-  <h2>Rezultāti</h2>
-  <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
-  <ul>
-    <li>✅ Real Madrid vs Barcelona – Uzvara</li>
-    <li>❌ Rīga vs Jokerit – Zaudējums</li>
-  </ul>
-</section>
+  <!-- Abonementi -->
+  <section id="abonementi">
+    <h2>Abonementi</h2>
+    <div class="plans">
+      <div class="plan"><h3>Basic</h3><div>0.99€/mēn<br>Bez reklāmām</div></div>
+      <div class="plan"><h3>Silver</h3><div>2.99€/mēn<br>1 prognoze/dienā</div></div>
+      <div class="plan"><h3>Gold</h3><div>4.99€/mēn<br>3 prognozes/dienā</div></div>
+      <div class="plan"><h3>Platinum</h3><div>9.99€/mēn<br>Neierobežoti</div></div>
+      <div class="plan"><h3>Elite</h3><div>19.99€/mēn<br>VIP serviss</div></div>
+    </div>
+  </section>
 
-<section id="abonementi">
-  <h2>Abonementi</h2>
-  <div class="abonements">
-    <div class="abon-card"><h3>Basic</h3><p>0.99€/mēn<br>Bez reklāmām</p></div>
-    <div class="abon-card"><h3>Silver</h3><p>2.99€/mēn<br>1 prognoze/dienā</p></div>
-    <div class="abon-card"><h3>Gold</h3><p>4.99€/mēn<br>3 prognozes/dienā</p></div>
-    <div class="abon-card"><h3>Platinum</h3><p>9.99€/mēn<br>Neierobežoti</p></div>
-    <div class="abon-card"><h3>Elite</h3><p>19.99€/mēn<br>VIP serviss</p></div>
-  </div>
-</section>
+  <!-- Bonusi -->
+  <section id="bonusi">
+    <h2>Bonusi</h2>
+    <div class="center" style="max-width:720px;margin:0 auto">
+      <p>🎁 Pirmais mēnesis -50%</p>
+      <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
+    </div>
+  </section>
 
-<section id="bonusi">
-  <h2>Bonusi</h2>
-  <div class="bonusi">
-    <p>🎁 Pirmais mēnesis -50%</p>
-    <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
-  </div>
-</section>
-
-<footer>
-  <div>Partneri: (logos here)</div>
-  <div class="social">
-    <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
-  </div>
-  <div>© 2025 LikmjuKods. All rights reserved.</div>
-</footer>
+  <footer>
+    <div>Partneri: (logos here)</div>
+    <div style="margin-top:6px"><a href="#">Telegram</a> · <a href="#">Instagram</a> · <a href="#">X</a></div>
+    <div style="margin-top:8px">© 2025 LikmjuKods. All rights reserved.</div>
+  </footer>
 
 <script>
-  // ===== SPA =====
+  // ——— SPA
   function showSection(id){
     document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
     document.getElementById('btn-'+id)?.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'smooth'});
   }
 
-  // ===== Coins (demo) =====
-  let coinBalance = 1000;
-  function updateCoins(){ document.getElementById('coin-balance').textContent = coinBalance; }
-  function placeBet(amount, odds){
-    if(!amount || amount<=0) return alert('Ievadi derīgu Coin skaitu.');
-    if(amount > coinBalance) return alert('Nepietiekams Coin daudzums.');
-    const win = Math.floor(amount * odds);
-    coinBalance = coinBalance - amount + win;
-    updateCoins();
-    alert('Tu uzvarēji! Ieguvums: ' + win + ' 🪙');
-  }
+  // ——— Coin bilance (persistē lokāli)
+  const BAL_KEY = 'lk_coins';
+  let coinBalance = Number(localStorage.getItem(BAL_KEY) || 1000);
+  const balEl = document.getElementById('coin-balance');
+  const setBal = v => { coinBalance = v; balEl.textContent = v; localStorage.setItem(BAL_KEY, v); };
+  setBal(coinBalance);
 
-  // ===== Helpers =====
-  function splitTeams(teamsStr){
-    // atbalsta " vs ", "-", "—", "–"
-    const parts = teamsStr.split(/\s+(?:vs|–|—|-)\s+/i);
-    if(parts.length>=2) return {team1:parts[0], team2:parts[1]};
-    // ja nav atdalītāja, atgriež visu kā title
-    return {team1:teamsStr, team2:''};
-  }
-  function statusChip(status){
-    if(status==='live') return '<span class="chip live"><span class="dot"></span> LIVE</span>';
-    if(status==='soon') return '<span class="chip soon">Sāks drīz</span>';
-    return '<span class="chip done">Beigusies</span>';
-  }
-
-  // ===== Render Games from games.json =====
-  const gamesWrap = document.getElementById('games-wrap');
+  // ——— Spēļu ielāde + zīmēšana
+  const gamesList = document.getElementById('games-list');
+  const filterBox = document.getElementById('sport-filters');
   let allGames = [];
+  let currentSport = 'Visi';
+
+  const statusRank = s => ({live:0, soon:1, done:3})[s] ?? 2;
+
   async function loadGames(){
     try{
       const res = await fetch('games.json',{cache:'no-store'});
       allGames = await res.json();
-      renderGames('all');
+      buildFilters();
+      render();
     }catch(e){
-      console.error('Neizdevās ielādēt games.json', e);
-      gamesWrap.innerHTML = '<div class="meta">Neizdevās ielādēt spēles.</div>';
+      gamesList.innerHTML = '<div class="center">Neizdevās ielādēt spēles.</div>';
+      console.error(e);
     }
   }
-  function renderGames(filterSport){
-    gamesWrap.innerHTML = '';
-    const list = allGames.filter(g => filterSport==='all' || g.sport===filterSport);
-    list.forEach(g=>{
-      const {team1, team2} = splitTeams(g.teams || '');
-      const row = document.createElement('div');
-      row.className = 'match';
-      row.innerHTML = `
-        <div class="left">
-          <div class="title">${team1}${team2 ? ' vs ' + team2 : ''} ${statusChip(g.status)}</div>
-          <div class="meta">Sporta veids: ${g.sport} · Tirgus: ${g.market} · Koef: <b>${g.odds}</b> · <span class="${g.status==='live'?'ok':''}">${g.time||''}</span></div>
-        </div>
-        <div class="bet">
-          <input type="number" min="1" placeholder="Coin" id="stake-${g.id}">
-          <button onclick="
-            (function(){
-              const v = parseInt(document.getElementById('stake-${g.id}').value,10);
-              placeBet(v, ${g.odds});
-              document.getElementById('stake-${g.id}').value='';
-            })()
-          ">Veikt likmi</button>
-        </div>`;
-      gamesWrap.appendChild(row);
+
+  function buildFilters(){
+    const sports = Array.from(new Set(allGames.map(g=>g.sport)));
+    filterBox.innerHTML = '';
+    addFilterChip('Visi', true);
+    sports.forEach(s=>addFilterChip(s));
+  }
+  function addFilterChip(name, active=false){
+    const btn = document.createElement('button');
+    btn.className = 'chip' + (active?' active':'');
+    btn.textContent = name;
+    btn.onclick = ()=>{
+      currentSport = name;
+      [...filterBox.children].forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    };
+    filterBox.appendChild(btn);
+  }
+
+  function render(){
+    const data = allGames
+      .filter(g => currentSport==='Visi' || g.sport===currentSport)
+      .sort((a,b)=> statusRank(a.status)-statusRank(b.status));
+
+    gamesList.innerHTML = '';
+    data.forEach(g=>{
+      const wrap = document.createElement('div');
+      wrap.className = 'game';
+
+      const left = document.createElement('div');
+      const title = document.createElement('div');
+      title.className = 'title';
+      title.textContent = `${g.teams}`;
+
+      const sub = document.createElement('div');
+      sub.className = 'sub';
+      sub.innerHTML = `
+        Sporta veids: ${g.sport}${g.tournament?` · Turnīrs: ${g.tournament}`:''}
+        · Tirgus: <b>${g.market}</b>
+        · Koef: <span class="odds">${Number(g.odds).toFixed(2)}</span>
+        ${g.time && g.time!=='LIVE' ? ` · ${g.time}` : ''}
+      `;
+
+      const row = document.createElement('div'); row.className='row';
+      // status badge
+      const st = document.createElement('span'); st.className='status';
+      if(g.status==='live'){ st.innerHTML = `<span class="dot"></span> LIVE`; }
+      else if(g.status==='soon'){ st.innerHTML = `<span class="soon">Sāks drīz</span>`; }
+      else if(g.status==='done'){ st.innerHTML = `<span class="done">Beigusies</span>`; }
+      else { st.textContent = g.status_label || g.status || '—'; }
+      row.appendChild(st);
+
+      // koef. izmaiņas
+      if(g.odds_change){
+        const num = Number(g.odds_change);
+        const chip = document.createElement('span');
+        chip.className = 'delta ' + (num>=0 ? 'up' : 'down');
+        chip.textContent = (num>=0?'+':'') + num.toFixed(2);
+        row.appendChild(chip);
+      }
+
+      left.appendChild(title);
+      left.appendChild(row);
+      left.appendChild(sub);
+
+      const right = document.createElement('div');
+      right.className = 'aside';
+      right.innerHTML = `<span class="tag">Coin</span>
+        <input type="number" min="1" placeholder="Coin" id="bet-${g.id}">
+        <button ${g.status==='done'?'disabled':''}>Veikt likmi</button>`;
+      right.querySelector('button').onclick = ()=> placeBet(`bet-${g.id}`, Number(g.odds));
+
+      wrap.appendChild(left);
+      wrap.appendChild(right);
+      gamesList.appendChild(wrap);
     });
-    if(list.length===0){
-      gamesWrap.innerHTML = '<div class="meta">Šim sporta veidam pašlaik nav spēļu.</div>';
-    }
   }
 
-  // Filters
-  document.querySelectorAll('.filter button').forEach(btn=>{
-    btn.addEventListener('click', ()=> renderGames(btn.dataset.filter));
-  });
+  // ——— Likmes (DEMO: uzvara uzreiz)
+  function placeBet(inputId, odds){
+    const el = document.getElementById(inputId);
+    const amount = Math.floor(Number(el.value||0));
+    if(!amount || amount<1) return alert('Ievadi derīgu Coin skaitu.');
+    if(amount > coinBalance) return alert('Nepietiekams Coin daudzums.');
+    // demo: uzvara
+    const win = Math.floor(amount * odds);
+    setBal(coinBalance - amount + win);
+    alert(`Tu uzvarēji! Ieguvums: ${win} 🪙`);
+    el.value = '';
+  }
 
-  // Init
-  updateCoins();
+  // start
+  showSection('sakums');
   loadGames();
 </script>
 </body>
