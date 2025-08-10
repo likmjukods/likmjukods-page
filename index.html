@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LikmjuKods — SPA v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#0a0f13; --panel:#11181d; --mint:#00ffcc; --text:#cfd6da; --soft:#9aa7ad; --ring:0 0 18px #00ffcc80; --shadow:0 12px 30px rgba(0,0,0,.35) }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:'Manrope',system-ui,sans-serif}
+  header{position:sticky;top:0;z-index:9;background:linear-gradient(90deg,#000,#022);padding:14px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid rgba(0,255,204,.12);backdrop-filter:blur(6px)}
+  .brand{margin:0;font-size:28px;font-weight:900;background:linear-gradient(90deg,#00ffcc,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Orbitron',sans-serif;letter-spacing:.5px}
+  nav{display:flex;gap:8px;flex-wrap:wrap}
+  nav button{appearance:none;border:1px solid var(--mint);background:transparent;color:var(--mint);border-radius:10px;padding:9px 14px;font-weight:800;cursor:pointer;transition:.2s}
+  nav button.active, nav button:hover{background:var(--mint);color:#000}
+  .coinbar{max-width:1100px;margin:12px auto 0;padding:0 12px;text-align:right;color:var(--mint);font-weight:800}
+  section{display:none;padding:22px;max-width:1100px;margin:16px auto;background:var(--panel);border-radius:16px;box-shadow:var(--ring),var(--shadow)}
+  section.active{display:block;animation:fade .35s ease} @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  h2{color:var(--mint);text-align:center;margin:2px 0 12px;font-weight:900;letter-spacing:.2px}
+  .center{text-align:center}
+  /* controls */
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0 14px}
+  .control{padding:10px 12px;border-radius:12px;border:1px solid #0e2a2f;background:#0e171b;color:#fff}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:#132026;color:var(--mint);border:1px solid #0ab9a6;border-radius:999px;padding:7px 12px;font-weight:900;cursor:pointer}
+  .chip .emo{filter:saturate(1.2)} .chip.active{background:var(--mint);color:#000}
+  /* games */
+  .game{background:#0f1b21;border:1px solid #0f3639;border-radius:14px;padding:14px;margin:10px 0;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+  .title{font-weight:900;color:#fff;display:flex;align-items:center;gap:10px}
+  .title .emo{font-size:22px}
+  .sub{color:var(--soft);margin-top:2px}
+  .status{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#0f1518;border:1px solid #20444a;color:#9fe4d6;font-weight:900}
+  .dot{width:8px;height:8px;border-radius:50%;background:#ff5c5c;box-shadow:0 0 8px #ff5c5c}
+  .aside{display:flex;align-items:center;gap:8px} .aside input{width:90px} .tag{background:#0e1b1e;border:1px solid #21474e;color:#9ed7cb;padding:4px 8px;border-radius:999px;font-weight:800}
+  input,select{padding:10px 12px;border-radius:12px;border:1px solid #0e2a2f;background:#0e171b;color:#fff}
+  .btn{padding:10px 14px;border:none;border-radius:12px;background:var(--mint);color:#000;font-weight:900;cursor:pointer}
+  /* auth */
+  .auth-wrap{display:flex;justify-content:center}
+  .auth{width:min(520px,92%);margin:8px auto;background:linear-gradient(180deg,rgba(15,27,33,.9),rgba(10,17,20,.85));border:1px solid #0f3639;padding:26px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35),var(--ring);backdrop-filter:blur(8px)}
+  .auth h3{margin:0 0 12px;color:#fff;text-align:center;font-size:1.35rem}
+  .field{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .field label{font-size:.9rem;color:#8dbeb5}
+  .field .inp{display:flex;align-items:center;background:#0e171b;border:1px solid #0e2a2f;border-radius:12px;padding:4px 8px}
+  .field .inp input{flex:1;padding:10px 10px;border:none;background:transparent;color:#fff;outline:none}
+  .eye{cursor:pointer;opacity:.7}
+  .meta{text-align:center;margin-top:8px}
+  .link{color:var(--mint);cursor:pointer;font-weight:900}
+  /* results */
+  #chart{margin-top:8px}
+  footer{text-align:center;color:#66757a;margin:28px 0 22px;font-size:.9em}
+</style>
+</head>
+<body>
+  <header>
+    <h1 class="brand">LIKMIJUKODS</h1>
+    <nav>
+      <button id="btn-sakums" onclick="show('sakums')" class="active">Sākums</button>
+      <button id="btn-speles" onclick="show('speles')">Spēles</button>
+      <button id="btn-rezultati" onclick="show('rezultati')">Rezultāti</button>
+      <button id="btn-abonementi" onclick="show('abonementi')">Abonementi</button>
+      <button id="btn-auth" onclick="show('auth')">Pieteikšanās</button>
+      <button id="btn-profils" onclick="show('profils')">Profils</button>
+    </nav>
+  </header>
+
+  <div class="coinbar">🪙 Coin bilance: <span id="coin">1000</span></div>
+
+  <section id="sakums" class="active">
+    <h2>Sākums</h2>
+    <p class="center">SPA v3 ar emoji sportiem + uzfrišinātu pieteikšanās formu.</p>
+  </section>
+
+  <section id="speles">
+    <h2>Spēles</h2>
+    <div class="controls">
+      <div id="sport-filters"></div>
+      <input id="q" class="control" placeholder="Meklēt: komandas / turnīrs / tirgus" />
+      <input id="from" type="date" class="control"/>
+      <input id="to" type="date" class="control"/>
+      <button class="btn" onclick="clearFilters()">Notīrīt</button>
+    </div>
+    <div id="games"></div>
+  </section>
+
+  <section id="rezultati">
+    <h2>Rezultāti</h2>
+    <div class="center" id="res-summary">Aprēķinu precizitāti…</div>
+    <div id="chart" class="center"></div>
+    <ul id="res-list" style="max-width:820px;margin:12px auto"></ul>
+  </section>
+
+  <section id="abonementi">
+    <h2>Abonementi</h2>
+    <div class="controls" style="justify-content:space-evenly">
+      <div class="chip"><span class="emo">🥉</span>Basic<br><small>0.99€/mēn</small></div>
+      <div class="chip"><span class="emo">🥈</span>Silver<br><small>2.99€/mēn</small></div>
+      <div class="chip"><span class="emo">🥇</span>Gold<br><small>4.99€/mēn</small></div>
+      <div class="chip"><span class="emo">💎</span>Platinum<br><small>9.99€/mēn</small></div>
+      <div class="chip"><span class="emo">👑</span>Elite<br><small>19.99€/mēn</small></div>
+    </div>
+  </section>
+
+  <section id="auth">
+    <h2>Pieteikšanās / Reģistrācija</h2>
+    <div class="auth-wrap">
+      <div class="auth">
+        <h3>Ienāc savā kontā</h3>
+        <div class="field">
+          <label for="user">Lietotājvārds</label>
+          <div class="inp"><input id="user" placeholder="Tavs vārds"></div>
+        </div>
+        <div class="field">
+          <label for="pass">Parole</label>
+          <div class="inp"><input id="pass" type="password" placeholder="••••••••"><span class="eye" onclick="togglePass()">👁️</span></div>
+        </div>
+        <button class="btn" style="width:100%;margin-top:6px" onclick="login()">Pieteikties</button>
+        <div class="meta">Nav konta? <span class="link" onclick="login()">Reģistrēties</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="profils">
+    <h2>Mans profils</h2>
+    <div class="center" id="profile">Neesi pieteicies.</div>
+  </section>
+
+  <footer>© 2025 LikmjuKods</footer>
+
+<script>
+  const GAMES = [{"id": 1, "sport": "Futbols", "emoji": "⚽", "teams": "Real Madrid vs Barcelona", "tournament": "La Liga", "market": "Zem 2.5", "odds": 1.65, "odds_change": "+0.02", "status": "live", "status_label": "LIVE", "time": "20:45", "date": "2025-08-11", "datetime": "2025-08-11T20:45:00"}, {"id": 2, "sport": "Hokejs", "emoji": "🏒", "teams": "Rīga vs Jokerit", "tournament": "KHL", "market": "Jokerit uzvara", "odds": 2.1, "odds_change": "-0.05", "status": "soon", "status_label": "Sāks drīz", "time": "21:15", "date": "2025-08-11", "datetime": "2025-08-11T21:15:00"}, {"id": 3, "sport": "Teniss", "emoji": "🎾", "teams": "Federer vs Nadal", "tournament": "Grand Slam", "market": "Federers uzvara", "odds": 1.9, "status": "done", "status_label": "Beigusies", "time": "Beigusies", "date": "2025-08-10", "datetime": "2025-08-10T18:00:00"}, {"id": 4, "sport": "Basketbols", "emoji": "🏀", "teams": "Warriors vs Lakers", "tournament": "NBA", "market": "Lakers +5.5", "odds": 1.85, "status": "soon", "status_label": "Sāks drīz", "time": "22:00", "date": "2025-08-11", "datetime": "2025-08-11T22:00:00"}, {"id": 5, "sport": "eSports", "emoji": "🎮", "teams": "NAVI vs G2", "tournament": "CS2 Major", "market": "NAVI uzvara", "odds": 1.75, "status": "live", "status_label": "LIVE", "time": "LIVE", "date": "2025-08-11", "datetime": "2025-08-11T20:00:00"}];
+  const RESULTS = [{"komandas": "Latvija vs Igaunija", "sports": "Futbols", "datums": "2025-06-19", "prognoze": "Latvija uzvara", "koeficients": "1.45", "rezultats": "pareizi"}, {"komandas": "Francija vs Vācija", "sports": "Futbols", "datums": "2025-06-19", "prognoze": "Vairāk par 2.5 vārtiem", "koeficients": "1.72", "rezultats": "garām"}, {"komandas": "Zviedrija vs Somija", "sports": "Hokejs", "datums": "2025-06-20", "prognoze": "Zviedrija-1.5", "koeficients": "1.85"}];
+
+  function show(id){ document.querySelectorAll('section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active')); const btn=document.getElementById('btn-'+id); if(btn) btn.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'}); }
+
+  // Coin
+  const KEY='lk_coins'; const coinEl=document.getElementById('coin');
+  function setCoins(v){ localStorage.setItem(KEY, v); coinEl.textContent=v; }
+  setCoins(Number(localStorage.getItem(KEY)||1000));
+
+  // Filters + search
+  const sportWrap=document.getElementById('sport-filters'); const qEl=document.getElementById('q'); const fromEl=document.getElementById('from'); const toEl=document.getElementById('to'); const list=document.getElementById('games');
+  let sport='Visi';
+  function sportMap(){ const map={}; for(const g of GAMES){ map[g.sport]=g.emoji || map[g.sport] || ''; } return map; }
+  function chips(){ const sports=[...new Set(GAMES.map(g=>g.sport))]; const m=sportMap(); sportWrap.innerHTML=''; addChip('Visi','🟢',true); sports.forEach(s=>addChip(s,m[s]||'•')); }
+  function addChip(name, emo, active=false){ const b=document.createElement('button'); b.className='chip'+(active?' active':''); b.innerHTML = `<span class="emo">${emo}</span> ${name}`;
+    b.onclick=()=>{ sport=name; [...sportWrap.children].forEach(c=>c.classList.remove('active')); b.classList.add('active'); render(); }; sportWrap.appendChild(b); }
+  function clearFilters(){ sport='Visi'; qEl.value=''; fromEl.value=''; toEl.value=''; [...sportWrap.children].forEach((c,i)=> c.classList.toggle('active', i===0)); render(); }
+  [qEl,fromEl,toEl].forEach(el=> el.addEventListener('input', render));
+
+  function render(){
+    const q=(qEl.value||'').toLowerCase();
+    const from=fromEl.value ? new Date(fromEl.value) : null;
+    const to=toEl.value ? new Date(toEl.value) : null;
+    const rank = s => ({live:0,soon:1,done:3})[s] ?? 2;
+
+    const data = GAMES
+      .filter(g => sport==='Visi' || g.sport===sport)
+      .filter(g => !q || [g.teams,g.tournament,g.market].join(' ').toLowerCase().includes(q))
+      .filter(g => { if(!from && !to) return true; const d=new Date(g.date); if(from && d<from) return false; if(to && d>to) return false; return true; })
+      .sort((a,b)=> rank(a.status)-rank(b.status));
+
+    list.innerHTML='';
+    data.forEach(g=>{
+      const wrap=document.createElement('div'); wrap.className='game';
+      const left=document.createElement('div');
+      left.innerHTML = `<div class='title'><span class="emo">${g.emoji||''}</span><span>${g.teams}</span></div>
+        <div class='sub'>${g.sport}${g.tournament?` · ${g.tournament}`:''} · Tirgus: <b>${g.market}</b> · Koef: <b>${Number(g.odds).toFixed(2)}</b>${g.time&&g.time!=='LIVE'?` · ${g.time}`:''}</div>
+        <div><span class='status'>${g.status==='live'?"<span class='dot'></span> LIVE": g.status==='soon'?"Sāks drīz": g.status==='done'?"Beigusies":(g.status||"—")}</span></div>`;
+
+      const right=document.createElement('div'); right.className='aside';
+      right.innerHTML = `<span class='tag'>Coin</span><input id='bet-${g.id}' type='number' min='1' placeholder='Coin'><button class='btn' ${g.status==='done'?'disabled':''}>Veikt likmi</button>`;
+      right.querySelector('button').onclick = ()=> bet(`bet-${g.id}`, Number(g.odds));
+
+      wrap.appendChild(left); wrap.appendChild(right); list.appendChild(wrap);
+    });
+  }
+
+  function bet(id, odds){ const el=document.getElementById(id); const amt=Math.floor(Number(el.value||0));
+    const current=Number(localStorage.getItem(KEY)||1000);
+    if(!amt||amt<1) return alert('Ievadi derīgu Coin skaitu.'); if(amt>current) return alert('Nepietiekams Coin daudzums.');
+    const win=Math.floor(amt*odds); setCoins(current-amt+win); alert(`Tu uzvarēji! Ieguvums: ${win} 🪙`); el.value=''; }
+
+  // Results
+  function renderResults(){
+    const ok=v=>['pareizi','win','uzvara','✅','true'].includes(String(v||'').toLowerCase());
+    const items=(RESULTS||[]);
+    const total=items.filter(i=>i.rezultats!=null).length;
+    const wins=items.filter(i=> ok(i.rezultats)).length;
+    const pct = total? Math.round((wins/total)*1000)/10 : null;
+    document.getElementById('res-summary').textContent = pct===null ? 'Vēl nav datu precizitātes aprēķinam.' : ('Prognožu precizitāte: '+pct+'% (no '+total+')');
+
+    const ul=document.getElementById('res-list'); ul.innerHTML='';
+    items.forEach(r=>{ const li=document.createElement('li'); const mark = ok(r.rezultats) ? '✅' : (r.rezultats ? '❌' : '•');
+      li.textContent = mark+' '+r.komandas+' — '+r.prognoze+' @ '+(r.koeficients||'-'); ul.appendChild(li); });
+
+    // chart
+    const N=10; const last=items.slice(-N); const vals=last.map(r=> ok(r.rezultats)?1:0);
+    drawBars('chart', vals);
+  }
+
+  function drawBars(id, vals){ const w=320, h=70, pad=8; const bw=(w - pad*2)/Math.max(1, vals.length);
+    let svg = '<svg width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg">';
+    svg += '<rect x="0" y="0" width="'+w+'" height="'+h+'" fill="#0b1418" stroke="#0f3639" />';
+    vals.forEach((v,i)=>{ const x=pad+i*bw; const barH = v? h-18 : 12; const y = h - barH - 6; const color = v? '#36d979' : '#ff5c5c';
+      svg += '<rect rx="3" x="'+x+'" y="'+y+'" width="'+(bw-5)+'" height="'+barH+'" fill="'+color+'" />'; });
+    svg += '</svg>'; document.getElementById(id).innerHTML = svg; }
+
+  // Auth
+  const UKEY='lk_user'; const profile=document.getElementById('profile');
+  function togglePass(){ const p=document.getElementById('pass'); p.type = p.type==='password' ? 'text' : 'password'; }
+  function login(){ const u=document.getElementById('user').value.trim(); const p=document.getElementById('pass').value.trim();
+    if(!u||!p) return alert('Ievadi lietotājvārdu un paroli'); localStorage.setItem(UKEY,u); updateProfile(); show('profils'); }
+  function updateProfile(){ const u=localStorage.getItem(UKEY); profile.innerHTML = u? "<div style='font-size:1.1rem'>Sveiks, <b>"+u+"</b>!</div><div class='tag' style='display:inline-block;margin:8px 0'>Abonements: Gold (demo)</div><div><button class='btn' onclick='logout()'>Izrakstīties</button></div>" : 'Neesi pieteicies.'; }
+  function logout(){ localStorage.removeItem(UKEY); updateProfile(); show('auth'); }
+
+  // init
+  chips(); render(); renderResults(); updateProfile(); show('sakums');
+</script>
+</body>
+</html>
