@@ -6,199 +6,80 @@
 <title>LikmjuKods</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ===== Pamatstils (apvienots) ===== */
   :root{
-    --bg:#0a0f13;        /* tumšais fons */
-    --panel:#1a1a1a;     /* paneļi */
-    --mint:#00ffcc;      /* tavas zaļgan–zilās akcentkrāsas */
-    --mint2:#00ffae;     /* otra mint nianse no style.css */
+    --bg:#0a0f13;
+    --panel:#1a1a1a;
+    --mint:#00ffcc;
+    --mint2:#00ffae;
     --text:#ccc;
     --text-soft:#999;
     --shadow: 0 0 15px #00ffcc80;
   }
-
   *{box-sizing:border-box}
-
-  body{
-    margin:0;
-    background-color: var(--bg);
-    color: var(--text);
-    font-family:'Roboto',sans-serif;
-  }
-
-  /* Header + navigācija */
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Roboto',sans-serif; }
   header{
     background: linear-gradient(90deg,#000,#022);
     padding: 14px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:16px;
-    flex-wrap:wrap;
+    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
   }
-
-  /* Fade virsraksts */
   .fade-text{
-    margin:0;
-    font-size:28px;
-    font-weight:900;
+    margin:0; font-size:28px; font-weight:900;
     background: linear-gradient(to right, var(--mint2), #ffffff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-family:'Orbitron', sans-serif;
-    letter-spacing: 0.5px;
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    font-family:'Orbitron', sans-serif; letter-spacing:.5px;
   }
-
-  /* Navigācijas pogas (buttons + <a><button>) */
-  nav button,
-  nav a button{
-    margin:6px;
-    padding:8px 12px;
-    background:transparent;
-    border:1px solid var(--mint);
-    color:var(--mint);
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.25s ease;
+  nav button, nav a button{
+    margin:6px; padding:8px 12px; background:transparent;
+    border:1px solid var(--mint); color:var(--mint); border-radius:8px;
+    cursor:pointer; font-weight:600; transition:.25s ease;
   }
-  nav button.active{
-    background:var(--mint);
-    color:#000;
-  }
-  nav button:hover,
-  nav a button:hover{
-    background:var(--mint);
-    color:#000;
-  }
-
-  /* Sadaļu kopējais konteiners */
+  nav button.active{ background:var(--mint); color:#000; }
+  nav button:hover, nav a button:hover{ background:var(--mint); color:#000; }
   section{
-    display:none;
-    padding:20px;
-    max-width:1000px;
-    margin:20px auto;
-    background:var(--panel);
-    border-radius:10px;
-    box-shadow: var(--shadow);
-    transition:opacity .4s ease;
+    display:none; padding:20px; max-width:1000px; margin:20px auto;
+    background:var(--panel); border-radius:10px; box-shadow:var(--shadow); transition:opacity .4s ease;
   }
-  section.active{
-    display:block;
-    opacity:1;
-    animation:fadeIn .4s ease-in-out;
-  }
-
-  h2{
-    color:var(--mint);
-    text-align:center;
-    margin-top:0;
-  }
-
-  footer{
-    text-align:center;
-    color:#555;
-    margin:28px 0 22px;
-    font-size:.9em;
-  }
-
-  /* Filtri (Spēles) */
-  .filter{
-    text-align:center;
-    margin-bottom:16px;
-  }
+  section.active{ display:block; opacity:1; animation:fadeIn .4s ease-in-out; }
+  h2{ color:var(--mint); text-align:center; margin-top:0; }
+  footer{ text-align:center; color:#555; margin:28px 0 22px; font-size:.9em; }
+  .filter{ text-align:center; margin-bottom:16px; }
   .filter button{
-    margin:5px;
-    padding:6px 12px;
-    background:#222;
-    border:1px solid var(--mint);
-    color:var(--mint);
-    border-radius:6px;
-    cursor:pointer;
-    transition:.2s ease;
+    margin:5px; padding:6px 12px; background:#222; border:1px solid var(--mint);
+    color:var(--mint); border-radius:6px; cursor:pointer; transition:.2s ease;
   }
-  .filter button:hover{
-    background:var(--mint);
-    color:#000;
-  }
-
-  /* Coin bilance + spēļu kartītes */
-  .coin-balance{
-    max-width:1000px;
-    margin:14px auto 0;
-    padding:0 6px;
-    text-align:right;
-    font-weight:700;
-    color:var(--mint);
-  }
+  .filter button:hover{ background:var(--mint); color:#000; }
+  .coin-balance{ max-width:1000px; margin:14px auto 0; padding:0 6px; text-align:right; font-weight:700; color:var(--mint); }
   .match{
-    margin:10px 0;
-    padding:12px;
-    background:#222;
-    border-radius:8px;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:10px;
-    justify-content:space-between;
+    margin:10px 0; padding:12px; background:#222; border-radius:8px;
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between;
   }
-  .match .title{
-    font-weight:600;
-  }
-  .match .meta{
-    color:var(--text-soft);
-    font-size:.95em;
-  }
+  .match .title{ font-weight:700; }
+  .match .meta{ color:var(--text-soft); font-size:.95em; }
   .match input{
-    width:90px;
-    padding:8px;
-    border-radius:6px;
-    border:1px solid #333;
-    background:#111;
-    color:#fff;
+    width:90px; padding:8px; border-radius:6px; border:1px solid #333; background:#111; color:#fff;
   }
-  .match button{
-    padding:8px 12px;
-    background:var(--mint);
-    color:#000;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
-    transition:.2s ease;
-  }
+  .match button{ padding:8px 12px; background:var(--mint); color:#000; border:none; border-radius:8px; cursor:pointer; font-weight:700; transition:.2s ease; }
   .match button:hover{ filter:brightness(1.1); }
 
-  /* Abonementu kartiņas */
-  .abonements{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    justify-content:center;
-  }
+  .abonements{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
   .abon-card{
-    background:#222;
-    border:1px solid var(--mint);
-    border-radius:10px;
-    padding:16px;
-    width:200px;
-    text-align:center;
-    box-shadow:0 0 10px #00ffcc30;
+    background:#222; border:1px solid var(--mint); border-radius:10px; padding:16px; width:200px;
+    text-align:center; box-shadow:0 0 10px #00ffcc30;
   }
-  .abon-card h3{
-    margin:10px 0 6px;
-    color:var(--mint);
-  }
+  .abon-card h3{ margin:10px 0 6px; color:var(--mint); }
   .abon-card p{ font-size:.95em; margin:0; }
 
-  /* Bonusi */
   .bonusi{ text-align:center; }
   .bonusi p{ font-size:.95em; margin:6px 0; }
 
-  /* animācija */
+  /* statusa punktiņi */
+  .status-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px; vertical-align:middle; }
+  .dot-live{ background:#ff3b3b; }  /* sarkans */
+  .dot-soon{ background:#00e676; }  /* zaļš */
+  .dot-done{ background:#888; }     /* pelēks */
+
   @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
 
-  /* Mobile uzlabojumi */
   @media (max-width:640px){
     header{ justify-content:center; }
     .coin-balance{ padding:0 16px; }
@@ -208,118 +89,75 @@
 </head>
 <body>
 
-  <header>
-    <h1 class="fade-text">LIKMIJUKODS</h1>
-    <nav>
-      <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
-      <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
-      <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
-      <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
-      <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
-      <a href="register.html"><button>Reģistrēties</button></a>
-      <a href="login.html"><button>Pieteikties</button></a>
-      <a href="profile.html"><button>Profils</button></a>
-    </nav>
-  </header>
+<header>
+  <h1 class="fade-text">LIKMIJUKODS</h1>
+  <nav>
+    <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
+    <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
+    <button onclick="showSection('rezultati')" id="btn-rezultati">Rezultāti</button>
+    <button onclick="showSection('abonementi')" id="btn-abonementi">Abonementi</button>
+    <button onclick="showSection('bonusi')" id="btn-bonusi">Bonusi</button>
+    <a href="register.html"><button>Reģistrēties</button></a>
+    <a href="login.html"><button>Pieteikties</button></a>
+    <a href="profile.html"><button>Profils</button></a>
+  </nav>
+</header>
 
-  <div class="coin-balance">
-    🪙 Coin bilance: <span id="coin-balance">1000</span>
+<div class="coin-balance">🪙 Coin bilance: <span id="coin-balance">1000</span></div>
+
+<section id="sakums" class="active">
+  <h2>Sākums</h2>
+  <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
+</section>
+
+<section id="speles">
+  <h2>Spēles</h2>
+  <div class="filter">
+    <button>⚽ Futbols</button>
+    <button>🏀 Basketbols</button>
+    <button>🏒 Hokejs</button>
+    <button>🎾 Teniss</button>
+    <button>🎮 eSports</button>
   </div>
+  <!-- Dinamiskajām spēlēm -->
+  <div id="games-list"></div>
+</section>
 
-  <!-- Sākums -->
-  <section id="sakums" class="active">
-    <h2>Sākums</h2>
-    <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-  </section>
+<section id="rezultati">
+  <h2>Rezultāti</h2>
+  <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
+  <ul>
+    <li>✅ Real Madrid vs Barcelona – Uzvara</li>
+    <li>❌ Rīga vs Jokerit – Zaudējums</li>
+  </ul>
+</section>
 
-  <!-- Spēles -->
-  <section id="speles">
-    <h2>Spēles</h2>
+<section id="abonementi">
+  <h2>Abonementi</h2>
+  <div class="abonements">
+    <div class="abon-card"><h3>Basic</h3><p>0.99€/mēn<br>Bez reklāmām</p></div>
+    <div class="abon-card"><h3>Silver</h3><p>2.99€/mēn<br>1 prognoze/dienā</p></div>
+    <div class="abon-card"><h3>Gold</h3><p>4.99€/mēn<br>3 prognozes/dienā</p></div>
+    <div class="abon-card"><h3>Platinum</h3><p>9.99€/mēn<br>Neierobežoti</p></div>
+    <div class="abon-card"><h3>Elite</h3><p>19.99€/mēn<br>VIP serviss</p></div>
+  </div>
+</section>
 
-    <div class="filter">
-      <button>⚽ Futbols</button>
-      <button>🏀 Basketbols</button>
-      <button>🏒 Hokejs</button>
-      <button>🎾 Teniss</button>
-      <button>🎮 eSports</button>
-    </div>
+<section id="bonusi">
+  <h2>Bonusi</h2>
+  <div class="bonusi">
+    <p>🎁 Pirmais mēnesis -50%</p>
+    <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
+  </div>
+</section>
 
-    <div class="match">
-      <div>
-        <div class="title">⚽ Real Madrid vs Barcelona</div>
-        <div class="meta">Tirgus: Zem 2.5 &middot; Koef: <b>1.65</b></div>
-      </div>
-      <div>
-        <input type="number" placeholder="Coin" min="1" id="bet1">
-        <button onclick="placeBet('bet1', 1.65)">Veikt likmi</button>
-      </div>
-    </div>
-
-    <div class="match">
-      <div>
-        <div class="title">🏒 Rīga vs Jokerit</div>
-        <div class="meta">Tirgus: Jokerit uzvara &middot; Koef: <b>2.10</b></div>
-      </div>
-      <div>
-        <input type="number" placeholder="Coin" min="1" id="bet2">
-        <button onclick="placeBet('bet2', 2.10)">Veikt likmi</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Rezultāti -->
-  <section id="rezultati">
-    <h2>Rezultāti</h2>
-    <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
-    <ul>
-      <li>✅ Real Madrid vs Barcelona – Uzvara</li>
-      <li>❌ Rīga vs Jokerit – Zaudējums</li>
-    </ul>
-  </section>
-
-  <!-- Abonementi -->
-  <section id="abonementi">
-    <h2>Abonementi</h2>
-    <div class="abonements">
-      <div class="abon-card">
-        <h3>Basic</h3>
-        <p>0.99€/mēn<br>Bez reklāmām</p>
-      </div>
-      <div class="abon-card">
-        <h3>Silver</h3>
-        <p>2.99€/mēn<br>1 prognoze/dienā</p>
-      </div>
-      <div class="abon-card">
-        <h3>Gold</h3>
-        <p>4.99€/mēn<br>3 prognozes/dienā</p>
-      </div>
-      <div class="abon-card">
-        <h3>Platinum</h3>
-        <p>9.99€/mēn<br>Neierobežoti</p>
-      </div>
-      <div class="abon-card">
-        <h3>Elite</h3>
-        <p>19.99€/mēn<br>VIP serviss</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bonusi -->
-  <section id="bonusi">
-    <h2>Bonusi</h2>
-    <div class="bonusi">
-      <p>🎁 Pirmais mēnesis -50%</p>
-      <p>🎉 Uzaicini draugu — saņem 100 Coin</p>
-    </div>
-  </section>
-
-  <footer>
-    <div>Partneri: (logos here)</div>
-    <div class="social">
-      <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
-    </div>
-    <div>© 2025 LikmjuKods. All rights reserved.</div>
-  </footer>
+<footer>
+  <div>Partneri: (logos here)</div>
+  <div class="social">
+    <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
+  </div>
+  <div>© 2025 LikmjuKods. All rights reserved.</div>
+</footer>
 
 <script>
   // SPA pārslēgšana
@@ -329,8 +167,8 @@
     document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
     const btn = document.getElementById('btn-'+sectionId);
     if(btn) btn.classList.add('active');
-    // fokusē sadaļas sākumu mobilei
     window.scrollTo({top:0, behavior:'smooth'});
+    if(sectionId==='speles') loadGames();
   }
 
   // Coin sistēma (demo)
@@ -340,14 +178,68 @@
     const amount = parseInt(input.value,10);
     if(!amount || amount <= 0) return alert('Ievadi derīgu Coin skaitu.');
     if(amount > coinBalance) return alert('Nepietiekams Coin daudzums.');
-
-    // DEMO režīms: uzreiz iedodam uzvaru (UI testiem)
-    const win = Math.floor(amount * koef);
+    const win = Math.floor(amount * koef);  // DEMO: uzvara uzreiz
     coinBalance = coinBalance - amount + win;
     document.getElementById('coin-balance').textContent = coinBalance;
     alert('Tu uzvarēji! Ieguvums: ' + win + ' 🪙');
     input.value = '';
   }
+
+  // Spēļu ielāde no games.json
+  async function loadGames(){
+    const list = document.getElementById('games-list');
+    list.innerHTML = 'Ielādē...';
+    try{
+      const res = await fetch('games.json');
+      const games = await res.json();
+      renderGames(games);
+    }catch(e){
+      console.error(e);
+      list.innerHTML = 'Neizdevās ielādēt spēles.';
+    }
+  }
+
+  function renderGames(games){
+    const list = document.getElementById('games-list');
+    list.innerHTML = '';
+    games.forEach((g, idx)=>{
+      let dotClass='dot-done', statusText='Beigusies';
+      if(g.status==='live'){ dotClass='dot-live'; statusText='LIVE'; }
+      else if(g.status==='soon'){ dotClass='dot-soon'; statusText='Sāks drīz'; }
+
+      const id = `bet_${idx}`;
+      const card = document.createElement('div');
+      card.className = 'match';
+      card.innerHTML = `
+        <div>
+          <div class="title">${g.emoji||''} ${g.team1} vs ${g.team2}
+            <span class="status-dot ${dotClass}"></span>
+            <span class="meta">${statusText}</span>
+          </div>
+          <div class="meta">Sporta veids: ${g.sport} &middot; Tirgus: ${g.market} &middot; Koef: <b>${g.odds}</b></div>
+        </div>
+        <div>
+          <input type="number" placeholder="Coin" min="1" id="${id}">
+          <button onclick="placeBet('${id}', ${g.odds})">Veikt likmi</button>
+        </div>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  // Filtru click (vienkāršs demo pēc sporta)
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.querySelectorAll('.filter button').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const sport = btn.textContent.replace(/^[^A-Za-zĀ-ž]+/,'').trim();
+        try{
+          const all = await (await fetch('games.json')).json();
+          const filtered = all.filter(x=>x.sport===sport);
+          renderGames(filtered.length? filtered : all);
+        }catch(e){ console.error(e); }
+      });
+    });
+  });
 </script>
 </body>
   </html>
