@@ -2,46 +2,73 @@
   {
     "id": 1,
     "sport": "Futbols",
+    "emoji": "⚽",
     "teams": "Real Madrid vs Barcelona",
+    "tournament": "La Liga",
     "market": "Zem 2.5",
     "odds": 1.65,
-    "status": "live", 
-    "time": "20:45"
+    "odds_change": "+0.02",
+    "status": "live",
+    "status_label": "LIVE",
+    "time": "20:45",
+    "date": "2025-08-11",
+    "datetime": "2025-08-11T20:45:00"
   },
   {
     "id": 2,
     "sport": "Hokejs",
+    "emoji": "🏒",
     "teams": "Rīga vs Jokerit",
+    "tournament": "KHL",
     "market": "Jokerit uzvara",
     "odds": 2.10,
+    "odds_change": "-0.05",
     "status": "soon",
-    "time": "21:15"
+    "status_label": "Sāks drīz",
+    "time": "21:15",
+    "date": "2025-08-11",
+    "datetime": "2025-08-11T21:15:00"
   },
   {
     "id": 3,
     "sport": "Teniss",
+    "emoji": "🎾",
     "teams": "Federer vs Nadal",
+    "tournament": "Grand Slam",
     "market": "Federers uzvara",
     "odds": 1.90,
     "status": "done",
-    "time": "Beigusies"
+    "status_label": "Beigusies",
+    "time": "Beigusies",
+    "date": "2025-08-10",
+    "datetime": "2025-08-10T18:00:00"
   },
   {
     "id": 4,
     "sport": "Basketbols",
+    "emoji": "🏀",
     "teams": "Warriors vs Lakers",
+    "tournament": "NBA",
     "market": "Lakers +5.5",
     "odds": 1.85,
     "status": "soon",
-    "time": "22:00"
+    "status_label": "Sāks drīz",
+    "time": "22:00",
+    "date": "2025-08-11",
+    "datetime": "2025-08-11T22:00:00"
   },
   {
     "id": 5,
     "sport": "eSports",
+    "emoji": "🎮",
     "teams": "NAVI vs G2",
+    "tournament": "CS2 Major",
     "market": "NAVI uzvara",
     "odds": 1.75,
     "status": "live",
-    "time": "LIVE"
+    "status_label": "LIVE",
+    "time": "LIVE",
+    "date": "2025-08-11",
+    "datetime": "2025-08-11T20:00:00"
   }
 ]
