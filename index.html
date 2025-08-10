@@ -12,79 +12,42 @@
     --mint:#00ffcc;
     --mint2:#00ffae;
     --text:#ccc;
-    --text-soft:#999;
-    --shadow: 0 0 15px #00ffcc80;
+    --text-soft:#9aa3a7;
+    --shadow:0 0 15px #00ffcc80;
+    --ok:#24d67b;
   }
   *{box-sizing:border-box}
-  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Roboto',sans-serif; }
-  header{
-    background: linear-gradient(90deg,#000,#022);
-    padding: 14px 20px;
-    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
-  }
-  .fade-text{
-    margin:0; font-size:28px; font-weight:900;
-    background: linear-gradient(to right, var(--mint2), #ffffff);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    font-family:'Orbitron', sans-serif; letter-spacing:.5px;
-  }
-  nav button, nav a button{
-    margin:6px; padding:8px 12px; background:transparent;
-    border:1px solid var(--mint); color:var(--mint); border-radius:8px;
-    cursor:pointer; font-weight:600; transition:.25s ease;
-  }
-  nav button.active{ background:var(--mint); color:#000; }
-  nav button:hover, nav a button:hover{ background:var(--mint); color:#000; }
-  section{
-    display:none; padding:20px; max-width:1000px; margin:20px auto;
-    background:var(--panel); border-radius:10px; box-shadow:var(--shadow); transition:opacity .4s ease;
-  }
-  section.active{ display:block; opacity:1; animation:fadeIn .4s ease-in-out; }
-  h2{ color:var(--mint); text-align:center; margin-top:0; }
-  footer{ text-align:center; color:#555; margin:28px 0 22px; font-size:.9em; }
-  .filter{ text-align:center; margin-bottom:16px; }
-  .filter button{
-    margin:5px; padding:6px 12px; background:#222; border:1px solid var(--mint);
-    color:var(--mint); border-radius:6px; cursor:pointer; transition:.2s ease;
-  }
-  .filter button:hover{ background:var(--mint); color:#000; }
-  .coin-balance{ max-width:1000px; margin:14px auto 0; padding:0 6px; text-align:right; font-weight:700; color:var(--mint); }
-  .match{
-    margin:10px 0; padding:12px; background:#222; border-radius:8px;
-    display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:space-between;
-  }
-  .match .title{ font-weight:700; }
-  .match .meta{ color:var(--text-soft); font-size:.95em; }
-  .match input{
-    width:90px; padding:8px; border-radius:6px; border:1px solid #333; background:#111; color:#fff;
-  }
-  .match button{ padding:8px 12px; background:var(--mint); color:#000; border:none; border-radius:8px; cursor:pointer; font-weight:700; transition:.2s ease; }
-  .match button:hover{ filter:brightness(1.1); }
-
-  .abonements{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-  .abon-card{
-    background:#222; border:1px solid var(--mint); border-radius:10px; padding:16px; width:200px;
-    text-align:center; box-shadow:0 0 10px #00ffcc30;
-  }
-  .abon-card h3{ margin:10px 0 6px; color:var(--mint); }
-  .abon-card p{ font-size:.95em; margin:0; }
-
-  .bonusi{ text-align:center; }
-  .bonusi p{ font-size:.95em; margin:6px 0; }
-
-  /* statusa punktiņi */
-  .status-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px; vertical-align:middle; }
-  .dot-live{ background:#ff3b3b; }  /* sarkans */
-  .dot-soon{ background:#00e676; }  /* zaļš */
-  .dot-done{ background:#888; }     /* pelēks */
-
-  @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
-
-  @media (max-width:640px){
-    header{ justify-content:center; }
-    .coin-balance{ padding:0 16px; }
-    nav{ display:flex; flex-wrap:wrap; justify-content:center; }
-  }
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Roboto',sans-serif}
+  header{background:linear-gradient(90deg,#000,#022);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .fade-text{margin:0;font-size:28px;font-weight:900;background:linear-gradient(to right,var(--mint2),#fff);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Orbitron',sans-serif;letter-spacing:.5px}
+  nav button,nav a button{margin:6px;padding:8px 12px;background:transparent;border:1px solid var(--mint);color:var(--mint);
+    border-radius:8px;cursor:pointer;font-weight:600;transition:.25s}
+  nav button.active,nav button:hover,nav a button:hover{background:var(--mint);color:#000}
+  .coin-balance{max-width:1000px;margin:14px auto 0;padding:0 6px;text-align:right;font-weight:700;color:var(--mint)}
+  section{display:none;padding:20px;max-width:1000px;margin:20px auto;background:var(--panel);border-radius:10px;box-shadow:var(--shadow)}
+  section.active{display:block;animation:fadeIn .4s ease}
+  h2{color:var(--mint);text-align:center;margin-top:0}
+  footer{text-align:center;color:#56626a;margin:28px 0 22px;font-size:.9em}
+  .filter{text-align:center;margin-bottom:16px}
+  .filter button{margin:5px;padding:6px 12px;background:#182026;border:1px solid var(--mint);color:var(--mint);border-radius:6px;cursor:pointer}
+  .filter button:hover{background:var(--mint);color:#000}
+  .match{margin:12px 0;padding:12px;background:#111a20;border:1px solid #1f2b33;border-radius:10px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+  .left{min-width:0}
+  .title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meta{color:var(--text-soft);font-size:.92em}
+  .tags{display:flex;gap:6px;align-items:center}
+  .chip{font-size:.8em;padding:4px 8px;border-radius:999px;border:1px solid #2b3942;background:#151e24;color:#9fb2bd}
+  .live{display:inline-flex;align-items:center;gap:6px;background:#201417;border-color:#682828;color:#ffbdbd}
+  .dot{width:7px;height:7px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 8px #ff3b3b}
+  .soon{background:#1b1c12;border-color:#4b5320;color:#d5e6a5}
+  .done{background:#17171b;border-color:#3a3a4a;color:#bfc3d1}
+  .bet{display:flex;gap:8px;align-items:center}
+  .bet input{width:90px;padding:8px;border-radius:8px;border:1px solid #23303a;background:#0d1419;color:#fff}
+  .bet button{padding:8px 12px;background:var(--mint);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:800}
+  .ok{color:var(--ok)}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @media (max-width:680px){header{justify-content:center}.match{flex-direction:column;align-items:stretch}}
 </style>
 </head>
 <body>
@@ -113,14 +76,14 @@
 <section id="speles">
   <h2>Spēles</h2>
   <div class="filter">
-    <button>⚽ Futbols</button>
-    <button>🏀 Basketbols</button>
-    <button>🏒 Hokejs</button>
-    <button>🎾 Teniss</button>
-    <button>🎮 eSports</button>
+    <button data-filter="all">Visi</button>
+    <button data-filter="Futbols">⚽ Futbols</button>
+    <button data-filter="Basketbols">🏀 Basketbols</button>
+    <button data-filter="Hokejs">🏒 Hokejs</button>
+    <button data-filter="Teniss">🎾 Teniss</button>
+    <button data-filter="eSports">🎮 eSports</button>
   </div>
-  <!-- Dinamiskajām spēlēm -->
-  <div id="games-list"></div>
+  <div id="games-wrap"></div>
 </section>
 
 <section id="rezultati">
@@ -160,86 +123,91 @@
 </footer>
 
 <script>
-  // SPA pārslēgšana
-  function showSection(sectionId){
+  // ===== SPA =====
+  function showSection(id){
     document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
+    document.getElementById(id).classList.add('active');
     document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-    const btn = document.getElementById('btn-'+sectionId);
-    if(btn) btn.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-    if(sectionId==='speles') loadGames();
+    document.getElementById('btn-'+id)?.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  // Coin sistēma (demo)
+  // ===== Coins (demo) =====
   let coinBalance = 1000;
-  function placeBet(inputId, koef){
-    const input = document.getElementById(inputId);
-    const amount = parseInt(input.value,10);
-    if(!amount || amount <= 0) return alert('Ievadi derīgu Coin skaitu.');
+  function updateCoins(){ document.getElementById('coin-balance').textContent = coinBalance; }
+  function placeBet(amount, odds){
+    if(!amount || amount<=0) return alert('Ievadi derīgu Coin skaitu.');
     if(amount > coinBalance) return alert('Nepietiekams Coin daudzums.');
-    const win = Math.floor(amount * koef);  // DEMO: uzvara uzreiz
+    const win = Math.floor(amount * odds);
     coinBalance = coinBalance - amount + win;
-    document.getElementById('coin-balance').textContent = coinBalance;
+    updateCoins();
     alert('Tu uzvarēji! Ieguvums: ' + win + ' 🪙');
-    input.value = '';
   }
 
-  // Spēļu ielāde no games.json
+  // ===== Helpers =====
+  function splitTeams(teamsStr){
+    // atbalsta " vs ", "-", "—", "–"
+    const parts = teamsStr.split(/\s+(?:vs|–|—|-)\s+/i);
+    if(parts.length>=2) return {team1:parts[0], team2:parts[1]};
+    // ja nav atdalītāja, atgriež visu kā title
+    return {team1:teamsStr, team2:''};
+  }
+  function statusChip(status){
+    if(status==='live') return '<span class="chip live"><span class="dot"></span> LIVE</span>';
+    if(status==='soon') return '<span class="chip soon">Sāks drīz</span>';
+    return '<span class="chip done">Beigusies</span>';
+  }
+
+  // ===== Render Games from games.json =====
+  const gamesWrap = document.getElementById('games-wrap');
+  let allGames = [];
   async function loadGames(){
-    const list = document.getElementById('games-list');
-    list.innerHTML = 'Ielādē...';
     try{
-      const res = await fetch('games.json');
-      const games = await res.json();
-      renderGames(games);
+      const res = await fetch('games.json',{cache:'no-store'});
+      allGames = await res.json();
+      renderGames('all');
     }catch(e){
-      console.error(e);
-      list.innerHTML = 'Neizdevās ielādēt spēles.';
+      console.error('Neizdevās ielādēt games.json', e);
+      gamesWrap.innerHTML = '<div class="meta">Neizdevās ielādēt spēles.</div>';
+    }
+  }
+  function renderGames(filterSport){
+    gamesWrap.innerHTML = '';
+    const list = allGames.filter(g => filterSport==='all' || g.sport===filterSport);
+    list.forEach(g=>{
+      const {team1, team2} = splitTeams(g.teams || '');
+      const row = document.createElement('div');
+      row.className = 'match';
+      row.innerHTML = `
+        <div class="left">
+          <div class="title">${team1}${team2 ? ' vs ' + team2 : ''} ${statusChip(g.status)}</div>
+          <div class="meta">Sporta veids: ${g.sport} · Tirgus: ${g.market} · Koef: <b>${g.odds}</b> · <span class="${g.status==='live'?'ok':''}">${g.time||''}</span></div>
+        </div>
+        <div class="bet">
+          <input type="number" min="1" placeholder="Coin" id="stake-${g.id}">
+          <button onclick="
+            (function(){
+              const v = parseInt(document.getElementById('stake-${g.id}').value,10);
+              placeBet(v, ${g.odds});
+              document.getElementById('stake-${g.id}').value='';
+            })()
+          ">Veikt likmi</button>
+        </div>`;
+      gamesWrap.appendChild(row);
+    });
+    if(list.length===0){
+      gamesWrap.innerHTML = '<div class="meta">Šim sporta veidam pašlaik nav spēļu.</div>';
     }
   }
 
-  function renderGames(games){
-    const list = document.getElementById('games-list');
-    list.innerHTML = '';
-    games.forEach((g, idx)=>{
-      let dotClass='dot-done', statusText='Beigusies';
-      if(g.status==='live'){ dotClass='dot-live'; statusText='LIVE'; }
-      else if(g.status==='soon'){ dotClass='dot-soon'; statusText='Sāks drīz'; }
-
-      const id = `bet_${idx}`;
-      const card = document.createElement('div');
-      card.className = 'match';
-      card.innerHTML = `
-        <div>
-          <div class="title">${g.emoji||''} ${g.team1} vs ${g.team2}
-            <span class="status-dot ${dotClass}"></span>
-            <span class="meta">${statusText}</span>
-          </div>
-          <div class="meta">Sporta veids: ${g.sport} &middot; Tirgus: ${g.market} &middot; Koef: <b>${g.odds}</b></div>
-        </div>
-        <div>
-          <input type="number" placeholder="Coin" min="1" id="${id}">
-          <button onclick="placeBet('${id}', ${g.odds})">Veikt likmi</button>
-        </div>
-      `;
-      list.appendChild(card);
-    });
-  }
-
-  // Filtru click (vienkāršs demo pēc sporta)
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.querySelectorAll('.filter button').forEach(btn=>{
-      btn.addEventListener('click', async ()=>{
-        const sport = btn.textContent.replace(/^[^A-Za-zĀ-ž]+/,'').trim();
-        try{
-          const all = await (await fetch('games.json')).json();
-          const filtered = all.filter(x=>x.sport===sport);
-          renderGames(filtered.length? filtered : all);
-        }catch(e){ console.error(e); }
-      });
-    });
+  // Filters
+  document.querySelectorAll('.filter button').forEach(btn=>{
+    btn.addEventListener('click', ()=> renderGames(btn.dataset.filter));
   });
+
+  // Init
+  updateCoins();
+  loadGames();
 </script>
 </body>
-  </html>
+</html>
