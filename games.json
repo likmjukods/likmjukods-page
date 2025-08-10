@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "sport": "Futbols",
+    "teams": "Real Madrid vs Barcelona",
+    "market": "Zem 2.5",
+    "odds": 1.65,
+    "status": "live", 
+    "time": "20:45"
+  },
+  {
+    "id": 2,
+    "sport": "Hokejs",
+    "teams": "Rīga vs Jokerit",
+    "market": "Jokerit uzvara",
+    "odds": 2.10,
+    "status": "soon",
+    "time": "21:15"
+  },
+  {
+    "id": 3,
+    "sport": "Teniss",
+    "teams": "Federer vs Nadal",
+    "market": "Federers uzvara",
+    "odds": 1.90,
+    "status": "done",
+    "time": "Beigusies"
+  },
+  {
+    "id": 4,
+    "sport": "Basketbols",
+    "teams": "Warriors vs Lakers",
+    "market": "Lakers +5.5",
+    "odds": 1.85,
+    "status": "soon",
+    "time": "22:00"
+  },
+  {
+    "id": 5,
+    "sport": "eSports",
+    "teams": "NAVI vs G2",
+    "market": "NAVI uzvara",
+    "odds": 1.75,
+    "status": "live",
+    "time": "LIVE"
+  }
+]
