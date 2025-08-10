@@ -1,59 +1,215 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>LikmjuKods</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* ===== Pamatstils (apvienots) ===== */
   :root{
-    --bg:#111; --panel:#1a1a1a; --ink:#ccc; --accent:#00ffcc; --panel2:#222;
+    --bg:#0a0f13;        /* tumšais fons */
+    --panel:#1a1a1a;     /* paneļi */
+    --mint:#00ffcc;      /* tavas zaļgan–zilās akcentkrāsas */
+    --mint2:#00ffae;     /* otra mint nianse no style.css */
+    --text:#ccc;
+    --text-soft:#999;
+    --shadow: 0 0 15px #00ffcc80;
   }
-  body{ margin:0; background-color:var(--bg); color:var(--ink); font-family:'Roboto',sans-serif; }
-  header{ background:linear-gradient(90deg,#000,#022); padding:10px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
-  header h1{ margin:0; font-size:2em; background:linear-gradient(90deg,var(--accent),#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Orbitron',sans-serif; }
-  nav button, nav a button{
-    margin:5px; padding:8px 12px; background:transparent; border:1px solid var(--accent); color:var(--accent);
-    border-radius:5px; cursor:pointer; transition:.25s ease;
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family:'Roboto',sans-serif;
   }
-  nav button.active, nav button:hover, nav a button:hover{ background:var(--accent); color:#000; }
-  .coin-bar{ display:flex; justify-content:flex-end; align-items:center; gap:8px; padding:8px 20px; font-weight:700; color:var(--accent);}
-  .coin-badge{ padding:4px 10px; border:1px solid var(--accent); border-radius:999px; }
-  section{ display:none; padding:20px; max-width:1000px; margin:20px auto; background:var(--panel); border-radius:10px; box-shadow:0 0 15px #00ffcc80; transition:opacity .4s ease; }
-  section.active{ display:block; opacity:1; animation:fadeIn .4s ease-in-out; }
-  footer{ text-align:center; color:#555; margin:20px 0; font-size:.9em; }
-  h2{ color:var(--accent); text-align:center; }
-  .filter{ text-align:center; margin-bottom:15px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-  .filter button{ margin:0; padding:6px 12px; background:#222; border:1px solid var(--accent); color:var(--accent); border-radius:6px; cursor:pointer; }
-  .filter button:hover{ background:var(--accent); color:#000; }
-  .match{ margin:12px 0; padding:12px; background:var(--panel2); border-radius:10px; border:1px solid #1f2a2a; }
-  .match-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:center; }
-  .odds{ font-weight:700; color:#9ffbe9; }
-  .live{ color:#ff6b6b; font-weight:700; }
-  .soon{ color:#8cff8c; font-weight:700; }
-  .done{ color:#999; font-weight:700; }
-  .match-controls{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px; }
-  .match input[type="number"]{ width:90px; padding:8px; border-radius:6px; border:none; background:#333; color:#eee; }
-  .btn{ padding:8px 12px; border-radius:6px; border:1px solid var(--accent); background:transparent; color:var(--accent); cursor:pointer; }
-  .btn.primary{ background:var(--accent); color:#000; border-color:var(--accent); }
-  .btn:disabled{ opacity:.5; cursor:not-allowed; }
-  .abonements{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-  .abon-card{ background:#222; border:1px solid var(--accent); border-radius:12px; padding:16px; width:190px; text-align:center; box-shadow:0 0 10px #00ffcc30; }
-  .abon-card h3{ margin:10px 0; color:var(--accent); }
+
+  /* Header + navigācija */
+  header{
+    background: linear-gradient(90deg,#000,#022);
+    padding: 14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  /* Fade virsraksts */
+  .fade-text{
+    margin:0;
+    font-size:28px;
+    font-weight:900;
+    background: linear-gradient(to right, var(--mint2), #ffffff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-family:'Orbitron', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* Navigācijas pogas (buttons + <a><button>) */
+  nav button,
+  nav a button{
+    margin:6px;
+    padding:8px 12px;
+    background:transparent;
+    border:1px solid var(--mint);
+    color:var(--mint);
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s ease;
+  }
+  nav button.active{
+    background:var(--mint);
+    color:#000;
+  }
+  nav button:hover,
+  nav a button:hover{
+    background:var(--mint);
+    color:#000;
+  }
+
+  /* Sadaļu kopējais konteiners */
+  section{
+    display:none;
+    padding:20px;
+    max-width:1000px;
+    margin:20px auto;
+    background:var(--panel);
+    border-radius:10px;
+    box-shadow: var(--shadow);
+    transition:opacity .4s ease;
+  }
+  section.active{
+    display:block;
+    opacity:1;
+    animation:fadeIn .4s ease-in-out;
+  }
+
+  h2{
+    color:var(--mint);
+    text-align:center;
+    margin-top:0;
+  }
+
+  footer{
+    text-align:center;
+    color:#555;
+    margin:28px 0 22px;
+    font-size:.9em;
+  }
+
+  /* Filtri (Spēles) */
+  .filter{
+    text-align:center;
+    margin-bottom:16px;
+  }
+  .filter button{
+    margin:5px;
+    padding:6px 12px;
+    background:#222;
+    border:1px solid var(--mint);
+    color:var(--mint);
+    border-radius:6px;
+    cursor:pointer;
+    transition:.2s ease;
+  }
+  .filter button:hover{
+    background:var(--mint);
+    color:#000;
+  }
+
+  /* Coin bilance + spēļu kartītes */
+  .coin-balance{
+    max-width:1000px;
+    margin:14px auto 0;
+    padding:0 6px;
+    text-align:right;
+    font-weight:700;
+    color:var(--mint);
+  }
+  .match{
+    margin:10px 0;
+    padding:12px;
+    background:#222;
+    border-radius:8px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    justify-content:space-between;
+  }
+  .match .title{
+    font-weight:600;
+  }
+  .match .meta{
+    color:var(--text-soft);
+    font-size:.95em;
+  }
+  .match input{
+    width:90px;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #333;
+    background:#111;
+    color:#fff;
+  }
+  .match button{
+    padding:8px 12px;
+    background:var(--mint);
+    color:#000;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+    transition:.2s ease;
+  }
+  .match button:hover{ filter:brightness(1.1); }
+
+  /* Abonementu kartiņas */
+  .abonements{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+  }
+  .abon-card{
+    background:#222;
+    border:1px solid var(--mint);
+    border-radius:10px;
+    padding:16px;
+    width:200px;
+    text-align:center;
+    box-shadow:0 0 10px #00ffcc30;
+  }
+  .abon-card h3{
+    margin:10px 0 6px;
+    color:var(--mint);
+  }
+  .abon-card p{ font-size:.95em; margin:0; }
+
+  /* Bonusi */
   .bonusi{ text-align:center; }
-  .bonusi p{ font-size:.95em; margin:5px 0; }
-  .social{ margin-top:10px; }
-  .social a{ margin:0 5px; color:var(--accent); text-decoration:none; }
-  .helper{ text-align:center; font-size:.9em; color:#9bded3; margin-top:8px; }
-  .toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#0c1a19; color:#cffff2; padding:10px 14px; border:1px solid var(--accent); border-radius:10px; box-shadow:0 0 10px #00ffcc40; opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:99; }
-  .toast.show{ opacity:1; }
+  .bonusi p{ font-size:.95em; margin:6px 0; }
+
+  /* animācija */
   @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+  /* Mobile uzlabojumi */
+  @media (max-width:640px){
+    header{ justify-content:center; }
+    .coin-balance{ padding:0 16px; }
+    nav{ display:flex; flex-wrap:wrap; justify-content:center; }
+  }
 </style>
 </head>
 <body>
 
   <header>
-    <h1>LIKMIJUKODS</h1>
+    <h1 class="fade-text">LIKMIJUKODS</h1>
     <nav>
       <button onclick="showSection('sakums')" id="btn-sakums" class="active">Sākums</button>
       <button onclick="showSection('speles')" id="btn-speles">Spēles</button>
@@ -66,78 +222,52 @@
     </nav>
   </header>
 
-  <div class="coin-bar">
-    🪙 Coin bilance:
-    <span class="coin-badge"><span id="coin-balance">0</span></span>
-    <button class="btn" id="add-100">+100</button>
-    <button class="btn" id="add-500">+500</button>
-    <button class="btn" id="reset-coins" title="Attīrīt demo">Reset</button>
+  <div class="coin-balance">
+    🪙 Coin bilance: <span id="coin-balance">1000</span>
   </div>
 
+  <!-- Sākums -->
   <section id="sakums" class="active">
     <h2>Sākums</h2>
     <p style="text-align:center;">Laipni lūdzam LikmjuKods — tavi AI sporta prognožu partneri.</p>
-    <p class="helper">Demo režīms: bilance glabājas lokāli (localStorage). Pilnā versijā norēķinus darīs serveris/API.</p>
   </section>
 
+  <!-- Spēles -->
   <section id="speles">
     <h2>Spēles</h2>
 
     <div class="filter">
-      <button data-sport="all" class="btn primary">Visi</button>
-      <button data-sport="Futbols" class="btn">⚽ Futbols</button>
-      <button data-sport="Basketbols" class="btn">🏀 Basketbols</button>
-      <button data-sport="Hokejs" class="btn">🏒 Hokejs</button>
-      <button data-sport="Teniss" class="btn">🎾 Teniss</button>
-      <button data-sport="eSports" class="btn">🎮 eSports</button>
+      <button>⚽ Futbols</button>
+      <button>🏀 Basketbols</button>
+      <button>🏒 Hokejs</button>
+      <button>🎾 Teniss</button>
+      <button>🎮 eSports</button>
     </div>
 
-    <!-- Match 1 -->
-    <div class="match" data-sport="Futbols" id="m1">
-      <div class="match-top">
-        <div>⚽ Real Madrid vs Barcelona — <span class="odds">Zem 2.5</span> (Koef: <strong>1.65</strong>)</div>
-        <div class="live">● LIVE</div>
+    <div class="match">
+      <div>
+        <div class="title">⚽ Real Madrid vs Barcelona</div>
+        <div class="meta">Tirgus: Zem 2.5 &middot; Koef: <b>1.65</b></div>
       </div>
-      <div class="match-controls">
-        <input type="number" min="1" placeholder="Coin" id="stake-m1">
-        <button class="btn primary" onclick="placeBet('m1',1.65)">Veikt likmi</button>
-        <button class="btn" onclick="settleBet('m1','win')"  id="win-m1"  disabled>✅ WIN</button>
-        <button class="btn" onclick="settleBet('m1','lose')" id="lose-m1" disabled>❌ LOSE</button>
-        <span id="msg-m1" style="color:#9bded3;"></span>
+      <div>
+        <input type="number" placeholder="Coin" min="1" id="bet1">
+        <button onclick="placeBet('bet1', 1.65)">Veikt likmi</button>
       </div>
     </div>
 
-    <!-- Match 2 -->
-    <div class="match" data-sport="Hokejs" id="m2">
-      <div class="match-top">
-        <div>🏒 Rīga vs Jokerit — <span class="odds">Jokerit uzvara</span> (Koef: <strong>2.10</strong>)</div>
-        <div class="soon">● Sāks drīz</div>
+    <div class="match">
+      <div>
+        <div class="title">🏒 Rīga vs Jokerit</div>
+        <div class="meta">Tirgus: Jokerit uzvara &middot; Koef: <b>2.10</b></div>
       </div>
-      <div class="match-controls">
-        <input type="number" min="1" placeholder="Coin" id="stake-m2">
-        <button class="btn primary" onclick="placeBet('m2',2.10)">Veikt likmi</button>
-        <button class="btn" onclick="settleBet('m2','win')"  id="win-m2"  disabled>✅ WIN</button>
-        <button class="btn" onclick="settleBet('m2','lose')" id="lose-m2" disabled>❌ LOSE</button>
-        <span id="msg-m2" style="color:#9bded3;"></span>
+      <div>
+        <input type="number" placeholder="Coin" min="1" id="bet2">
+        <button onclick="placeBet('bet2', 2.10)">Veikt likmi</button>
       </div>
     </div>
-
-    <!-- Match 3 (parāde kā trešais piemērs) -->
-    <div class="match" data-sport="Teniss" id="m3">
-      <div class="match-top">
-        <div>🎾 Alcaraz vs Sinner — <span class="odds">Alcaraz uzvara</span> (Koef: <strong>1.80</strong>)</div>
-        <div class="done">● Beigusies</div>
-      </div>
-      <div class="match-controls">
-        <input type="number" min="1" placeholder="Coin" id="stake-m3" disabled>
-        <button class="btn" disabled>Veikt likmi</button>
-        <span style="color:#aaa;">Spēle beigusies</span>
-      </div>
-    </div>
-
-    <p class="helper">* Pagaidām demo: pēc likmes veikšanas aktivizējas WIN/LOSE pogas. Pilnā versijā to darīs rezultātu serviss.</p>
   </section>
 
+  <!-- Rezultāti -->
   <section id="rezultati">
     <h2>Rezultāti</h2>
     <p style="text-align:center;">Prognožu precizitāte: 78% pēdējo 30 dienu laikā.</p>
@@ -147,17 +277,34 @@
     </ul>
   </section>
 
+  <!-- Abonementi -->
   <section id="abonementi">
     <h2>Abonementi</h2>
     <div class="abonements">
-      <div class="abon-card"><h3>Basic</h3><p>0.99€/mēn<br>Bez reklāmām</p></div>
-      <div class="abon-card"><h3>Silver</h3><p>2.99€/mēn<br>1 prognoze/dienā</p></div>
-      <div class="abon-card"><h3>Gold</h3><p>4.99€/mēn<br>3 prognozes/dienā</p></div>
-      <div class="abon-card"><h3>Platinum</h3><p>9.99€/mēn<br>Neierobežoti</p></div>
-      <div class="abon-card"><h3>Elite</h3><p>19.99€/mēn<br>VIP serviss</p></div>
+      <div class="abon-card">
+        <h3>Basic</h3>
+        <p>0.99€/mēn<br>Bez reklāmām</p>
+      </div>
+      <div class="abon-card">
+        <h3>Silver</h3>
+        <p>2.99€/mēn<br>1 prognoze/dienā</p>
+      </div>
+      <div class="abon-card">
+        <h3>Gold</h3>
+        <p>4.99€/mēn<br>3 prognozes/dienā</p>
+      </div>
+      <div class="abon-card">
+        <h3>Platinum</h3>
+        <p>9.99€/mēn<br>Neierobežoti</p>
+      </div>
+      <div class="abon-card">
+        <h3>Elite</h3>
+        <p>19.99€/mēn<br>VIP serviss</p>
+      </div>
     </div>
   </section>
 
+  <!-- Bonusi -->
   <section id="bonusi">
     <h2>Bonusi</h2>
     <div class="bonusi">
@@ -168,105 +315,39 @@
 
   <footer>
     <div>Partneri: (logos here)</div>
-    <div class="social"><a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a></div>
+    <div class="social">
+      <a href="#">Telegram</a> | <a href="#">Instagram</a> | <a href="#">X</a>
+    </div>
     <div>© 2025 LikmjuKods. All rights reserved.</div>
   </footer>
 
-  <div id="toast" class="toast">Ziņa</div>
-
 <script>
-  // ===== SPA =====
-  function showSection(id){
+  // SPA pārslēgšana
+  function showSection(sectionId){
     document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    document.getElementById(sectionId).classList.add('active');
     document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-    document.getElementById('btn-'+id)?.classList.add('active');
+    const btn = document.getElementById('btn-'+sectionId);
+    if(btn) btn.classList.add('active');
+    // fokusē sadaļas sākumu mobilei
+    window.scrollTo({top:0, behavior:'smooth'});
   }
 
-  // ===== Toast helper =====
-  const toastEl = document.getElementById('toast');
-  function toast(msg, ms=1400){
-    toastEl.textContent = msg;
-    toastEl.classList.add('show');
-    setTimeout(()=>toastEl.classList.remove('show'), ms);
+  // Coin sistēma (demo)
+  let coinBalance = 1000;
+  function placeBet(inputId, koef){
+    const input = document.getElementById(inputId);
+    const amount = parseInt(input.value,10);
+    if(!amount || amount <= 0) return alert('Ievadi derīgu Coin skaitu.');
+    if(amount > coinBalance) return alert('Nepietiekams Coin daudzums.');
+
+    // DEMO režīms: uzreiz iedodam uzvaru (UI testiem)
+    const win = Math.floor(amount * koef);
+    coinBalance = coinBalance - amount + win;
+    document.getElementById('coin-balance').textContent = coinBalance;
+    alert('Tu uzvarēji! Ieguvums: ' + win + ' 🪙');
+    input.value = '';
   }
-
-  // ===== Coin storage =====
-  const LS_COINS = 'lk_coins_v1';
-  let coins = parseInt(localStorage.getItem(LS_COINS)||'1000',10); // start ar 1000, ja nav
-  const balEl = document.getElementById('coin-balance');
-  function saveCoins(){ localStorage.setItem(LS_COINS, String(coins)); balEl.textContent = coins.toLocaleString('lv-LV'); }
-  saveCoins();
-
-  // ātrās ielādes/reset
-  document.getElementById('add-100').onclick = ()=>{ coins+=100; saveCoins(); toast('Bilance +100'); };
-  document.getElementById('add-500').onclick = ()=>{ coins+=500; saveCoins(); toast('Bilance +500'); };
-  document.getElementById('reset-coins').onclick = ()=>{
-    coins = 0; saveCoins(); Object.keys(pending).forEach(k=>pending[k]=null);
-    document.querySelectorAll('[id^="win-"],[id^="lose-"]').forEach(b=>b.disabled=true);
-    document.querySelectorAll('[id^="msg-"]').forEach(s=>s.textContent='');
-    toast('Demo bilance attīrīta');
-  };
-
-  // ===== Demo bet engine =====
-  // pending: {matchId:{stake,odds}}
-  const pending = { m1:null, m2:null, m3:null };
-
-  function placeBet(matchId, odds){
-    const stakeInput = document.getElementById('stake-'+matchId);
-    const msg = document.getElementById('msg-'+matchId);
-    const winBtn = document.getElementById('win-'+matchId);
-    const loseBtn = document.getElementById('lose-'+matchId);
-
-    if (pending[matchId]) { msg.textContent='Ir aktīva likme. Norēķini WIN/LOSE.'; return; }
-
-    const stake = Math.floor(Number(stakeInput.value||0));
-    if (!Number.isFinite(stake) || stake<1){ toast('Ievadi derīgu likmes summu'); return; }
-    if (coins<stake){ toast('Nepietiek Coin'); return; }
-
-    coins -= stake; saveCoins();
-    pending[matchId] = { stake, odds };
-    winBtn.disabled = false; loseBtn.disabled = false;
-    msg.textContent = `Likme pieņemta: ${stake} @ ${odds.toFixed(2)}.`;
-    toast('Likme pieņemta');
-  }
-
-  function settleBet(matchId, result){
-    const p = pending[matchId];
-    const msg = document.getElementById('msg-'+matchId);
-    const winBtn = document.getElementById('win-'+matchId);
-    const loseBtn = document.getElementById('lose-'+matchId);
-    if (!p){ toast('Nav aktīvas likmes'); return; }
-
-    if (result==='win'){
-      const prize = Math.floor(p.stake * p.odds);
-      coins += prize; saveCoins();
-      msg.textContent = `✅ WIN! Atgriezās ${prize} Coin (ieskaitot likmi).`;
-      toast(`WIN +${prize}`);
-    } else {
-      msg.textContent = `❌ LOSE! Zaudēti ${p.stake} Coin.`;
-      toast('LOSE');
-    }
-    pending[matchId]=null;
-    winBtn.disabled = true; loseBtn.disabled = true;
-  }
-
-  // padarām funkcijas globālas HTML onClick
-  window.placeBet = placeBet;
-  window.settleBet = settleBet;
-
-  // ===== Filtrs (demo) =====
-  const filterBtns = document.querySelectorAll('.filter .btn');
-  filterBtns.forEach(b=>{
-    b.addEventListener('click', ()=>{
-      filterBtns.forEach(x=>x.classList.remove('primary'));
-      b.classList.add('primary');
-      const wanted = b.getAttribute('data-sport');
-      document.querySelectorAll('.match').forEach(m=>{
-        m.style.display = (wanted==='all' || m.getAttribute('data-sport')===wanted) ? '' : 'none';
-      });
-    });
-  });
 </script>
 </body>
   </html>
